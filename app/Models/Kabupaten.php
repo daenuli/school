@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kabupaten extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['id', 'provinsi_id', 'nama'];
 }
