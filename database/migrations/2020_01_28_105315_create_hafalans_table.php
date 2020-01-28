@@ -15,6 +15,10 @@ class CreateHafalansTable extends Migration
     {
         Schema::create('hafalans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('student_id');
+            $table->integer('count');
+            $table->text('note');
             $table->timestamps();
         });
     }
