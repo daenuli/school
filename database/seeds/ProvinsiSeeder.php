@@ -3,7 +3,7 @@
 use App\Models\Provinsi;
 use Illuminate\Database\Seeder;
 
-class ProvinsiTableSeeder extends Seeder
+class ProvinsiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
