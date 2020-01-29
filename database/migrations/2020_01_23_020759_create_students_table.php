@@ -19,6 +19,12 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('birth_place');
             $table->date('birth_date');
+            $table->string('avatar')->nullable();
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->boolean('gender'); //1 = Laki Laki, 2 = Perempuan
+            $table->boolean('status'); //1 = Aktif, 2 = Tidak Aktif
+            
             $table->date('registration_date');
             $table->timestamps();
         });
