@@ -96,7 +96,7 @@
                           <i class="material-icons">email</i>
                         </span>
                       </div>
-                      <input type="email" class="form-control" placeholder="Email...">
+                      <input type="email" class="form-control" name="email" placeholder="Email">
                     </div>
                   </span>
                   <span class="bmd-form-group">
@@ -106,7 +106,7 @@
                           <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="password" class="form-control" placeholder="Password...">
+                      <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                   </span>
                 </div>
