@@ -43,9 +43,15 @@ Tip 2: you can also add an image using data-image tag
         </div>
         <ul class="nav">
             <li class="nav-item active ">
-                <a class="nav-link" href="{{asset('material/examples/dashboard.html')}}">
+                <a class="nav-link" href="{{url('home')}}">
                     <i class="material-icons">dashboard</i>
                     <p> Dashboard </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('users')}}">
+                    <i class="material-icons">people</i>
+                    <p> Users </p>
                 </a>
             </li>
         </ul>
