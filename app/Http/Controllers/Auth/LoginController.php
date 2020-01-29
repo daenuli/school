@@ -38,16 +38,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    /**
-     * This logout function for tag HTML anchor <a></a>.
-     * This function will override function logout from AuthenticatesUsers
-     *
-     * @return void
-     */
-     public function logout()
-     {
-        Auth::logout();
-        return redirect('/');
-     }
 }
