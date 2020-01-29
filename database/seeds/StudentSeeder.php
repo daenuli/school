@@ -12,10 +12,10 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-    	$faker = Faker::create('id_ID');
- 
-    	for($i = 1; $i <= 5; $i++){
- 
+    	$faker = Faker::create();
+
+    	for($i = 1; $i <= 100; $i++){
+
     		DB::table('students')->insert([
     			'nis' => $faker->numberBetween(111111000000110001,111555999999990999),
     			'name' => $faker->name,
