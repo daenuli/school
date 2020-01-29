@@ -20,6 +20,6 @@ Route::get('/login', function () {
     return view('admin.auth.login');
 });
 Route::post('/login', 'Auth\LoginController@login')->name('login');
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'Admin\HomeController@index');

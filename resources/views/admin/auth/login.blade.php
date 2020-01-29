@@ -64,31 +64,9 @@
               <div class="card card-login card-hidden">
                 <div class="card-header card-header-rose text-center">
                   <h4 class="card-title">Login</h4>
-                  {{-- <div class="social-line">
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                      <i class="fa fa-facebook-square"></i>
-                    </a>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                      <i class="fa fa-google-plus"></i>
-                    </a>
-                  </div> --}}
-
                 </div>
                 <div class="card-body ">
                   <p class="card-description text-center">Or Be Classical</p>
-                  {{-- <span class="bmd-form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">face</i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control" placeholder="First Name...">
-                    </div>
-                  </span> --}}
                   <span class="bmd-form-group">
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -96,7 +74,7 @@
                           <i class="material-icons">email</i>
                         </span>
                       </div>
-                      <input type="email" class="form-control" name="email" placeholder="Email">
+                      <input type="email" class="form-control" value="{{ empty(old('email')) ? 'admin@admin.com' : old('email') }}" name="email" placeholder="Email" required autofocus>
                     </div>
                   </span>
                   <span class="bmd-form-group">
@@ -106,7 +84,7 @@
                           <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="password" class="form-control" name="password" placeholder="Password">
+                      <input type="password" class="form-control" value="111111" name="password" placeholder="Password" required>
                     </div>
                   </span>
                 </div>
