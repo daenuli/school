@@ -31,16 +31,6 @@
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th class="text-right">Actions</th>
-                </tr>
-              </tfoot>
               <tbody>
                 <tr>
                   <td>Unity Butler</td>
