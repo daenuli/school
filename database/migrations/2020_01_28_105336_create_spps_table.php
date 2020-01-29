@@ -15,7 +15,14 @@ class CreateSppsTable extends Migration
     {
         Schema::create('spps', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('users_id');
+            $table->integer('students_id');
+            $table->integer('total');
+            $table->boolean('status'); // False. Belum Lunas, True. Lunas
             $table->timestamps();
+            //
+            // $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('students_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 
