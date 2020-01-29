@@ -151,5 +151,5 @@ class ProvinsiSeeder extends Seeder
                      'nama' => 'Papua'
                   ]
                 ]);
-    }
+   }
 }
