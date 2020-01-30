@@ -15,6 +15,8 @@ class CreateStudentUsersTable extends Migration
     {
         Schema::create('student_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('student_id');
             $table->timestamps();
         });
     }
