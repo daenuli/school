@@ -22,8 +22,8 @@ class CreateStudentsTable extends Migration
             $table->string('avatar', 200)->nullable();
             $table->string('email', 100)->unique();
             $table->string('phone')->nullable();
-            $table->boolean('gender'); //1 = Laki Laki, 2 = Perempuan
-            $table->boolean('status'); //1 = Aktif, 2 = Tidak Aktif
+            $table->boolean('gender'); //1 = Laki Laki, 0 = Perempuan
+            $table->boolean('status'); //1 = Aktif, 0 = Tidak Aktif
             $table->date('registration_date');
             $table->string('provinsi_id',2)->nullable();
             $table->string('kabupaten_id',4)->nullable();
