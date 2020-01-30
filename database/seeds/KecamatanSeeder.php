@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Kecamatan;
 
-class KecamatanTableSeeder extends Seeder
+class KecamatanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
