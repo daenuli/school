@@ -31,7 +31,6 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('material/assets/demo/demo.css')}}" rel="stylesheet" />
 </head>
-
 <body class="">
     <div class="wrapper ">
         @include('admin.layouts.part.sidebar')
@@ -276,5 +275,29 @@ $(document).ready(function() {
   md.initVectorMap();
 
 });
+</script>
+<script>
+  function setFormValidation(id) {
+    $(id).validate({
+      highlight: function(element) {
+        $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
+        $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
+      },
+      success: function(element) {
+        $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
+        $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
+      },
+      errorPlacement: function(error, element) {
+        $(element).closest('.form-group').append(error);
+      },
+    });
+  }
+
+  $(document).ready(function() {
+    setFormValidation('#RegisterValidation');
+    setFormValidation('#TypeValidation');
+    setFormValidation('#LoginValidation');
+    setFormValidation('#RangeValidation');
+  });
 </script>
 </html>
