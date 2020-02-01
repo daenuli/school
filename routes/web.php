@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     // return view('admin.layouts.app');
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/login', function () {
