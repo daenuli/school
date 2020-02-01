@@ -15,7 +15,7 @@ Tip 2: you can also add an image using data-image tag
             </div>
             <div class="user-info">
                 <a data-toggle="collapse" href="#collapseExample" class="username">
-                    <span>Tania Andrew<b class="caret"></b></span>
+                    <span>{{ Auth::user()->name }}<b class="caret"></b></span>
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
@@ -42,35 +42,17 @@ Tip 2: you can also add an image using data-image tag
             </div>
         </div>
         <ul class="nav">
-            <li class="nav-item active ">
+            <li class="nav-item {{ Request::is('home') ? 'active' : ''}}">
                 <a class="nav-link" href="{{url('home')}}">
                     <i class="material-icons">dashboard</i>
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="nav-item ">
-              <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
-                <i class="material-icons">people</i>
-                <p> Users
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse" id="mapsExamples">
-                <ul class="nav">
-                  <li class="nav-item ">
-                    <a class="nav-link" href="{{url('users/create')}}">
-                      <span class="sidebar-mini"> C </span>
-                      <span class="sidebar-normal"> Tambah </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="{{url('users')}}">
-                      <span class="sidebar-mini"> L </span>
-                      <span class="sidebar-normal"> List </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <i class="material-icons">people</i>
+                    <p> Users </p>
+                </a>
             </li>
         </ul>
     </div>

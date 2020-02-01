@@ -24,9 +24,5 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'Admin\HomeController@index');
 
-Route::get('/users', function () {
-    return view('admin.users.index');
-});
-Route::get('/users/create', function () {
-    return view('admin.users.create');
-});
+Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
+Route::resource('users', 'Admin\UsersController');
