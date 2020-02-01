@@ -14,7 +14,8 @@
 Route::get('/', function () {
     // return view('admin.layouts.app');
     // return view('welcome');
-    return redirect('/login');
+    return view('admin.auth.login');
+    // return redirect('/login');
 });
 
 Route::get('/login', function () {
