@@ -43,7 +43,9 @@
             <div class="content">
                 <div class="content">
                     <div class="container-fluid">
-                        @yield('content')
+                        <div class="row">
+                            @yield('content')
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,6 +96,7 @@
 <script src="{{asset('material/assets/js/material-dashboard.js?v=2.1.0')}}" type="text/javascript"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('material/assets/demo/demo.js')}}"></script>
+@yield('script')
 <script>
 $(document).ready(function() {
   $().ready(function() {
