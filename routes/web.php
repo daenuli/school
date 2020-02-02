@@ -22,7 +22,11 @@ Route::get('/login', function () {
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
+//Yajra
+Route::get('/student/dbtb', 'Admin\StudentsController@dbTables')->name('student.dbtb');
+
 Route::get('/home', 'Admin\HomeController@index');
+Route::resource('/student', 'Admin\StudentsController');
 
 Route::get('/users', function () {
     return view('admin.users.index');

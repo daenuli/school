@@ -17,7 +17,8 @@ class StudentSeeder extends Seeder
         for($i = 1; $i <= 100; $i++){
 
     		DB::table('students')->insert([
-    			'nis' => $faker->numberBetween(111111,999999),
+    			'nis' => $faker->numberBetween(0001,9999),
+                'nisn' => '000'.$faker->numberBetween(3111111,5888888),
                 'name' => $faker->name,
                 'birth_place' => $faker->city,
                 'birth_date' => $faker->dateTimeBetween($startDate = '-25 years', $endDate = '-5 years', $timezone = null)->format('Y-m-d'),
