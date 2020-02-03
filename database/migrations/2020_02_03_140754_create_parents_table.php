@@ -23,7 +23,7 @@ class CreateParentsTable extends Migration
             $table->string('job');
             $table->integer('salary');
             $table->string('phone');
-            $table->enum('role', [1,2, 3]); // 1. Ayah, 2. Ibu, 3. Wali
+            $table->enum('role', [1, 2, 3]); // 1. Ayah, 2. Ibu, 3. Wali
             $table->integer('is_guardian'); // Apakah sebagai wali? 0. No, 1. Yes
             $table->timestamps();
         });
