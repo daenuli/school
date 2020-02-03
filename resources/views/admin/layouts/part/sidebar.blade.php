@@ -48,11 +48,51 @@ Tip 2: you can also add an image using data-image tag
                     <p> Dashboard </p>
                 </a>
             </li>
+            <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
+                <i class="material-icons">emoji_people</i>
+                <p> Santri
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('student') || Request::is('student/*')? 'show' : '' }}" id="mapsExamples">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('student.create') }}">
+                      <span class="sidebar-mini"> TS </span>
+                      <span class="sidebar-normal"> Tambah Santri </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('student') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('student.index') }}">
+                      <span class="sidebar-mini"> DS </span>
+                      <span class="sidebar-normal"> Daftar Santri </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="material-icons">people</i>
                     <p> Users </p>
                 </a>
+              <div class="collapse" id="mapsExamples">
+                <ul class="nav">
+                  <li class="nav-item ">
+                    <a class="nav-link" href="{{url('users/create')}}">
+                      <span class="sidebar-mini"> C </span>
+                      <span class="sidebar-normal"> Tambah </span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="{{url('users')}}">
+                      <span class="sidebar-mini"> L </span>
+                      <span class="sidebar-normal"> List </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
         </ul>
     </div>

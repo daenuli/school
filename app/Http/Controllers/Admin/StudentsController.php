@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Student;
+use Yajra\Datatables\Datatables;
+use Form;
 
 class StudentsController extends Controller
 {
@@ -14,7 +17,35 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        //
+        $ajax     = route('student.dbtb');
+        return view('admin.students.index', compact('ajax'));
+    }
+
+    public function dbTables(Request $request)
+    {
+        $data = Student::where('status', 1)->get();
+        return Datatables::of($data)
+        ->editColumn('gender',function($index){
+            if ($index->gender == 1) {
+                return "<span class='badge badge-pill badge-primary'>Laki-Laki</span>";
+            }else {
+                return "<span class='badge badge-pill badge-info'>Perempuan</span>";
+            }
+        })
+        ->addColumn('birth', function($index){
+            return $index->birth_place.", ".date('d M Y', strtotime($index->birth_date));
+        })
+        ->addColumn('action', function($index){
+            $tag     = Form::open(["url"=>route('student.show', $index->id), "method" => "PUT", "class" => "text-right"]);
+            $tag    .= "<a href=". route('student.show', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag    .= Form::close();
+            return $tag;
+        })
+        ->rawColumns([
+            'id', 'gender', 'action'
+        ])
+        ->make(true);
     }
 
     /**
@@ -24,7 +55,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.students.create');
     }
 
     /**

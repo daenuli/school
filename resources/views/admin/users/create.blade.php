@@ -4,11 +4,18 @@
 <div class="col-md-12">
     {!! form_start($form, ['class' => 'form-horizontal']) !!}
     <div class="card ">
-      <div class="card-header card-header-rose card-header-text">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">contacts</i>
+        </div>
+        <h4 class="card-title">Input Data User</h4>
+      </div>
+
+      {{-- <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
           <h4 class="card-title">Create User</h4>
         </div>
-      </div>
+      </div> --}}
       <div class="card-body">
         {!! form_rest($form) !!}
       </div>
