@@ -35,8 +35,7 @@ class SppsController extends Controller
             }
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('spp.show', $index->id), "method" => "PUT", "class" => "text-right"]);
-            $tag    .= "<a href=". route('spp.show', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
+            $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE", "class" => "text-right"]);
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
             return $tag;
@@ -118,6 +117,7 @@ class SppsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Spp::find($id)->delete();
+        return redirect('/spp');
     }
 }
