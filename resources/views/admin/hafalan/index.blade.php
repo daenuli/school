@@ -14,6 +14,7 @@
           { data: 'user_id', name: 'user_id', searchable: true, orderable: true},
           { data: 'student_id', name: 'student_id', searchable: true, orderable: true},
           { data: 'count', name: 'count', searchable: true, orderable: true},
+          { data: 'note', name: 'note', searchable: false, orderable: false},
           { data: 'action', name: 'action', searchable: false, orderable: false,}
           ],
           columnDefs: [{
@@ -64,6 +65,7 @@
                   <th>Musyrif</th>
                   <th>Santri</th>
                   <th>Jumlah Hafalan (Juz)</th>
+                  <th>Catatan</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -73,6 +75,7 @@
                   <th>Musyrif</th>
                   <th>Santri</th>
                   <th>Jumlah Hafalan (Juz)</th>
+                  <th>Catatan</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </tfoot>

@@ -30,7 +30,7 @@ Route::get('/hafalan/dbtb', 'Admin\HafalanController@dbTables')->name('hafalan.d
 
 Route::get('/home', 'Admin\HomeController@index');
 Route::resource('/student', 'Admin\StudentsController');
-Route::resource('/hafalan', 'Admin\HafalanController');
+Route::resource('/hafalan', 'Admin\HafalanController')->except(['show']);
 
 Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
 Route::resource('users', 'Admin\UsersController');

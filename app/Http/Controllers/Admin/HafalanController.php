@@ -44,8 +44,8 @@ class HafalanController extends Controller
                 return $index->student->name;
             })
             ->addColumn('action', function($index){
-                $tag = Form::open(["url" => route($this->route.'show', $index->id), "method" => "PUT", "class" => "text-right"]);
-                $tag .= "<a href=". route($this->route.'show', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
+                $tag = Form::open(["url" => route($this->route.'destroy', $index->id), "method" => "PUT", "class" => "text-right"]);
+                $tag .= "<a href=". route($this->route.'edit', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
                 $tag .= "<button type='submit' class='btn btn-danger btn-sm' onclick='javascript:return confirm(`Apakah anda yakin ingin menghapus data ini?`)'>Hapus</button>";
                 $tag .= Form::close();
                 return $tag;
@@ -57,8 +57,8 @@ class HafalanController extends Controller
     public function create(FormBuilder $formBuilder)
     {
         $data['title'] = $this->title;
-        $data['form'] = $formBuilder->create(\App\Forms\HafalanForm::class, ['method'=>'POST', 'url'=> route($this->storeUrl)]);
         $data['back'] = route($this->route.'index');
+        $data['form'] = $formBuilder->create(\App\Forms\HafalanForm::class, ['method'=>'POST', 'url'=> route($this->storeUrl)]);
         return view($this->folder.'.create', $data);
     }
 
@@ -75,14 +75,16 @@ class HafalanController extends Controller
         }
     }
 
-    public function show($id)
+    public function edit(FormBuilder $formBuilder, $id)
     {
-
-    }
-
-    public function edit($id)
-    {
-        //
+        $data['form'] = $formBuilder->create(\App\Forms\HafalanForm::class, [
+            'method'    => 'PUT',
+            'url'       => route($this->route.'update', $id),
+        ]);
+        $data['h'] = Hafalan::findOrFail($id);
+        $data['title'] = $this->title;
+        $data['back'] = route($this->route.'index');
+        return view($this->folder.'.edit', $data);
     }
 
     public function update(Request $request, $id)
