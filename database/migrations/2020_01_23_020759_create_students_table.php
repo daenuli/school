@@ -16,14 +16,14 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nis', 4)->unique();
-            $table->string('nik')->unique();
+            $table->string('nik')->nullable()->unique();
             $table->string('nisn', 10)->unique();
             $table->string('name');
             $table->string('birth_place');
             $table->date('birth_date');
-            $table->integer('position'); // Anak ke berapa ?
-            $table->enum('level', ['smp', 'sma']); // Jenjang (SMP or SMA)
-            $table->boolean('child_status'); // 0. Yatim, 1. Tidak yatim
+            $table->integer('position')->nullable(); // Anak ke berapa ?
+            $table->enum('level', ['smp', 'sma'])->nullable(); // Jenjang (SMP or SMA)
+            $table->boolean('child_status')->nullable(); // 0. Yatim, 1. Tidak yatim
             $table->string('avatar', 200)->nullable();
             $table->string('email', 100)->unique();
             $table->string('phone')->nullable();
