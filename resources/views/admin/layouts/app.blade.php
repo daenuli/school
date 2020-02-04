@@ -30,6 +30,8 @@
     <link href="{{asset('material/assets/css/material-dashboard.css?v=2.1.0')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('material/assets/demo/demo.css')}}" rel="stylesheet" />
+    {{-- custom plugin --}}
+    @yield('link')
 </head>
 <body class="">
     <div class="wrapper ">
