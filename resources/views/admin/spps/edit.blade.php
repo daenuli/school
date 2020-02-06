@@ -7,13 +7,12 @@
         <div class="card-icon">
           <i class="material-icons">contacts</i>
         </div>
-        <h4 class="card-title">Input Data SPP</h4>
+        <h4 class="card-title">Edit Data SPP</h4>
       </div>
       <div class="card-body ">
         <form method="post" action="{{route('spp.update', $data->id)}}" class="form-horizontal">
           @csrf
           @method('PUT')
-          <input type="hidden" name="users_id" value="{{auth()->user()->id}}">
           <div class="row">
             <label class="col-sm-2 col-form-label">Nama Santri</label>
             <div class="col-sm-8">

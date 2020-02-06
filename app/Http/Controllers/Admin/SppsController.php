@@ -9,6 +9,7 @@ use App\Models\Student;
 use Yajra\Datatables\Datatables;
 use Form;
 use App\Http\Controllers\Admin\Auth;
+use App\User;
 
 class SppsController extends Controller
 {
@@ -27,6 +28,22 @@ class SppsController extends Controller
     {
         $data = Spp::where('status', 1)->get();
         return Datatables::of($data)
+        ->editColumn('users_id', function($index){
+            $user = User::all();
+            foreach ($user as $value) {
+              if ($index->users_id == $value->id) {
+                return $value->name;
+              }
+            }
+        })
+        ->editColumn('students_id', function($index){
+            $student = Student::all();
+            foreach ($student as $value) {
+              if ($index->students_id == $value->id) {
+                return $value->name;
+              }
+            }
+        })
         ->editColumn('status',function($index){
             if ($index->status == 1) {
               return "<span class='badge badge-pill badge-primary'>Lunas</span>";
@@ -35,11 +52,13 @@ class SppsController extends Controller
             }
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE", "class" => "text-right"]);
+            $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE"]);
+            $tag    .= "<div class='d-flex justify-content-end'>";
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET", "class" => "text-right"]);
+            $tag    .= Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET"]);
             $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= "</div>";
             $tag    .= Form::close();
             return $tag;
         })
