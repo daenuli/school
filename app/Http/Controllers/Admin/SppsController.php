@@ -38,6 +38,9 @@ class SppsController extends Controller
             $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE", "class" => "text-right"]);
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
+            $tag    .= Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET", "class" => "text-right"]);
+            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= Form::close();
             return $tag;
         })
         ->rawColumns([
@@ -65,12 +68,7 @@ class SppsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Spp;
-        $data->users_id = auth()->user()->id;
-        $data->students_id = $request->students_id;
-        $data->total = $request->total;
-        $data->status = $request->status;
-        $data->save();
+        Spp::create($request->all());
 
         return redirect('/spp');
     }
@@ -94,7 +92,10 @@ class SppsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Spp::find($id);
+        $student = Student::all();
+        // return response()->json($data);
+        return view('admin.spps.edit', compact('data', 'student'));
     }
 
     /**
@@ -106,7 +107,9 @@ class SppsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Spp::find($id)->update($request->all());
+
+        return redirect('/spp');
     }
 
     /**

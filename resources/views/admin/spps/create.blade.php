@@ -12,6 +12,7 @@
     <div class="card-body ">
       <form method="post" action="{{route('spp.store')}}" class="form-horizontal">
         @csrf
+        <input type="hidden" name="users_id" value="{{auth()->user()->id}}">
         <div class="row">
           <label class="col-sm-2 col-form-label">Nama Santri</label>
           <div class="col-sm-8">
