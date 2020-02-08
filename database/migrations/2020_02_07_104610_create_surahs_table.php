@@ -15,6 +15,9 @@ class CreateSurahsTable extends Migration
     {
         Schema::create('surahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->integer('juz')->nullable();
+            $table->integer('ayat');
             $table->timestamps();
         });
     }

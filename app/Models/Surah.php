@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Surah extends Model
 {
-    //
+    protected $fillable = ['id','name','juz','ayat'];
 }
