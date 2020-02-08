@@ -32,3 +32,6 @@ Route::resource('/student', 'Admin\StudentsController');
 
 Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
 Route::resource('users', 'Admin\UsersController');
+
+Route::get('/spp/dbtb', 'Admin\SppsController@dbTables')->name('spp.dbtb');
+Route::resource('/spp', 'Admin\SppsController');
