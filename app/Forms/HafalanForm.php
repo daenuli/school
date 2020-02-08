@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 use App\Models\Student;
+use App\Models\Surah;
 
 class HafalanForm extends Form
 {
@@ -22,10 +23,31 @@ class HafalanForm extends Form
                     'data-style' => 'select-with-transition',
                 ],
             ])
-            ->add('count', 'text', [
+            ->add('surah_id', 'select', [
+                'rules' => 'required',
+                'label' => 'Nama Surah',
+                'empty_value' => '-- Pilih Nama Surah --',
+                'choices' => Surah::pluck('name', 'id')->toArray(),
+                'attr' => [
+                    'data-validation' => 'required',
+                    'class' => 'js-example-basic-single form-control',
+                    'data-style' => 'select-with-transition',
+                ],
+            ])
+            ->add('juz', 'text', [
                 'rules' => 'required',
                 'attr' => ['data-validation' => 'required', 'placeholder' => 'contoh: 5 Juz', 'maxlength' => '2'],
-                'label' => 'Jumlah Hafalan'
+                'label' => 'Juz'
+            ])
+            ->add('ayat_start', 'text', [
+                'rules' => 'required',
+                'attr' => ['data-validation' => 'required', 'placeholder' => 'contoh: ayat 150', 'maxlength' => '3'],
+                'label' => 'Juz'
+            ])
+            ->add('ayat_end', 'text', [
+                'rules' => 'required',
+                'attr' => ['data-validation' => 'required', 'placeholder' => 'contoh: ayat 250', 'maxlength' => '3'],
+                'label' => 'Juz'
             ])
             ->add('note', 'textarea', [
                 'rules' => 'required',

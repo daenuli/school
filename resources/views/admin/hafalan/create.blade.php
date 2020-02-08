@@ -26,7 +26,10 @@
             </div>
         @endif
         {!! form_row($form->student_id) !!}
-        {!! form_row($form->count) !!}
+        {!! form_row($form->juz) !!}
+        {!! form_row($form->surah_id) !!}
+        {!! form_row($form->ayat_start) !!}
+        {!! form_row($form->ayat_end) !!}
         {!! form_row($form->note) !!}
       </div>
       <div class="card-footer ml-auto">

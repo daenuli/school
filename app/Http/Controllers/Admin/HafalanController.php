@@ -64,11 +64,19 @@ class HafalanController extends Controller
 
     public function store(Request $request, FormBuilder $formBuilder)
     {
-        $request->validate(['student_id' => 'required','count' => 'required|max:2','note' => 'required']);
+        $request->validate(['student_id' => 'required','juz' => 'required|max:2','note' => 'required']);
         $form = $formBuilder->create(\App\Forms\HafalanForm::class);
         if(!$form->isValid()){return redirect()->back()->withErrors($form->getErrors())->withInput();};
-        if ($request->count <= 30) {
-            Hafalan::create(['user_id' => Auth::id(), 'student_id' => $request->student_id, 'count' => $request->count, 'note' => $request->note]);
+        if ($request->juz <= 30) {
+            Hafalan::create([
+                'user_id' => Auth::id(),
+                'student_id' => $request->student_id,
+                'surah_id' => $request->surah_id,
+                'juz' => $request->juz,
+                'ayat_start' => $request->ayat_start,
+                'ayat_end' => $request->ayat_end,
+                'note' => $request->note
+            ]);
             return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Input !'));
         }else {
             return redirect()->back()->with('alert', 'Jumlah Hafalan maximal 30 Juz')->withInput();
@@ -93,7 +101,15 @@ class HafalanController extends Controller
         if (!$form->isValide()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        Hafalan::find($id)->update(['user_id' => Auth::id(), 'student_id' => $request->student_id, 'count' => $request->count, 'note' => $request->note]);
+        Hafalan::find($id)->update([
+            'user_id' => Auth::id(),
+            'student_id' => $request->student_id,
+            'surah_id' => $request->surah_id,
+            'juz' => $request->juz,
+            'ayat_start' => $request->ayat_start,
+            'ayat_end' => $request->ayat_end,
+            'note' => $request->note
+        ]);
         return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Input !'));
     }
 
