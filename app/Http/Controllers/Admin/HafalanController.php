@@ -87,9 +87,14 @@ class HafalanController extends Controller
         return view($this->folder.'.edit', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create(\App\Forms\HafalanForm::class);
+        if (!$form->isValide()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        Hafalan::find($id)->update(['user_id' => Auth::id(), 'student_id' => $request->student_id, 'count' => $request->count, 'note' => $request->note]);
+        return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Input !'));
     }
 
     public function destroy($id)

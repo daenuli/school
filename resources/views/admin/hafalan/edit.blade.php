@@ -27,7 +27,7 @@
         @endif
         {!! form_row($form->student_id, $option = ['selected' => $h->student_id]) !!}
         {!! form_row($form->count) !!}
-        {!! form_row($form->note) !!}
+        {!! form_row($form->note, $option = ['value' => $h->note]) !!}
       </div>
       <div class="card-footer ml-auto">
         <a href="{{$back}}" class="btn btn-default">Cancel</a>
