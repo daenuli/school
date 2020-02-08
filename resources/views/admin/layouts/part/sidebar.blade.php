@@ -96,6 +96,30 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ Request::is('spp') || Request::is('spp/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#spp">
+                <i class="material-icons">credit_card</i>
+                <p> SPP
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('spp') || Request::is('spp/*')? 'show' : '' }}" id="spp">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('spp/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spp.create') }}">
+                      <span class="sidebar-mini"> TS </span>
+                      <span class="sidebar-normal"> Tambah SPP </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('spp') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('spp.index') }}">
+                      <span class="sidebar-mini"> DS </span>
+                      <span class="sidebar-normal"> Daftar SPP </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="material-icons">people</i>

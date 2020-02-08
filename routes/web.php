@@ -34,3 +34,6 @@ Route::resource('/hafalan', 'Admin\HafalanController')->except(['show']);
 
 Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
 Route::resource('users', 'Admin\UsersController');
+
+Route::get('/spp/dbtb', 'Admin\SppsController@dbTables')->name('spp.dbtb');
+Route::resource('/spp', 'Admin\SppsController');
