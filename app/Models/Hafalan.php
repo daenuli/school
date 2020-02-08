@@ -7,8 +7,7 @@ use App\User;
 
 class Hafalan extends Model
 {
-    protected $fillable = ['user_id', 'student_id', 'count', 'note'];
-
+protected $fillable = ['user_id', 'student_id', 'surah_id', 'juz', 'ayat_start', 'ayat_end','note'];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,5 +16,4 @@ class Hafalan extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
-    }
-}
+    }}
