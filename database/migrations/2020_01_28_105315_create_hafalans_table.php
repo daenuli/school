@@ -17,7 +17,10 @@ class CreateHafalansTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('student_id');
-            $table->integer('count');
+            $table->integer('surah_id');
+            $table->integer('juz');
+            $table->string('ayat_start');
+            $table->string('ayat_end');
             $table->text('note');
             $table->timestamps();
         });
