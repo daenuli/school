@@ -22,10 +22,11 @@ class CreateStudentsTable extends Migration
             $table->string('birth_place');
             $table->date('birth_date');
             $table->integer('position')->nullable(); // Anak ke berapa ?
+            $table->integer('sibling')->nullable(); // Dari berapa bersaudara ?
             $table->enum('level', ['smp', 'sma'])->nullable(); // Jenjang (SMP or SMA)
-            $table->boolean('child_status')->nullable(); // 0. Yatim, 1. Tidak yatim
+            $table->boolean('child_status')->nullable(); // 1. Yatim, 0. Tidak yatim
             $table->string('avatar', 200)->nullable();
-            $table->string('email', 100)->unique();
+            $table->string('email', 100)->unique()->nullable();
             $table->string('phone')->nullable();
             $table->boolean('gender'); //1 = Laki Laki, 0 = Perempuan
             $table->boolean('status'); //1 = Aktif, 0 = Tidak Aktif

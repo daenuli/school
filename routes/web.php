@@ -27,6 +27,11 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 //Yajra
 Route::get('/student/dbtb', 'Admin\StudentsController@dbTables')->name('student.dbtb');
 
+Route::post('kabupatenAll', 'Admin\WilayahController@getAllKabupaten')->name('wilayah.kabupaten.all');
+Route::post('kabupaten', 'Admin\WilayahController@getKabupaten')->name('wilayah.kabupaten');
+Route::post('kecamatan', 'Admin\WilayahController@getKecamatan')->name('wilayah.kecamatan');
+Route::get('provinsi', 'Admin\WilayahController@getProvinsi')->name('wilayah.provinsi');
+
 Route::get('/home', 'Admin\HomeController@index');
 Route::resource('/student', 'Admin\StudentsController');
 
