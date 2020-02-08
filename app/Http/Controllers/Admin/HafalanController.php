@@ -99,6 +99,8 @@ class HafalanController extends Controller
 
     public function destroy($id)
     {
-        //
+        $h = Hafalan::findOrFail($id);
+        $h->delete();
+        return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Hapus !'));
     }
 }
