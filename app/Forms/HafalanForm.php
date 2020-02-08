@@ -42,14 +42,14 @@ class HafalanForm extends Form
             ->add('ayat_start', 'text', [
                 'rules' => 'required',
                 'attr' => ['data-validation' => 'required', 'placeholder' => 'contoh: ayat 150', 'maxlength' => '3'],
-                'label' => 'Juz'
+                'label' => 'Mulai Ayat'
             ])
             ->add('ayat_end', 'text', [
                 'rules' => 'required',
                 'attr' => ['data-validation' => 'required', 'placeholder' => 'contoh: ayat 250', 'maxlength' => '3'],
-                'label' => 'Juz'
+                'label' => 'Ayat Terakhir'
             ])
-            ->add('note', 'textarea', [
+            ->add('note', 'text', [
                 'rules' => 'required',
                 'attr' => ['data-validation' => 'required'],
                 'label' => 'Catatan'

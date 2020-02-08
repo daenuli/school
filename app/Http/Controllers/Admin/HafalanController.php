@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Student;
 use App\Models\Hafalan;
+use App\Models\Surah;
 use Kris\LaravelFormBuilder\FormBuilder;
 use DataTables;
 use Form;
@@ -43,9 +44,12 @@ class HafalanController extends Controller
             ->editColumn('student_id', function($index){
                 return $index->student->name;
             })
+            ->editColumn('surah_id', function($index){
+                return $index->surah->name;
+            })
             ->addColumn('action', function($index){
                 $tag = Form::open(["url" => route($this->route.'destroy', $index->id), "method" => "PUT", "class" => "text-right"]);
-                $tag .= "<a href=". route($this->route.'edit', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
+                $tag .= "<a href=". route($this->route.'edit', $index->id) ." class='btn btn-primary btn-sm'>Ubah</a> ";
                 $tag .= "<button type='submit' class='btn btn-danger btn-sm' onclick='javascript:return confirm(`Apakah anda yakin ingin menghapus data ini?`)'>Hapus</button>";
                 $tag .= Form::close();
                 return $tag;
@@ -67,12 +71,13 @@ class HafalanController extends Controller
         $request->validate(['student_id' => 'required','juz' => 'required|max:2','note' => 'required']);
         $form = $formBuilder->create(\App\Forms\HafalanForm::class);
         if(!$form->isValid()){return redirect()->back()->withErrors($form->getErrors())->withInput();};
-        if ($request->juz <= 30) {
+        $j = $request->juz;
+        if ($j <= 30 && $j >= 1) {
             Hafalan::create([
                 'user_id' => Auth::id(),
                 'student_id' => $request->student_id,
                 'surah_id' => $request->surah_id,
-                'juz' => $request->juz,
+                'juz' => $j,
                 'ayat_start' => $request->ayat_start,
                 'ayat_end' => $request->ayat_end,
                 'note' => $request->note
@@ -98,19 +103,22 @@ class HafalanController extends Controller
     public function update(Request $request, $id, FormBuilder $formBuilder)
     {
         $form = $formBuilder->create(\App\Forms\HafalanForm::class);
-        if (!$form->isValide()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        if (!$form->isValid()){return redirect()->back()->withErrors($form->getErrors())->withInput();}
+        $j = $request->juz;
+        if ($j <= 30 && $j >= 1) {
+            Hafalan::find($id)->update([
+                'user_id' => Auth::id(),
+                'student_id' => $request->student_id,
+                'surah_id' => $request->surah_id,
+                'juz' => $j,
+                'ayat_start' => $request->ayat_start,
+                'ayat_end' => $request->ayat_end,
+                'note' => $request->note
+            ]);
+            return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Ubah !'));
+        }else {
+            return redirect()->back()->with('alert', 'Jumlah Hafalan maximal 30 Juz')->withInput();
         }
-        Hafalan::find($id)->update([
-            'user_id' => Auth::id(),
-            'student_id' => $request->student_id,
-            'surah_id' => $request->surah_id,
-            'juz' => $request->juz,
-            'ayat_start' => $request->ayat_start,
-            'ayat_end' => $request->ayat_end,
-            'note' => $request->note
-        ]);
-        return redirect($this->rdr)->with('Success', trans('Data anda telah berhasil di Input !'));
     }
 
     public function destroy($id)

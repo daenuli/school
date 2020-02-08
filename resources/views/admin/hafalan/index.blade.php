@@ -13,7 +13,10 @@
           { data: 'id', name: 'id', searchable: true, orderable: true},
           { data: 'user_id', name: 'user_id', searchable: true, orderable: true},
           { data: 'student_id', name: 'student_id', searchable: true, orderable: true},
-          { data: 'count', name: 'count', searchable: true, orderable: true},
+          { data: 'juz', name: 'juz', searchable: true, orderable: true},
+          { data: 'surah_id', name: 'surah_id', searchable: true, orderable: true},
+          { data: 'ayat_start', name: 'ayat_start', searchable: false, orderable: false},
+          { data: 'ayat_end', name: 'ayat_end', searchable: false, orderable: false},
           { data: 'note', name: 'note', searchable: false, orderable: false},
           { data: 'action', name: 'action', searchable: false, orderable: false,}
           ],
@@ -64,7 +67,10 @@
                   <th>Nomor</th>
                   <th>Musyrif</th>
                   <th>Santri</th>
-                  <th>Jumlah Hafalan (Juz)</th>
+                  <th>Juz</th>
+                  <th>Surah</th>
+                  <th>Mulai Ayat</th>
+                  <th>Akhir Ayat</th>
                   <th>Catatan</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -74,7 +80,10 @@
                   <th>Nomor</th>
                   <th>Musyrif</th>
                   <th>Santri</th>
-                  <th>Jumlah Hafalan (Juz)</th>
+                  <th>Juz</th>
+                  <th>Surah</th>
+                  <th>Mulai Ayat</th>
+                  <th>Akhir Ayat</th>
                   <th>Catatan</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>

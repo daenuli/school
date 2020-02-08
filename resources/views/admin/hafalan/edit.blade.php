@@ -26,7 +26,10 @@
             </div>
         @endif
         {!! form_row($form->student_id, $option = ['selected' => $h->student_id]) !!}
-        {!! form_row($form->count) !!}
+        {!! form_row($form->juz, $option = ['value' => $h->juz]) !!}
+        {!! form_row($form->surah_id, $option = ['selected' => $h->surah_id]) !!}
+        {!! form_row($form->ayat_start, $option = ['value' => $h->ayat_start]) !!}
+        {!! form_row($form->ayat_end, $option = ['value' => $h->ayat_end]) !!}
         {!! form_row($form->note, $option = ['value' => $h->note]) !!}
       </div>
       <div class="card-footer ml-auto">
