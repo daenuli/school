@@ -162,7 +162,16 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        $illness = IllnessHistory::where('student_id', $id)->get();
+        $parents = Parents::where('student_id', $id)->get();
+        $father = Parents::where([['student_id', $id], ['role', 1]])->first();
+        $mother = Parents::where([['student_id', $id], ['role', 2]])->first();
+        $wali = Parents::where([['student_id', $id], ['role', 3]])->first();
+        $guardian = Parents::where([['student_id', $id], ['is_guardian', 0]])->first();
+        $school = SchoolHistory::where('student_id', $id)->get();
+
+        return view('admin.students.show', compact('student', 'illness', 'parents', 'school', 'father', 'mother', 'wali', 'guardian'));
     }
 
     /**
