@@ -13,6 +13,14 @@
           </h4>
         </div>
         <div class="card-body">
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="material-icons">close</i>
+            </button>
+            <span>{{ $message }}</span>
+          </div>
+          @endif
           <div class="material-datatables">
             <table id="datatable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
               <thead>
@@ -44,7 +52,7 @@
           processing: true,
           serverSide: true,
           ajax: '{{$ajax}}',
-          order: [[1,'desc']],
+          order: [[0,'desc']],
           columns: [
               { data: 'id', searchable: true, orderable: true},
               { data: 'nis', searchable: true, orderable: true},

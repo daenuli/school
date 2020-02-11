@@ -30,6 +30,8 @@
     <link href="{{asset('material/assets/css/material-dashboard.css?v=2.1.0')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('material/assets/demo/demo.css')}}" rel="stylesheet" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @yield('style')
 </head>
 <body class="">
     <div class="wrapper ">
@@ -86,7 +88,7 @@
 <!-- Library for adding dinamically elements -->
 <script src="{{asset('material/assets/js/plugins/arrive.min.js')}}"></script>
 <!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
 <!-- Chartist JS -->
 <script src="{{asset('material/assets/js/plugins/chartist.min.js')}}"></script>
 <!--  Notifications Plugin    -->
@@ -95,6 +97,7 @@
 <script src="{{asset('material/assets/js/material-dashboard.js?v=2.1.0')}}" type="text/javascript"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('material/assets/demo/demo.js')}}"></script>
+
 @yield('script')
 <script>
 $(document).ready(function() {
