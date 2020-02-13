@@ -14,14 +14,11 @@
         @csrf
         <input type="hidden" name="users_id" value="{{auth()->user()->id}}">
         <div class="row">
-          <label class="col-sm-2 col-form-label">Nama Santri</label>
+          <label class="col-sm-2 col-form-label">Kategori</label>
           <div class="col-sm-8">
-            <select class="form-control" name="students_id">
-              <option disabled selected>Single Option</option>
-              @foreach ($data as $field)
-                <option value="{{$field->id}}">{{$field->name}}</option>
-              @endforeach
-            </select>
+            <div class="form-group">
+              <input type="text" class="form-control" name="name">
+            </div>
           </div>
         </div>
         <div class="row">
@@ -29,27 +26,6 @@
           <div class="col-sm-8">
             <div class="form-group">
               <input type="number" class="form-control" name="total">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <label class="col-sm-2 col-form-label label-checkbox">Status</label>
-          <div class="col-sm-8 checkbox-radios">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="status" value="1" checked> Lunas
-                <span class="circle">
-                  <span class="check"></span>
-                </span>
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="status" value="0"> Belum Lunas
-                <span class="circle">
-                  <span class="check"></span>
-                </span>
-              </label>
             </div>
           </div>
         </div>

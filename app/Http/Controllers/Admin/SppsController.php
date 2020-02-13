@@ -26,7 +26,7 @@ class SppsController extends Controller
 
     public function dbTables(Request $request)
     {
-        $data = Spp::where('status', 1)->get();
+        $data = Spp::all();
         return Datatables::of($data)
         ->editColumn('users_id', function($index){
             $user = User::all();
@@ -34,21 +34,6 @@ class SppsController extends Controller
               if ($index->users_id == $value->id) {
                 return $value->name;
               }
-            }
-        })
-        ->editColumn('students_id', function($index){
-            $student = Student::all();
-            foreach ($student as $value) {
-              if ($index->students_id == $value->id) {
-                return $value->name;
-              }
-            }
-        })
-        ->editColumn('status',function($index){
-            if ($index->status == 1) {
-              return "<span class='badge badge-pill badge-primary'>Lunas</span>";
-            } else {
-              return "<span class='badge badge-pill badge-primary'>Belum Lunas</span>";
             }
         })
         ->addColumn('action', function($index){
@@ -75,8 +60,7 @@ class SppsController extends Controller
      */
     public function create()
     {
-        $data = Student::all();
-        return view('admin.spps.create', compact('data'));
+        return view('admin.spps.create');
     }
 
     /**
