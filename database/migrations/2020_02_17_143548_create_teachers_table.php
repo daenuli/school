@@ -17,7 +17,7 @@ class CreateTeachersTable extends Migration
             $table->bigIncrements('id');
             $table->string('nik')->nullable()->unique();
             $table->string('name');
-            $table->bolean('gender'); //0 Perempuan; 1 Laki-laki
+            $table->boolean('gender'); //0 Perempuan; 1 Laki-laki
             $table->integer('departement_id');
             $table->string('phone');
             $table->timestamps();
