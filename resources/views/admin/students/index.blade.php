@@ -1,5 +1,13 @@
 @extends('admin.layouts.app')
 
+@section('style')
+<style>
+  table tr td a:hover {
+    text-decoration: underline;
+  }
+</style>
+@endsection
+
 @section('content')
     <div class="col-md-12">
       <div class="card">
@@ -13,7 +21,7 @@
           </h4>
         </div>
         <div class="card-body">
-          @if ($message = Session::get('success'))
+          @if ($message = Session::get('notif'))
           <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <i class="material-icons">close</i>
@@ -30,6 +38,7 @@
                   <th>Nama</th>
                   <th>TTL</th>
                   <th>Gender</th>
+                  <th>Hafalan</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -59,6 +68,7 @@
               { data: 'name', searchable: true, orderable: true},
               { data: 'birth', searchable: true, orderable: true},
               { data: 'gender', searchable: true, orderable: true},
+              { data: 'hafalan', searchable: true, orderable: true},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{

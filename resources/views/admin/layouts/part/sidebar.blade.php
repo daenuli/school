@@ -48,14 +48,14 @@ Tip 2: you can also add an image using data-image tag
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
                 <i class="material-icons">emoji_people</i>
                 <p> Santri
                   <b class="caret"></b>
                 </p>
               </a>
-              <div class="collapse {{ Request::is('student') || Request::is('student/*')? 'show' : '' }}" id="mapsExamples">
+              <div class="collapse {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'show' : '' }}" id="mapsExamples">
                 <ul class="nav">
                   <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('student.create') }}">

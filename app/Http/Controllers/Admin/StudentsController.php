@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Parents;
 use App\Models\StudentUser;
 use App\Models\Provinsi;
+use App\Models\Hafalan;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\SchoolHistory;
@@ -17,11 +18,6 @@ use Form;
 
 class StudentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $ajax = route('student.dbtb');
@@ -32,6 +28,9 @@ class StudentsController extends Controller
     {
         $data = Student::where('status', 1)->get();
         return Datatables::of($data)
+        ->editColumn('name', function($index){
+            return "<a href=".route('student.show', $index->id)." class='text-dark underline'>".$index->name."</a>";
+        })
         ->editColumn('gender',function($index){
             if ($index->gender == 1) {
                 return "<span class='badge badge-pill badge-primary'>Laki-Laki</span>";
@@ -39,39 +38,36 @@ class StudentsController extends Controller
                 return "<span class='badge badge-pill badge-info'>Perempuan</span>";
             }
         })
+        ->addColumn('hafalan', function($index){
+            $hafalan = Hafalan::where('student_id', $index->id)->get()->sortByDesc('id')->first();
+            if ($hafalan) {
+                return "<span class='badge badge-pill badge-success'><a href='' class='text-white'>".$hafalan->count." Juz</a></span>";
+            } else {
+                return "<span class='badge badge-pill badge-warning'><a href='' class='text-white'>Belum Setor</a></span>";
+            }
+        })
         ->addColumn('birth', function($index){
             return $index->birth_place.", ".date('d M Y', strtotime($index->birth_date));
         })
         ->addColumn('action', function($index){
             $tag     = Form::open(["url"=>route('student.show', $index->id), "method" => "PUT", "class" => "text-right"]);
-            $tag    .= "<a href=". route('student.show', $index->id) ." class='btn btn-primary btn-sm'>Detail</a> ";
-            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag    .= "<a href='' class='btn btn-primary btn-sm'>SPP</a> ";
+            // $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
             return $tag;
         })
         ->rawColumns([
-            'id', 'gender', 'action'
+            'id', 'name', 'gender', 'hafalan', 'action'
         ])
         ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $provinsi = Provinsi::all();
         return view('admin.students.create', compact('provinsi'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $student = new Student;
@@ -151,15 +147,9 @@ class StudentsController extends Controller
             $illness->save();
         }
 
-    return redirect()->route('student.index')->with('success', 'Data berhasil ditambah!');
+    return redirect()->route('student.index')->with('notif', 'Data berhasil ditambah!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $student = Student::find($id);
@@ -168,41 +158,76 @@ class StudentsController extends Controller
         $father = Parents::where([['student_id', $id], ['role', 1]])->first();
         $mother = Parents::where([['student_id', $id], ['role', 2]])->first();
         $wali = Parents::where([['student_id', $id], ['role', 3]])->first();
-        $guardian = Parents::where([['student_id', $id], ['is_guardian', 0]])->first();
-        $school = SchoolHistory::where('student_id', $id)->get();
+        $guardian = Parents::where([['student_id', $id], ['is_guardian', 1]])->first();
+        $school = SchoolHistory::where('student_id', $id)->first();
 
-        return view('admin.students.show', compact('student', 'illness', 'parents', 'school', 'father', 'mother', 'wali', 'guardian'));
+        // for update
+        $provinsi = Provinsi::all();
+
+        return view('admin.students.show', compact('student', 'illness', 'parents', 'school', 'father', 'mother', 'wali', 'guardian', 'provinsi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        $provinsi = Provinsi::all();
+        return view('admin.students.edit', compact('student', 'provinsi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        Student::find($id)->update([
+            'nik' => $request->nik,
+            'nisn' => $request->nisn,
+            'name' => $request->name,
+            'birth_place' => $request->birth_place,
+            'birth_date' => $request->birth_date,
+            'gender' => $request->gender,
+            'position' => $request->position,
+            'sibling' => $request->sibling,
+            'level' => $request->level,
+            'child_status' => $request->child_status,
+            'provinsi_id' => $request->provinsi_id,
+            'kabupaten_id' => $request->kabupaten_id,
+            'kecamatan_id' => $request->kecamatan_id,
+            'street' => $request->street,
+            'status' => $request->status,
+            'email' => $request->email
+        ]);
+        return redirect()->route('student.show', $id)->with('notif', 'Data berhasil diubah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function updateAva(Request $request, $id)
+    {
+        $data     = Student::findOrFail($id);
+        $ava      = $request->file('avatar');
+        if ($ava) {
+            if ($data->avatar && file_exists(storage_path('app/public/'.$data->avatar)) ) {
+                \Storage::delete('public/'.$data->avatar);
+            }
+            $ava_path = $ava->store('ava_student', 'public'); //$ava->store('nama_folder', 'bersifat public')
+            $data->avatar = $ava_path;
+        }
+        $data->save();
+        return redirect()->route('student.show', $id)->with('notif', 'Poto Profil berhasil diubah');
+    }
+
+    public function historySchoolUpdate(Request $request, $id)
+    {
+        SchoolHistory::find($request->school_id)->update([
+            'name' => $request->school_name,
+            'graduate' => $request->school_graduate,
+            'nasional_exam_number' => $request->school_exam_number,
+            'npsn' => $request->school_npsn,
+            'provinsi_id' => $request->school_provinsi_id,
+            'kabupaten_id' => $request->school_kabupaten_id,
+            'kecamatan_id' => $request->school_kecamatan_id,
+            'street' => $request->school_street
+        ]);
+
+        return redirect()->route('student.show', $id)->with('notif', 'Data berhasil diubah!');
+    }
+
     public function destroy($id)
     {
         //
