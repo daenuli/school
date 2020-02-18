@@ -18,10 +18,9 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>User Id</th>
-                  <th>Student Id</th>
+                  <th>Kategori</th>
                   <th>Total</th>
-                  <th>Status</th>
+                  <th>Pembuat</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -47,10 +46,9 @@
           order: [[1,'desc']],
           columns: [
               { data: 'id', searchable: true, orderable: true},
-              { data: 'users_id', searchable: true, orderable: true},
-              { data: 'students_id', searchable: true, orderable: true},
+              { data: 'name', searchable: true, orderable: true},
               { data: 'total', searchable: true, orderable: true},
-              { data: 'status', searchable: true, orderable: true},
+              { data: 'users_id', searchable: true, orderable: true},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{
