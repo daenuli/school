@@ -40,3 +40,6 @@ Route::resource('users', 'Admin\UsersController');
 
 Route::get('/spp/dbtb', 'Admin\SppsController@dbTables')->name('spp.dbtb');
 Route::resource('/spp', 'Admin\SppsController');
+
+Route::get('/teacher/dbtb', 'Admin\TeacherController@dbTables')->name('teacher.dbtb');
+Route::resource('/teacher', 'Admin\TeacherController');
