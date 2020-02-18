@@ -20,9 +20,9 @@ class CreateParentsTable extends Migration
             $table->date('birth_date');
             $table->boolean('gender'); // 0. Perempuan, 1. Laki
             $table->enum('last_education', ['sd', 'smp', 'sma', 'sarjana']);
-            $table->string('job');
-            $table->integer('salary');
-            $table->string('phone');
+            $table->string('job')->nullable();
+            $table->integer('salary')->nullable();
+            $table->string('phone')->nullable();
             $table->enum('role', [1, 2, 3]); // 1. Ayah, 2. Ibu, 3. Wali
             $table->boolean('is_guardian'); // Apakah sebagai wali? 0. No, 1. Yes
             $table->timestamps();
