@@ -96,6 +96,30 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ Request::is('teacher') || Request::is('teacher/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#teacher">
+                <i class="material-icons">person</i>
+                <p> Guru
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('teacher') || Request::is('teacher/*')? 'show' : '' }}" id="teacher">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('teacher/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('teacher.create') }}">
+                      <span class="sidebar-mini"> TS </span>
+                      <span class="sidebar-normal"> Tambah Guru </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('teacher') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('teacher.index') }}">
+                      <span class="sidebar-mini"> DS </span>
+                      <span class="sidebar-normal"> Daftar Guru </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="material-icons">people</i>
