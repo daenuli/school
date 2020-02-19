@@ -21,7 +21,7 @@ class TeacherSeeder extends Seeder
               'nik' => $faker->numberBetween(2100000000000000,9999999999999999),
               'name' => $faker->name,
               'gender' => $faker->randomElement([0, 1]),
-              'departement_id' => $faker->randomElement([1, 2, 3]),
+              'departement_id' => $faker->numberBetween(1,24),
               'phone' => $faker->phoneNumber,
               'created_at' => now(),
               'updated_at' => now(),

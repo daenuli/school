@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use Yajra\Datatables\Datatables;
 use Form;
+use App\Models\Departement;
 
 class TeacherController extends Controller
 {
@@ -33,12 +34,11 @@ class TeacherController extends Controller
             }
         })
         ->editColumn('departement_id',function($index){
-            if ($index->departement_id == 1) {
-              return "<span class='badge badge-pill badge-success'>Jabatan 1</span>";
-            } elseif ($index->departement_id == 2) {
-              return "<span class='badge badge-pill badge-danger'>Jabatan 2</span>";
-            } elseif ($index->departement_id == 3) {
-              return "<span class='badge badge-pill badge-info'>Jabatan 3</span>";
+            $departement = Departement::all();
+            foreach ($departement as $value) {
+              if ($index->departement_id == $value->id) {
+                return $value->name;
+              }
             }
         })
         ->addColumn('action', function($index){
@@ -65,7 +65,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teachers.create');
+        $departement = Departement::all();
+        return view('admin.teachers.create', compact('departement'));
     }
 
     /**
@@ -101,7 +102,8 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $data = Teacher::find($id);
-        return view('admin.teachers.edit', compact('data'));
+        $departement = Departement::all();
+        return view('admin.teachers.edit', compact('data', 'departement'));
     }
 
     /**

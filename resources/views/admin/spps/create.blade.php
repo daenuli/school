@@ -7,7 +7,9 @@
       <div class="card-icon">
         <i class="material-icons">contacts</i>
       </div>
-      <h4 class="card-title">Input Data SPP</h4>
+      <h4 class="card-title">Input Data SPP
+        <a href="{{ route('spp.index') }}" class="btn btn-sm btn-danger pull-right">Kembali</a>
+      </h4>
     </div>
     <div class="card-body ">
       <form method="post" action="{{route('spp.store')}}" class="form-horizontal">

@@ -7,7 +7,9 @@
       <div class="card-icon">
         <i class="material-icons">contacts</i>
       </div>
-      <h4 class="card-title">Input Data Guru</h4>
+      <h4 class="card-title">Edit Data Guru
+        <a href="{{route('teacher.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
+      </h4>
     </div>
     <div class="card-body ">
       <form method="post" action="{{route('teacher.update', $data->id)}}" class="form-horizontal">
@@ -50,9 +52,9 @@
           <label class="col-sm-2 col-form-label">Jabatan</label>
           <div class="col-sm-8">
             <select class="form-control" name="departement_id">
-              <option value="1" {{$data->departement_id == 1 ? 'selected' : ''}}>Jabatan 1</option>
-              <option value="2" {{$data->departement_id == 2 ? 'selected' : ''}}>Jabatan 2</option>
-              <option value="3" {{$data->departement_id == 3 ? 'selected' : ''}}>Jabatan 3</option>
+              @foreach ($departement as $value)
+                <option value="{{$value->id}}" {{$data->departement_id == $value->id ? 'selected' : ''}}>{{$value->name}}</option>
+              @endforeach
             </select>
           </div>
         </div>
