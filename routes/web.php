@@ -50,3 +50,6 @@ Route::resource('/spp', 'Admin\SppsController');
 
 Route::get('/teacher/dbtb', 'Admin\TeacherController@dbTables')->name('teacher.dbtb');
 Route::resource('/teacher', 'Admin\TeacherController');
+
+Route::get('/grade/dbtb', 'Admin\GradeController@dbTables')->name('grade.dbtb');
+Route::resource('/grade', 'Admin\GradeController');

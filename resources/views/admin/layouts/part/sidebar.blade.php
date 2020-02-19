@@ -96,6 +96,30 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ Request::is('grade') || Request::is('grade/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#class">
+                <i class="material-icons">account_balance</i>
+                <p> Kelas
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('grade') || Request::is('grade/*')? 'show' : '' }}" id="class">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('grade/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('grade.create') }}">
+                      <span class="sidebar-mini"> TK </span>
+                      <span class="sidebar-normal"> Tambah Kelas </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('grade') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('grade.index') }}">
+                      <span class="sidebar-mini"> DK </span>
+                      <span class="sidebar-normal"> Daftar Kelas </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('teacher') || Request::is('teacher/*')? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#teacher">
                 <i class="material-icons">person</i>
@@ -107,13 +131,13 @@ Tip 2: you can also add an image using data-image tag
                 <ul class="nav">
                   <li class="nav-item {{ Request::is('teacher/create') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('teacher.create') }}">
-                      <span class="sidebar-mini"> TS </span>
+                      <span class="sidebar-mini"> TG </span>
                       <span class="sidebar-normal"> Tambah Guru </span>
                     </a>
                   </li>
                   <li class="nav-item {{ Request::is('teacher') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('teacher.index') }}">
-                      <span class="sidebar-mini"> DS </span>
+                      <span class="sidebar-mini"> DG </span>
                       <span class="sidebar-normal"> Daftar Guru </span>
                     </a>
                   </li>
