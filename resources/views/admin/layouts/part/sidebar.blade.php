@@ -48,7 +48,32 @@ Tip 2: you can also add an image using data-image tag
                     <p> Dashboard </p>
                 </a>
             </li>
+            <li class="nav-item {{ Request::is('hafalan') || Request::is('hafalan/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#collapseHafalan">
+                <i class="material-icons">assessment</i>
+                <p> Hafalan Tahfizh
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('hafalan') || Request::is('hafalan/*')? 'show' : '' }}" id="collapseHafalan">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('hafalan/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('hafalan.create') }}">
+                      <span class="sidebar-mini"> TH </span>
+                      <span class="sidebar-normal"> Tambah Hafalan </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('hafalan') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('hafalan.index') }}">
+                      <span class="sidebar-mini"> DH </span>
+                      <span class="sidebar-normal"> Data Hafalan </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}"> --}}
               <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
                 <i class="material-icons">emoji_people</i>
                 <p> Santri

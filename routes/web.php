@@ -26,6 +26,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //Yajra
 Route::get('/student/dbtb', 'Admin\StudentsController@dbTables')->name('student.dbtb');
+Route::get('/hafalan/dbtb', 'Admin\HafalanController@dbTables')->name('hafalan.dbtb');
 
 // plugin alamat
 Route::post('kabupatenAll', 'Admin\WilayahController@getAllKabupaten')->name('wilayah.kabupaten.all');
@@ -41,6 +42,7 @@ Route::resource('/student', 'Admin\StudentsController');
 Route::resource('/parent', 'Admin\ParentsController');
 Route::resource('/illness', 'Admin\IllnessHistoryController');
 Route::resource('/school', 'Admin\SchoolHistoryController');
+Route::resource('/hafalan', 'Admin\HafalanController')->except(['show']);
 
 Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
 Route::resource('users', 'Admin\UsersController');

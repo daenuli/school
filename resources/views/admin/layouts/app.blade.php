@@ -32,6 +32,8 @@
     <link href="{{asset('material/assets/demo/demo.css')}}" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('style')
+    {{-- custom plugin --}}
+    @yield('link')
 </head>
 <body class="">
     <div class="wrapper ">
