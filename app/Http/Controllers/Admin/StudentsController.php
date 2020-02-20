@@ -15,6 +15,7 @@ use App\Models\SchoolHistory;
 use App\Models\IllnessHistory;
 use Yajra\Datatables\Datatables;
 use Form;
+use App\Models\SppStudent;
 
 class StudentsController extends Controller
 {
@@ -50,9 +51,8 @@ class StudentsController extends Controller
             return $index->birth_place.", ".date('d M Y', strtotime($index->birth_date));
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('student.show', $index->id), "method" => "PUT", "class" => "text-right"]);
-            $tag    .= "<a href='' class='btn btn-primary btn-sm'>SPP</a> ";
-            // $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag     = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
+            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
             $tag    .= Form::close();
             return $tag;
         })
@@ -138,7 +138,7 @@ class StudentsController extends Controller
 
         // input in student illness history
         $countIllness = count($request->illness_name);
-        for ($i=0; $i < $countIllness; $i++) { 
+        for ($i=0; $i < $countIllness; $i++) {
             $illness = new IllnessHistory;
             $illness->student_id = $findStudent;
             $illness->name = $request->illness_name[$i];
@@ -231,5 +231,19 @@ class StudentsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sppStudent($id)
+    {
+        $ajax = route('sppStudent.spptb', $id);
+        // return response()->json($ajax);
+        return view('admin.sppStudents.index', compact('ajax'));
+    }
+
+    public function sppTables(Request $request, $id)
+    {
+        $data = SppStudent::where('student_id', $id)->get();
+        return Datatables::of($data)
+        ->make(true);
     }
 }
