@@ -15,6 +15,7 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('department_id');
             $table->string('nik')->nullable()->unique();
             $table->string('name');
             $table->boolean('gender'); //0 Perempuan; 1 Laki-laki
