@@ -56,3 +56,6 @@ Route::get('/sppStudent/{sppStudent}/spptb', 'Admin\StudentsController@sppTables
 Route::get('/sppStudent/{sppStudent}/sppdtl', 'Admin\StudentsController@sppStudent')->name('sppStudent.sppdtl');
 Route::get('/sppStudent/sppcrt', 'Admin\StudentsController@sppCreate')->name('sppStudent.sppcrt');
 Route::post('/sppStudent/{sppStudent}/sppstr', 'Admin\StudentsController@sppStore')->name('sppStudent.sppstr');
+Route::get('/sppStudent/{sppStudent}/sppedt', 'Admin\StudentsController@sppEdit')->name('sppStudent.sppedt');
+Route::delete('/sppStudent/{sppStudent}/sppdestroy', 'Admin\StudentsController@sppDestroy')->name('sppStudent.sppdestroy');
+Route::post('/sppStudent/{sppStudent}/sppupdt', 'Admin\StudentsController@sppUpdate')->name('sppStudent.sppupdt');

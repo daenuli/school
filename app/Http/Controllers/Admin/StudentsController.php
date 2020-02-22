@@ -228,7 +228,7 @@ class StudentsController extends Controller
             'street' => $request->school_street
         ]);
 
-        return redirect()->route('student.show', $id)->with('notif', 'Data berhasil diubah!');
+        return redirect()->route('student.show', $id)->with('nosubmittif', 'Data berhasil diubah!');
     }
 
     public function destroy($id)
@@ -241,10 +241,11 @@ class StudentsController extends Controller
     public function sppStudent($id)
     {
         $spp = Spp::all();
+        $spps = SppStudent::find($id);
         $ajax = route('sppStudent.spptb', $id);
         $id;
         // return response()->json($ajax);
-        return view('admin.sppStudents.index', compact('ajax','spp','id'));
+        return view('admin.sppStudents.index', compact('ajax','spp','spps','id'));
     }
 
     public function sppTables(Request $request, $id)
@@ -278,12 +279,12 @@ class StudentsController extends Controller
             }
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE"]);
+            $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index->id), "method" => "DELETE"]);
             $tag    .= "<div class='d-flex justify-content-end'>";
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET"]);
-            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index->id), "method" => "GET"]);
+            $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
             $tag    .= "</div>";
             $tag    .= Form::close();
             return $tag;
@@ -304,5 +305,25 @@ class StudentsController extends Controller
     {
         SppStudent::create($request->all());
         return redirect()->route('sppStudent.sppdtl', $id);
+    }
+
+    public function sppEdit($id)
+    {
+        $spp = Spp::all();
+        $spps = SppStudent::find($id);
+        return view('admin.sppStudents.edit', compact('spp','spps'));
+    }
+
+    public function sppUpdate(Request $request, $id)
+    {
+        $spp = $request->student_id;
+        SppStudent::find($id)->update($request->all());
+        return redirect()->route('sppStudent.sppdtl', $spp);
+    }
+
+    public function sppDestroy($id)
+    {
+        SppStudent::find($id)->delete();
+        return redirect()->back();
     }
 }

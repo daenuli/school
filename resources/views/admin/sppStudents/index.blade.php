@@ -30,7 +30,8 @@
               </tbody>
             </table>
           </div>
-          @include('admin.sppStudents.create-model')
+          @include('admin.sppStudents.create')
+          {{-- @include('admin.sppStudents.edit') --}}
         </div>
         <!-- end content-->
       </div>
