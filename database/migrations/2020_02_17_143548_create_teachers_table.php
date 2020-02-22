@@ -15,11 +15,10 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('department_id');
+            $table->integer('department_id')->nullable();
             $table->string('nik')->nullable()->unique();
             $table->string('name');
             $table->boolean('gender'); //0 Perempuan; 1 Laki-laki
-            $table->integer('departement_id');
             $table->string('phone');
             $table->timestamps();
         });
