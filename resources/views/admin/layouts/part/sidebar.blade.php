@@ -5,13 +5,20 @@ Tip 1: You can change the color of the sidebar using: data-color="purple | azure
 Tip 2: you can also add an image using data-image tag
 -->
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">CT</a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">Creative Tim</a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini"></a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal"><b>Ar</b> Rabwah</a>
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{asset('material/assets/img/faces/avatar.jpg')}}" />
+                {{-- <img src="{{asset('material/assets/img/faces/avatar.jpg')}}" /> --}}
+                @auth
+                  @if(auth()->user()->avatar)
+                    <img src="{{Storage::url(auth()->user()->avatar)}}">
+                  @else
+                    <img src="{{Avatar::create(auth()->user()->name)->toBase64()}}">
+                  @endif
+                @endauth
             </div>
             <div class="user-info">
                 <a data-toggle="collapse" href="#collapseExample" class="username">
