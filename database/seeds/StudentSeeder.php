@@ -16,7 +16,7 @@ class StudentSeeder extends Seeder
         Student::truncate();
     	$faker = Faker::create('id_ID');
 
-        for($i = 1; $i <= 100; $i++){
+        for($i = 1; $i <= 145; $i++){
 
     		DB::table('students')->insert([
     			'nis' => $faker->unique()->numberBetween(0001,9999),
