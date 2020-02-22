@@ -26,6 +26,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //Yajra
 Route::get('/student/dbtb', 'Admin\StudentsController@dbTables')->name('student.dbtb');
+Route::get('/hafalan/dbtb', 'Admin\HafalanController@dbTables')->name('hafalan.dbtb');
 
 // plugin alamat
 Route::post('kabupatenAll', 'Admin\WilayahController@getAllKabupaten')->name('wilayah.kabupaten.all');
@@ -41,6 +42,7 @@ Route::resource('/student', 'Admin\StudentsController');
 Route::resource('/parent', 'Admin\ParentsController');
 Route::resource('/illness', 'Admin\IllnessHistoryController');
 Route::resource('/school', 'Admin\SchoolHistoryController');
+Route::resource('/hafalan', 'Admin\HafalanController')->except(['show']);
 
 Route::get('users/data', 'Admin\UsersController@data')->name('users.data');
 Route::resource('users', 'Admin\UsersController');
@@ -59,3 +61,6 @@ Route::post('/sppStudent/{sppStudent}/sppstr', 'Admin\StudentsController@sppStor
 Route::get('/sppStudent/{sppStudent}/sppedt', 'Admin\StudentsController@sppEdit')->name('sppStudent.sppedt');
 Route::delete('/sppStudent/{sppStudent}/sppdestroy', 'Admin\StudentsController@sppDestroy')->name('sppStudent.sppdestroy');
 Route::post('/sppStudent/{sppStudent}/sppupdt', 'Admin\StudentsController@sppUpdate')->name('sppStudent.sppupdt');
+
+Route::get('/grade/dbtb', 'Admin\GradeController@dbTables')->name('grade.dbtb');
+Route::resource('/grade', 'Admin\GradeController');

@@ -8,14 +8,8 @@
         <div class="card-icon">
           <i class="material-icons">contacts</i>
         </div>
-        <h4 class="card-title">Input Data User</h4>
+        <h4 class="card-title">Input Data Kelas</h4>
       </div>
-
-      {{-- <div class="card-header card-header-rose card-header-text">
-        <div class="card-text">
-          <h4 class="card-title">Create User</h4>
-        </div>
-      </div> --}}
       <div class="card-body">
         {!! form_rest($form) !!}
       </div>

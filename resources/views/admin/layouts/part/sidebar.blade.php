@@ -5,13 +5,20 @@ Tip 1: You can change the color of the sidebar using: data-color="purple | azure
 Tip 2: you can also add an image using data-image tag
 -->
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">CT</a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">Creative Tim</a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini"></a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal"><b>Ar</b> Rabwah</a>
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{asset('material/assets/img/faces/avatar.jpg')}}" />
+                {{-- <img src="{{asset('material/assets/img/faces/avatar.jpg')}}" /> --}}
+                @auth
+                  @if(auth()->user()->avatar)
+                    <img src="{{Storage::url(auth()->user()->avatar)}}">
+                  @else
+                    <img src="{{Avatar::create(auth()->user()->name)->toBase64()}}">
+                  @endif
+                @endauth
             </div>
             <div class="user-info">
                 <a data-toggle="collapse" href="#collapseExample" class="username">
@@ -48,7 +55,32 @@ Tip 2: you can also add an image using data-image tag
                     <p> Dashboard </p>
                 </a>
             </li>
+            <li class="nav-item {{ Request::is('hafalan') || Request::is('hafalan/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#collapseHafalan">
+                <i class="material-icons">assessment</i>
+                <p> Hafalan Tahfizh
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('hafalan') || Request::is('hafalan/*')? 'show' : '' }}" id="collapseHafalan">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('hafalan/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('hafalan.create') }}">
+                      <span class="sidebar-mini"> TH </span>
+                      <span class="sidebar-normal"> Tambah Hafalan </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('hafalan') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('hafalan.index') }}">
+                      <span class="sidebar-mini"> DH </span>
+                      <span class="sidebar-normal"> Data Hafalan </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}"> --}}
               <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
                 <i class="material-icons">emoji_people</i>
                 <p> Santri
@@ -75,7 +107,7 @@ Tip 2: you can also add an image using data-image tag
             <li class="nav-item {{ Request::is('spp') || Request::is('spp/*')? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#spp">
                 <i class="material-icons">credit_card</i>
-                <p> SPP
+                <p> Kategori SPP
                   <b class="caret"></b>
                 </p>
               </a>
@@ -96,6 +128,30 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ Request::is('grade') || Request::is('grade/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#class">
+                <i class="material-icons">account_balance</i>
+                <p> Kelas
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('grade') || Request::is('grade/*')? 'show' : '' }}" id="class">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('grade/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('grade.create') }}">
+                      <span class="sidebar-mini"> TK </span>
+                      <span class="sidebar-normal"> Tambah Kelas </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('grade') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('grade.index') }}">
+                      <span class="sidebar-mini"> DK </span>
+                      <span class="sidebar-normal"> Daftar Kelas </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('teacher') || Request::is('teacher/*')? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#teacher">
                 <i class="material-icons">person</i>
@@ -107,13 +163,13 @@ Tip 2: you can also add an image using data-image tag
                 <ul class="nav">
                   <li class="nav-item {{ Request::is('teacher/create') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('teacher.create') }}">
-                      <span class="sidebar-mini"> TS </span>
+                      <span class="sidebar-mini"> TG </span>
                       <span class="sidebar-normal"> Tambah Guru </span>
                     </a>
                   </li>
                   <li class="nav-item {{ Request::is('teacher') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('teacher.index') }}">
-                      <span class="sidebar-mini"> DS </span>
+                      <span class="sidebar-mini"> DG </span>
                       <span class="sidebar-normal"> Daftar Guru </span>
                     </a>
                   </li>

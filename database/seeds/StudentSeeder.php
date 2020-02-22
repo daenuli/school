@@ -16,15 +16,15 @@ class StudentSeeder extends Seeder
         Student::truncate();
     	$faker = Faker::create('id_ID');
 
-        for($i = 1; $i <= 100; $i++){
+        for($i = 1; $i <= 145; $i++){
 
     		DB::table('students')->insert([
-    			'nis' => $faker->numberBetween(0001,9999),
-                'nisn' => '000'.$faker->numberBetween(3111111,5888888),
+    			'nis' => $faker->unique()->numberBetween(0001,9999),
+                'nisn' => '000'.$faker->unique()->numberBetween(3111111,5888888),
                 'name' => $faker->name,
                 'birth_place' => $faker->city,
                 'birth_date' => $faker->dateTimeBetween($startDate = '-25 years', $endDate = '-5 years', $timezone = null)->format('Y-m-d'),
-                'email' =>  $faker->email,
+                'email' =>  $faker->unique()->email,
                 'phone' =>  $faker->phoneNumber,
                 'gender' => $faker->randomElement([0, 1]),
                 'status' => 1,

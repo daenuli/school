@@ -22,4 +22,8 @@ class Student extends Model
     {
         return $this->belongsTo(Provinsi::class, 'provinsi_id', 'id');
     }
+    public function hafalans()
+    {
+        return $this->hasMany(Hafalan::class);
+    }
 }
