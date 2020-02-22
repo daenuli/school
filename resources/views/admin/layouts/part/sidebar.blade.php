@@ -107,7 +107,7 @@ Tip 2: you can also add an image using data-image tag
             <li class="nav-item {{ Request::is('spp') || Request::is('spp/*')? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#spp">
                 <i class="material-icons">credit_card</i>
-                <p> SPP
+                <p> Kategori SPP
                   <b class="caret"></b>
                 </p>
               </a>
