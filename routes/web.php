@@ -54,3 +54,5 @@ Route::resource('/teacher', 'Admin\TeacherController');
 // spp student / spp detail
 Route::get('/sppStudent/{sppStudent}/spptb', 'Admin\StudentsController@sppTables')->name('sppStudent.spptb');
 Route::get('/sppStudent/{sppStudent}/sppdtl', 'Admin\StudentsController@sppStudent')->name('sppStudent.sppdtl');
+Route::get('/sppStudent/sppcrt', 'Admin\StudentsController@sppCreate')->name('sppStudent.sppcrt');
+Route::post('/sppStudent/{sppStudent}/sppstr', 'Admin\StudentsController@sppStore')->name('sppStudent.sppstr');

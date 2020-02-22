@@ -8,8 +8,9 @@
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Spp Santri
+            <a href="{{route('student.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
             <a href="" class="btn btn-sm btn-info pull-right">Print</a>
-            <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
+            <button type="button" class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target=".bd-example-modal-lg">Tambah Data</button>
           </h4>
         </div>
         <div class="card-body">
@@ -18,8 +19,9 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>SPP</th>
-                  <th>User</th>
+                  <th>Kategori</th>
+                  <th>Pencatat</th>
+                  <th>Tanggal Bayar</th>
                   <th>Status</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
@@ -28,6 +30,7 @@
               </tbody>
             </table>
           </div>
+          @include('admin.sppStudents.create-model')
         </div>
         <!-- end content-->
       </div>
@@ -48,6 +51,7 @@
               { data: 'id', searchable: true, orderable: true},
               { data: 'spp_id', searchable: true, orderable: true},
               { data: 'user_id', searchable: true, orderable: true},
+              { data: 'created_at', searchable: true, orderable: true},
               { data: 'status', searchable: true, orderable: true},
               { data: 'action', searchable: false, orderable: false}
           ],
