@@ -24,7 +24,7 @@ class StudentSeeder extends Seeder
                 'name' => $faker->name,
                 'birth_place' => $faker->city,
                 'birth_date' => $faker->dateTimeBetween($startDate = '-25 years', $endDate = '-5 years', $timezone = null)->format('Y-m-d'),
-                'email' =>  $faker->email,
+                'email' =>  $faker->unique()->email,
                 'phone' =>  $faker->phoneNumber,
                 'gender' => $faker->randomElement([0, 1]),
                 'status' => 1,
