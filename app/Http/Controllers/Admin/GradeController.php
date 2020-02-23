@@ -36,6 +36,12 @@ class GradeController extends Controller
     {
         $users = Grade::all();
         return DataTables::of($users)
+        ->editColumn('teacher_id', function($index){
+          return isset($index->teacher->name)?$index->teacher->name:'-';
+        })
+        ->editColumn('name', function($index){
+          return '<a href="'.route($this->uri.'.show', $index->id).'" class="btn btn-sm btn-info">'.$index->name.'</a>';
+        })
         ->addColumn('action', function ($index) {
             return '<form action="'. route($this->uri.'.destroy', $index->id) .'" method="POST" class="text-center">
             <a href="' . route($this->uri.'.edit', $index->id) . '" class="btn btn-sm btn-success"><i class="material-icons">create</i> Edit </a>
@@ -45,7 +51,7 @@ class GradeController extends Controller
             </form>
             ';
         })
-        ->rawColumns(['id', 'action'])
+        ->rawColumns(['id', 'name', 'action'])
         ->make(true);
     }
 
@@ -74,9 +80,11 @@ class GradeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'teacher_id' => 'required',
             'name' => 'required',
         ]);
         $data = new Grade;
+        $data->teacher_id = $request->teacher_id;
         $data->name = $request->name;
         $data->save();
 
@@ -91,7 +99,7 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'p';
     }
 
     /**
@@ -103,14 +111,13 @@ class GradeController extends Controller
     public function edit(FormBuilder $formBuilder, $id)
     {
         $data['title'] = $this->title;
-        $tbl = Grade::find($id);
         $data['form'] = $formBuilder->create('App\Forms\GradeForm', [
             'method' => 'PUT',
-            'model' => $tbl,
             'url' => route($this->uri.'.update', $id)
         ]);
         $data['back'] = route($this->uri.'.index');
-        return view($this->folder.'.create', $data);
+        $data['h'] = Grade::find($id);
+        return view($this->folder.'.edit', $data);
     }
 
     /**
@@ -123,12 +130,13 @@ class GradeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+          'teacher_id' => 'required',
+          'name' => 'required'
         ]);
-        $data = Grade::find($id);
-        $data->name = $request->name;
-        $data->save();
-
+        Grade::findOrFail($id)->update([
+          'teacher_id' => $request->teacher_id,
+          'name' => $request->name
+        ]);
         return redirect(route($this->uri.'.index'))->with('Success',trans('Data anda telah berhasil di Edit !'));
     }
 

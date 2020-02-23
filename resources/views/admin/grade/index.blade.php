@@ -10,9 +10,8 @@
           aaSorting: [[0, 'desc']],
           columns: [
           { data: 'id', name: 'id', searchable: true, orderable: true},
-          { data: 'name', name: 'name', render: function (data, type, full, meta) {
-            return "<span class='btn btn-sm btn-info'><b>"+ data + "</b></span>";
-          }},
+          { data: 'teacher_id', name: 'teacher_id', searchable: true, orderable: true},
+          { data: 'name', name: 'name', searchable: true, orderable: true},
           { data: 'action', name: 'action', searchable: true, orderable: true},
           ],
           columnDefs: [{
@@ -53,22 +52,24 @@
                 <b> {{ session('Success') }} </b></span>
             </div>
           @endif
-                  
+
 
           <div class="material-datatables">
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
               <thead>
                 <tr>
                   <th>Nomor</th>
+                  <th>Wali Kelas</th>
                   <th>Kelas</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-center">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Nomor</th>
+                  <th>Wali Kelas</th>
                   <th>Kelas</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-center">Actions</th>
                 </tr>
               </tfoot>
               <tbody>
