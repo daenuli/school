@@ -176,6 +176,30 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ Request::is('donatur') || Request::is('donatur/*')? 'active' : '' }}">
+              <a class="nav-link" data-toggle="collapse" href="#donatur">
+                <i class="material-icons">how_to_vote</i>
+                <p> Donatur
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <div class="collapse {{ Request::is('donatur') || Request::is('donatur/*')? 'show' : '' }}" id="donatur">
+                <ul class="nav">
+                  <li class="nav-item {{ Request::is('donatur/create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('donatur.create') }}">
+                      <span class="sidebar-mini"> TG </span>
+                      <span class="sidebar-normal"> Tambah Guru </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('donatur') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('donatur.index') }}">
+                      <span class="sidebar-mini"> DG </span>
+                      <span class="sidebar-normal"> Daftar Guru </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="material-icons">people</i>
