@@ -15,6 +15,10 @@ use App\Models\SchoolHistory;
 use App\Models\IllnessHistory;
 use Yajra\Datatables\Datatables;
 use Form;
+use App\Models\SppStudent;
+use App\Models\Spp;
+use App\User;
+use Carbon\Carbon;
 
 class StudentsController extends Controller
 {
@@ -50,9 +54,8 @@ class StudentsController extends Controller
             return $index->birth_place.", ".date('d M Y', strtotime($index->birth_date));
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('student.show', $index->id), "method" => "PUT", "class" => "text-right"]);
-            $tag    .= "<a href='' class='btn btn-primary btn-sm'>SPP</a> ";
-            // $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag     = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
+            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
             $tag    .= Form::close();
             return $tag;
         })
@@ -138,7 +141,7 @@ class StudentsController extends Controller
 
         // input in student illness history
         $countIllness = count($request->illness_name);
-        for ($i=0; $i < $countIllness; $i++) { 
+        for ($i=0; $i < $countIllness; $i++) {
             $illness = new IllnessHistory;
             $illness->student_id = $findStudent;
             $illness->name = $request->illness_name[$i];
@@ -225,11 +228,102 @@ class StudentsController extends Controller
             'street' => $request->school_street
         ]);
 
-        return redirect()->route('student.show', $id)->with('notif', 'Data berhasil diubah!');
+        return redirect()->route('student.show', $id)->with('nosubmittif', 'Data berhasil diubah!');
     }
 
     public function destroy($id)
     {
         //
+    }
+
+    //bagian adib spp santri
+
+    public function sppStudent($id)
+    {
+        $spp = Spp::all();
+        $spps = SppStudent::find($id);
+        $ajax = route('sppStudent.spptb', $id);
+        $id;
+        // return response()->json($ajax);
+        return view('admin.sppStudents.index', compact('ajax','spp','spps','id'));
+    }
+
+    public function sppTables(Request $request, $id)
+    {
+        $data = SppStudent::where('student_id', $id)->get();
+        return Datatables::of($data)
+        ->editColumn('spp_id', function($index){
+            $spp = Spp::all();
+            foreach ($spp as $value) {
+              if ($index->spp_id == $value->id) {
+                return $value->name;
+              }
+            }
+        })
+        ->editColumn('user_id', function($index){
+            $user = User::all();
+            foreach ($user as $value) {
+              if ($index->user_id == $value->id) {
+                return $value->name;
+              }
+            }
+        })
+        ->editColumn('created_at', function($index){
+            return date('d F Y', strtotime($index->created_at));
+        })
+        ->editColumn('status', function($index){
+            if ($index->status == 1) {
+              return 'Lunas';
+            } else {
+              return 'Belum Lunas';
+            }
+        })
+        ->addColumn('action', function($index){
+            $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index->id), "method" => "DELETE"]);
+            $tag    .= "<div class='d-flex justify-content-end'>";
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag    .= Form::close();
+            $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index->id), "method" => "GET"]);
+            $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
+            $tag    .= "</div>";
+            $tag    .= Form::close();
+            return $tag;
+        })
+        ->rawColumns([
+            'spp_id', 'user_id', 'created_at', 'status', 'action'
+        ])
+        ->make(true);
+    }
+
+    public function sppCreate()
+    {
+        $spp = Spp::all();
+        return view('admin.sppStudents.create', compact('spp'));
+    }
+
+    public function sppStore(Request $request, $id)
+    {
+        SppStudent::create($request->all());
+        return redirect()->route('sppStudent.sppdtl', $id);
+    }
+
+    public function sppEdit($id)
+    {
+        $spp = Spp::all();
+        $spps = SppStudent::find($id);
+        return view('admin.sppStudents.edit', compact('spp','spps'));
+    }
+
+    public function sppUpdate(Request $request, $id)
+    {
+        $spp = $request->student_id;
+        SppStudent::find($id)->update($request->all());
+        return redirect()->route('sppStudent.sppdtl', $spp);
+    }
+
+    public function sppDestroy($id)
+    {
+        SppStudent::find($id)->delete();
+        return redirect()->back();
     }
 }

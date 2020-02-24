@@ -7,7 +7,9 @@
       <div class="card-icon">
         <i class="material-icons">contacts</i>
       </div>
-      <h4 class="card-title">Input Data Guru</h4>
+      <h4 class="card-title">Input Data Guru
+        <a href="{{route('teacher.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
+      </h4>
     </div>
     <div class="card-body ">
       <form method="post" action="{{route('teacher.store')}}" class="form-horizontal">
@@ -49,9 +51,10 @@
           <label class="col-sm-2 col-form-label">Jabatan</label>
           <div class="col-sm-8">
             <select class="form-control" name="departement_id">
-              <option value="1">Jabatan 1</option>
-              <option value="2">Jabatan 2</option>
-              <option value="3">Jabatan 3</option>
+              <option value="" selected>- Pilih Jabatan 1-</option>
+              @foreach ($departement as $value)
+                <option value="{{$value->id}}">{{$value->name}}</option>
+              @endforeach
             </select>
           </div>
         </div>
