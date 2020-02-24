@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Grade;
 use App\Models\Teacher;
+use App\Models\Student;
 use Kris\LaravelFormBuilder\FormBuilder;
 use DataTables;
 use Form;
@@ -32,7 +33,6 @@ class GradeController extends Controller
         return view($this->folder.'.index',$data);
     }
     public function dbTables()
-
     {
         $users = Grade::all();
         return DataTables::of($users)
@@ -54,7 +54,19 @@ class GradeController extends Controller
         ->rawColumns(['id', 'name', 'action'])
         ->make(true);
     }
-
+    public function studentDbtb()
+    {
+      $s = Student::all();
+      return DataTables::of($s)
+        ->addColumn('action', function($index){
+          $tag = Form::open(["url" => route($this->uri.'.destroy', $index->id), "method" => "DELETE"]);
+          $tag .= "<button type='submit' class='btn btn-sm btn-danger btn-label' onclick='javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')'>Hapus</button>";
+          $tag .= Form::close();
+          return $tag;
+        })
+        ->rawColumns(['id', 'action'])
+        ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -99,7 +111,15 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        return 'p';
+      $data['title'] = $this->title;
+      $data['back'] = route($this->uri.'.index');
+      $data['kelas'] = Grade::findOrFail($id);
+      if (isset(Grade::find($id)->teacher->name)) {
+        'ada';
+      }else {
+        'gada';
+      }
+      return view($this->folder.'.show', $data);
     }
 
     /**

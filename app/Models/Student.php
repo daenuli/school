@@ -26,4 +26,8 @@ class Student extends Model
     {
         return $this->hasMany(Hafalan::class);
     }
+    public function studentGrades()
+    {
+      return $this->hasMany(StudentGrade::class);
+    }
 }
