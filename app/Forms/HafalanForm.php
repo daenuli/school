@@ -54,7 +54,7 @@ class HafalanForm extends Form
                 'attr' => ['data-validation' => 'required'],
                 'label' => 'Catatan'
             ])
-            ->add('Tambahkan', 'submit', [
+            ->add('Kirim', 'submit', [
                 'attr'  => [
                     'class' => 'btn btn-fill btn-rose pull-right',
                 ],

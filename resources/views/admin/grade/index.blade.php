@@ -9,11 +9,10 @@
           ajax: 'grade/dbtb',
           aaSorting: [[0, 'desc']],
           columns: [
-          { data: 'id', name: 'id', searchable: false, orderable: false},
-          { data: 'name', name: 'name', render: function (data, type, full, meta) {
-            return "<span class='btn btn-sm btn-info'><b>"+ data + "</b></span>";
-          }},
-          { data: 'action', name: 'action', searchable: false, orderable: false},
+          { data: 'id', name: 'id', searchable: true, orderable: true},
+          { data: 'teacher_id', name: 'teacher_id', searchable: true, orderable: true},
+          { data: 'name', name: 'name', searchable: true, orderable: true},
+          { data: 'action', name: 'action', searchable: true, orderable: true},
           ],
           columnDefs: [{
             "targets": 0,
@@ -60,15 +59,17 @@
               <thead>
                 <tr>
                   <th>Nomor</th>
+                  <th>Wali Kelas</th>
                   <th>Kelas</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-center">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Nomor</th>
+                  <th>Wali Kelas</th>
                   <th>Kelas</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-center">Actions</th>
                 </tr>
               </tfoot>
               <tbody>

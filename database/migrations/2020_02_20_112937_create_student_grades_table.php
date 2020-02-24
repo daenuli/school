@@ -18,6 +18,7 @@ class CreateStudentGradesTable extends Migration
             $table->integer('school_year_id'); // kelas
             $table->integer('grade_id');
             $table->integer('student_id');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
