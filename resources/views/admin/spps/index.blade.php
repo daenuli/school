@@ -43,12 +43,12 @@
           processing: true,
           serverSide: true,
           ajax: '{{$ajax}}',
-          order: [[1,'desc']],
+          order: [],
           columns: [
-              { data: 'id', searchable: true, orderable: true},
-              { data: 'name', searchable: true, orderable: true},
-              { data: 'total', searchable: true, orderable: true},
-              { data: 'users_id', searchable: true, orderable: true},
+              { data: 'id', searchable: false, orderable: false},
+              { data: 'name', searchable: false, orderable: false},
+              { data: 'total', searchable: false, orderable: false},
+              { data: 'users_id', searchable: true, orderable: false},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{

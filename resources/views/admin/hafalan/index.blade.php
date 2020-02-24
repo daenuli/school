@@ -10,7 +10,7 @@
           ajax: 'hafalan/dbtb',
           aaSorting: [[0, 'desc']],
           columns: [
-          { data: 'id', name: 'id', searchable: true, orderable: true},
+          { data: 'id', name: 'id', searchable: false, orderable: false},
           { data: 'user_id', name: 'user_id', searchable: true, orderable: true},
           { data: 'student_id', name: 'student_id', searchable: true, orderable: true},
           { data: 'juz', name: 'juz', searchable: true, orderable: true},

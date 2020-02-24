@@ -36,6 +36,9 @@ class SppsController extends Controller
               }
             }
         })
+        ->editColumn('total', function($index) {
+            return 'Rp '.number_format($index->total, 0, "", ".");
+        })
         ->addColumn('action', function($index){
             $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE"]);
             $tag    .= "<div class='d-flex justify-content-end'>";

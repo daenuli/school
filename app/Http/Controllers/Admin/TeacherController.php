@@ -33,10 +33,10 @@ class TeacherController extends Controller
               return "<span class='badge badge-pill badge-primary'>Perempuan</span>";
             }
         })
-        ->editColumn('departement_id',function($index){
+        ->editColumn('department_id',function($index){
             $departement = Departement::all();
             foreach ($departement as $value) {
-              if ($index->departement_id == $value->id) {
+              if ($index->department_id == $value->id) {
                 return $value->name;
               }
             }
@@ -53,7 +53,7 @@ class TeacherController extends Controller
             return $tag;
         })
         ->rawColumns([
-            'gender', 'departement_id', 'action'
+            'gender', 'department_id', 'action'
         ])
         ->make(true);
     }

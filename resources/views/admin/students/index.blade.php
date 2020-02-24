@@ -63,12 +63,12 @@
           ajax: '{{$ajax}}',
           order: [[0,'desc']],
           columns: [
-              { data: 'id', searchable: true, orderable: true},
+              { data: 'id', searchable: false, orderable: false},
               { data: 'nis', searchable: true, orderable: true},
               { data: 'name', searchable: true, orderable: true},
-              { data: 'birth', searchable: true, orderable: true},
-              { data: 'gender', searchable: true, orderable: true},
-              { data: 'hafalan', searchable: true, orderable: true},
+              { data: 'birth', searchable: false, orderable: false},
+              { data: 'gender', searchable: false, orderable: false},
+              { data: 'hafalan', searchable: false, orderable: false},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{

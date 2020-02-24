@@ -50,7 +50,7 @@
         <div class="row">
           <label class="col-sm-2 col-form-label">Jabatan</label>
           <div class="col-sm-8">
-            <select class="form-control" name="departement_id">
+            <select class="form-control" name="department_id">
               <option value="" selected>- Pilih Jabatan 1-</option>
               @foreach ($departement as $value)
                 <option value="{{$value->id}}">{{$value->name}}</option>

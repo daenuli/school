@@ -49,11 +49,11 @@
           ajax: '{{$ajax}}',
           order: [[1,'desc']],
           columns: [
-              { data: 'id', searchable: true, orderable: true},
-              { data: 'spp_id', searchable: true, orderable: true},
-              { data: 'user_id', searchable: true, orderable: true},
+              { data: 'id', searchable: false, orderable: false},
+              { data: 'spp_id', searchable: false, orderable: false},
+              { data: 'user_id', searchable: false, orderable: false},
               { data: 'created_at', searchable: true, orderable: true},
-              { data: 'status', searchable: true, orderable: true},
+              { data: 'status', searchable: false, orderable: false},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{

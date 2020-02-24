@@ -9,11 +9,11 @@
           ajax: 'grade/dbtb',
           aaSorting: [[0, 'desc']],
           columns: [
-          { data: 'id', name: 'id', searchable: true, orderable: true},
+          { data: 'id', name: 'id', searchable: false, orderable: false},
           { data: 'name', name: 'name', render: function (data, type, full, meta) {
             return "<span class='btn btn-sm btn-info'><b>"+ data + "</b></span>";
           }},
-          { data: 'action', name: 'action', searchable: true, orderable: true},
+          { data: 'action', name: 'action', searchable: false, orderable: false},
           ],
           columnDefs: [{
             "targets": 0,
@@ -53,7 +53,7 @@
                 <b> {{ session('Success') }} </b></span>
             </div>
           @endif
-                  
+
 
           <div class="material-datatables">
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">

@@ -51,9 +51,9 @@
         <div class="row">
           <label class="col-sm-2 col-form-label">Jabatan</label>
           <div class="col-sm-8">
-            <select class="form-control" name="departement_id">
+            <select class="form-control" name="department_id">
               @foreach ($departement as $value)
-                <option value="{{$value->id}}" {{$data->departement_id == $value->id ? 'selected' : ''}}>{{$value->name}}</option>
+                <option value="{{$value->id}}" {{$data->department_id == $value->id ? 'selected' : ''}}>{{$value->name}}</option>
               @endforeach
             </select>
           </div>
