@@ -18,7 +18,7 @@ class CreateSppStudentsTable extends Migration
             $table->integer('student_id');
             $table->integer('spp_id');
             $table->integer('user_id');
-            $table->boolean('status');
+            $table->boolean('status'); // 1 = Lunas, 0 = Belum Lunas
             $table->timestamps();
         });
     }

@@ -65,3 +65,9 @@ Route::post('/sppStudent/{sppStudent}/sppupdt', 'Admin\StudentsController@sppUpd
 
 Route::get('/grade/dbtb', 'Admin\GradeController@dbTables')->name('grade.dbtb');
 Route::resource('/grade', 'Admin\GradeController');
+
+// Parent Search
+Route::get('/search', 'ParentStudentController@search')->name('search.input');
+Route::get('/result', 'ParentStudentController@result')->name('search.result');
+Route::get('/result/{id}/spptb', 'ParentStudentController@sppTables')->name('search.spp');
+Route::get('/result/{id}/hafalantb', 'ParentStudentController@hafalanTables')->name('search.hafalan');
