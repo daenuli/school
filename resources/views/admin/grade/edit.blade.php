@@ -15,7 +15,6 @@
       <div class="card-body">
         {!! form_row($form->teacher_id, $option = ['selected' => $h->teacher_id]) !!}
         {!! form_row($form->name, $option = ['value' => $h->name]) !!}
-        {!! form_row($form->student_id) !!}
       </div>
       <div class="card-footer ml-auto">
         <a href="{{$back}}" class="btn btn-default">Cancel</a>
@@ -29,8 +28,8 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-      $('.js-example-basic-multiple').select2();
-      $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+        $('.js-example-basic-single').select2();
     });
 </script>
 @endsection

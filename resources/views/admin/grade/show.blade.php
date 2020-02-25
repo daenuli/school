@@ -7,8 +7,15 @@
           <i class="material-icons">contacts</i>
         </div>
         <h4 class="card-title">Informasi Kelas {{$kelas->name}}</h4>
+
       </div>
       <div class="card-body">
+        <div class="row">
+          <div class="col-12 text-right">
+
+            <button class="btn btn-info btn-round"><i class="fa fa-plus"></i> Tambah Siswa</button>
+          </div>
+        </div>
         <div class="row mt-3">
           <div class="col-12">
             <table class="table">

@@ -27,18 +27,6 @@ class GradeForm extends Form
               'rules' => 'required',
               'attr' => ['data-validation' => 'required']
             ])
-            ->add('student_id', 'select', [
-                'rules' => 'required',
-                'label' => 'Nama Siswa',
-                'empty_value' => '-- Pilih Siswa --',
-                'choices' => Student::orderBy('name')->pluck('name', 'id')->toArray(),
-                'attr' => [
-                    'data-validation' => 'required',
-                    'class' => 'js-example-basic-multiple form-control',
-                    'data-style' => 'select-with-transition',
-                    'multiple' => 'multiple'
-                ],
-            ])
             ->add('Kirim', 'submit', [
                 'attr'  => [
                     'class' => 'btn btn-fill btn-rose pull-right',

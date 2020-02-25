@@ -17,10 +17,10 @@
           <label id="labelName" class="col-md-2 col-form-label" for="school_year_id">Tahun Ajaran</label>
           <div class="col-md-8">
             <div class="form-group has-default">
-              <select class="js-example-basic-multiple form-control" name="school_year_id">
+              <select class="js-example-basic-single form-control" name="school_year_id">
                   @foreach ($years as $y)
                     <option>-- Pilih Tahun Ajaran --</option>
-                    <option value="{{$y->id}}">{{$y->start_year}}/{{$y->end_year}}</option>
+                      <option value="{{$y->id}}">{{$y->start_year}}/{{$y->end_year}}</option>
                   @endforeach
               </select>
             </div>
@@ -28,7 +28,18 @@
         </div>
         {!! form_row($form->teacher_id) !!}
         {!! form_row($form->name) !!}
-        {!! form_row($form->student_id) !!}
+        <div class="row">
+          <label id="labelNames" class="col-md-2 col-form-label" for="student_id">Nama Siswa</label>
+          <div class="col-md-8">
+            <div class="form-group has-default">
+              <select id="student_id" class="js-example-basic-multiple form-control" name="student_id[]" multiple>
+                  @foreach ($std as $s)
+                      <option value="{{$s->id}}">{{$s->name}}</option>
+                  @endforeach
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card-footer ml-auto">
         <a href="{{$back}}" class="btn btn-default">Cancel</a>

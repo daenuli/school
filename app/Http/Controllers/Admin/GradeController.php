@@ -89,6 +89,7 @@ class GradeController extends Controller
         ]);
         $data['back'] = route($this->uri.'.index');
         $data['years'] = SchoolYear::all();
+        $data['std'] = Student::all();
         return view($this->folder.'.create', $data);
     }
 
