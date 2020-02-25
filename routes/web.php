@@ -65,3 +65,5 @@ Route::post('/sppStudent/{sppStudent}/sppupdt', 'Admin\StudentsController@sppUpd
 
 Route::get('/grade/dbtb', 'Admin\GradeController@dbTables')->name('grade.dbtb');
 Route::resource('/grade', 'Admin\GradeController');
+
+Route::resource('/donaturStudent', 'DonaturStudentController');
