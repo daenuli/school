@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Grade;
+use App\Models\StudentGrade;
+use App\Models\SchoolYear;
 use App\Models\Teacher;
 use App\Models\Student;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -54,18 +56,24 @@ class GradeController extends Controller
         ->rawColumns(['id', 'name', 'action'])
         ->make(true);
     }
-    public function studentDbtb()
+    public function studentDbtb($id)
     {
-      $s = Student::all();
+      $s = StudentGrade::where([['status', 1],['grade_id', $id]])->get();
       return DataTables::of($s)
-        ->addColumn('action', function($index){
-          $tag = Form::open(["url" => route($this->uri.'.destroy', $index->id), "method" => "DELETE"]);
-          $tag .= "<button type='submit' class='btn btn-sm btn-danger btn-label' onclick='javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')'>Hapus</button>";
-          $tag .= Form::close();
-          return $tag;
-        })
-        ->rawColumns(['id', 'action'])
-        ->make(true);
+      ->addColumn('nis', function($index){
+        return $index->student->nis;
+      })
+      ->addColumn('name', function($index){
+        return $index->student->name;
+      })
+      ->addColumn('action', function($index){
+        $tag = Form::open(["url" => route($this->uri.'.destroy', $index->id), "method" => "DELETE"]);
+        $tag .= "<button type='submit' class='btn btn-sm btn-danger btn-label' onclick='javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')'>Hapus</button>";
+        $tag .= Form::close();
+        return $tag;
+      })
+      ->rawColumns(['id', 'action'])
+      ->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -80,6 +88,7 @@ class GradeController extends Controller
             'url' => route($this->uri.'.store')
         ]);
         $data['back'] = route($this->uri.'.index');
+        $data['years'] = SchoolYear::all();
         return view($this->folder.'.create', $data);
     }
 
@@ -99,7 +108,14 @@ class GradeController extends Controller
         $data->teacher_id = $request->teacher_id;
         $data->name = $request->name;
         $data->save();
-
+        foreach ($request->student_id as $s) {
+          $k = new StudentGrade;
+          $k->school_year_id = $request->school_year_id;
+          $k->grade_id = $data->id;
+          $k->student_id = $s;
+          $k->status = 1;
+          $k->save();
+        }
         return redirect(route($this->uri.'.index'))->with('Success',trans('Data anda telah berhasil di Input !'));
     }
 

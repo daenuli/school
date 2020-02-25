@@ -4,6 +4,8 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 use App\Models\Teacher;
+use App\Models\Student;
+use App\Models\SchoolYear;
 
 class GradeForm extends Form
 {
@@ -24,6 +26,18 @@ class GradeForm extends Form
             ->add('name', 'text', [
               'rules' => 'required',
               'attr' => ['data-validation' => 'required']
+            ])
+            ->add('student_id', 'select', [
+                'rules' => 'required',
+                'label' => 'Nama Siswa',
+                'empty_value' => '-- Pilih Siswa --',
+                'choices' => Student::orderBy('name')->pluck('name', 'id')->toArray(),
+                'attr' => [
+                    'data-validation' => 'required',
+                    'class' => 'js-example-basic-multiple form-control',
+                    'data-style' => 'select-with-transition',
+                    'multiple' => 'multiple'
+                ],
             ])
             ->add('Kirim', 'submit', [
                 'attr'  => [

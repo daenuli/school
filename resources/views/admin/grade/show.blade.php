@@ -65,7 +65,7 @@
       table = $('#datatables').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/std/dbtb',
+        ajax: '{{url('/std/dbtb/'.$kelas->id)}}',
         order: [[0, 'desc']],
         columns: [
         { data: 'id', name: 'id', searchable: true, orderable: true},
