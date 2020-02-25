@@ -9,7 +9,7 @@
           </div>
           <h4 class="card-title">Daftar Donatur
             <a href="" class="btn btn-sm btn-info pull-right">Print</a>
-            <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
+            <a href="{{ route('donatur.create') }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
           </h4>
         </div>
         <div class="card-body">

@@ -28,15 +28,39 @@ class DonaturController extends Controller
     {
         $data = Donatur::orderBy('created_at', 'desc')->get();
         return DataTables::of($data)
+        ->editColumn('date_birth', function($index){
+          return date('d F Y', strtotime($index->date_birth));
+        })
         ->addColumn('alamat', function($index){
-          return $index->provinsi_id.', '.$index->kabupaten_id;
+            $kecamatan = Kecamatan::all();
+            foreach ($kecamatan as $value) {
+              if ($index->kecamatan_id == $value->id) {
+                $kec = $value->nama;
+              }
+            }
+
+            $kabupaten = Kabupaten::all();
+            foreach ($kabupaten as $value) {
+              if ($index->kabupaten_id == $value->id) {
+                $kab = $value->nama;
+              }
+            }
+
+            $provinsi = Provinsi::all();
+            foreach ($provinsi as $value) {
+              if ($index->provinsi_id == $value->id) {
+                $prov = $value->nama;
+              }
+            }
+
+            return $index->street.', '.$kec.', '.$kab.', '.$prov;
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('teacher.destroy', $index->id), "method" => "DELETE"]);
+            $tag     = Form::open(["url"=>route('donatur.destroy', $index->id), "method" => "DELETE"]);
             $tag    .= "<div class='d-flex justify-content-end'>";
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('teacher.edit', $index->id), "method" => "GET"]);
+            $tag    .= Form::open(["url"=>route('donatur.edit', $index->id), "method" => "GET"]);
             $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
             $tag    .= "</div>";
             $tag    .= Form::close();
@@ -55,7 +79,10 @@ class DonaturController extends Controller
      */
     public function create()
     {
-        //
+        $kec = Kecamatan::all();
+        $kab = Kabupaten::all();
+        $prov = Provinsi::all();
+        return view('admin.donaturs.create', compact('kec','kab','prov'));
     }
 
     /**
@@ -66,7 +93,8 @@ class DonaturController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Donatur::create($request->all());
+        return redirect('/donatur');
     }
 
     /**

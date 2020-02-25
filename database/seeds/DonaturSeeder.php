@@ -22,7 +22,7 @@ class DonaturSeeder extends Seeder
             'provinsi_id' => '34',
             'kabupaten_id' => '3404',
             'kecamatan_id' => '3404110',
-            'street' => 'Jalan Lurus Menuju Surga'
+            'street' => 'Jl. Raya Krapyak'
           ]
         ]);
     }

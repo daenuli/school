@@ -188,13 +188,13 @@ Tip 2: you can also add an image using data-image tag
                   <li class="nav-item {{ Request::is('donatur/create') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('donatur.create') }}">
                       <span class="sidebar-mini"> TG </span>
-                      <span class="sidebar-normal"> Tambah Guru </span>
+                      <span class="sidebar-normal"> Tambah Donatur </span>
                     </a>
                   </li>
                   <li class="nav-item {{ Request::is('donatur') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('donatur.index') }}">
                       <span class="sidebar-mini"> DG </span>
-                      <span class="sidebar-normal"> Daftar Guru </span>
+                      <span class="sidebar-normal"> Daftar Donatur </span>
                     </a>
                   </li>
                 </ul>
