@@ -16,35 +16,36 @@
       <div class="card-icon">
         <i class="material-icons">contacts</i>
       </div>
-      <h4 class="card-title">Input Data Donatur
+      <h4 class="card-title">Edit Data Donatur
         <a href="{{route('donatur.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
       </h4>
     </div>
     <div class="card-body ">
-      <form method="post" action="{{route('donatur.store')}}" class="form-horizontal">
+      <form method="post" action="{{route('donatur.update', $data->id)}}" class="form-horizontal">
         @csrf
+        @method('PUT')
         <div class="row">
           <label class="col-sm-2 col-form-label">NIK</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="nik">
+            <input type="text" class="form-control" name="nik" value="{{$data->nik}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Nama Donatur</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" value="{{$data->name}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="email">
+            <input type="text" class="form-control" name="email" value="{{$data->email}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control datepicker" name="date_birth">
+            <input type="text" class="form-control datepicker" name="date_birth" value="{{$data->date_birth}}">
           </div>
         </div>
         <div class="row d-flex align-items-end mt-3">
@@ -53,7 +54,7 @@
             <select class="select2 kecamatan form-control" title="Pilih Kecamatan" name="kecamatan_id" style="width: 100%" id="kecamatan_id">
               <option value="" selected="selected">- Please Select -</option>
               @foreach ($kec as $value)
-                <option value="{{$value->id}}">{{$value->nama}}</option>
+                <option value="{{$value->id}}" {{$data->kecamatan_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
               @endforeach
             </select>
           </div>
@@ -64,7 +65,7 @@
             <select class="select2 kabupaten form-control" title="Pilih Kabupaten" name="kabupaten_id" style="width: 100%" id="kabupaten_id">
               <option value="" selected="selected">- Please Select -</option>
               @foreach ($kab as $value)
-                <option value="{{$value->id}}">{{$value->nama}}</option>
+                <option value="{{$value->id}}" {{$data->kabupaten_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
               @endforeach
             </select>
           </div>
@@ -75,7 +76,7 @@
             <select class="select2 provinsi form-control" title="Pilih Provinsi" name="provinsi_id" style="width: 100%" id="provinsi_id">
               <option value="" selected="selected">- Please Select -</option>
               @foreach ($prov as $value)
-                <option value="{{$value->id}}">{{$value->nama}}</option>
+                <option value="{{$value->id}}" {{$data->provinsi_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
               @endforeach
             </select>
           </div>
@@ -84,7 +85,7 @@
           <label class="col-sm-2 col-form-label">Alamat</label>
           <div class="col-sm-8">
             <div class="form-group">
-              <input type="text" class="form-control" name="street">
+              <input type="text" class="form-control" name="street" value="{{$data->street}}">
             </div>
           </div>
         </div>

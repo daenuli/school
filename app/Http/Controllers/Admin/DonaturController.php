@@ -116,7 +116,11 @@ class DonaturController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Donatur::find($id);
+        $kec = Kecamatan::all();
+        $kab = Kabupaten::all();
+        $prov = Provinsi::all();
+        return view('admin.donaturs.edit', compact('data','kec','kab','prov'));
     }
 
     /**
@@ -128,7 +132,8 @@ class DonaturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Donatur::find($id)->update($request->all());
+        return redirect('/donatur');
     }
 
     /**
@@ -139,6 +144,7 @@ class DonaturController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Donatur::find($id)->delete();
+        return redirect('/donatur');
     }
 }
