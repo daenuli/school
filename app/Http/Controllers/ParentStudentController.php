@@ -12,7 +12,7 @@ class ParentStudentController extends Controller
 {
     public function search()
     {
-    	return view('parents.search');
+    	return view('parent_student.search');
     }
 
     public function result(Request $request)
@@ -26,7 +26,7 @@ class ParentStudentController extends Controller
     	} else {
 	    	$ajaxSpp = route('search.spp', $student->id);
 	    	$ajaxHafalan = route('search.hafalan', $student->id);
-    		return view('parents.result', compact('student', 'ajaxSpp', 'ajaxHafalan'));
+    		return view('parent_student.result', compact('student', 'ajaxSpp', 'ajaxHafalan'));
     	}
     }
 
