@@ -68,4 +68,6 @@ Route::resource('/grade', 'Admin\GradeController');
 
 Route::get('/donatur/dbtb', 'Admin\DonaturController@dbTables')->name('donatur.dbtb');
 Route::resource('/donatur', 'Admin\DonaturController');
-Route::resource('/donaturStudent', 'DonaturStudentController');
+
+Route::get('/donaturStudent', 'DonaturStudentController@create')->name('donaturStudent.create');
+Route::post('/donaturStudent', 'DonaturStudentController@store')->name('donaturStudent.store');
