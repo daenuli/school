@@ -48,11 +48,11 @@
           </div>
         </div>
         <div class="row d-flex align-items-end mt-3">
-          <label class="col-sm-2 col-form-label">Kecamatan</label>
+          <label class="col-sm-2 col-form-label">Provinsi</label>
           <div class="col-sm-8">
-            <select class="select2 kecamatan form-control" title="Pilih Kecamatan" name="kecamatan_id" style="width: 100%" id="kecamatan_id">
+            <select class="select2 provinsi form-control" title="Pilih Provinsi" name="provinsi_id" style="width: 100%" id="provinsi_id">
               <option value="" selected="selected">- Please Select -</option>
-              @foreach ($kec as $value)
+              @foreach ($prov as $value)
                 <option value="{{$value->id}}">{{$value->nama}}</option>
               @endforeach
             </select>
@@ -70,11 +70,11 @@
           </div>
         </div>
         <div class="row d-flex align-items-end mt-3">
-          <label class="col-sm-2 col-form-label">Provinsi</label>
+          <label class="col-sm-2 col-form-label">Kecamatan</label>
           <div class="col-sm-8">
-            <select class="select2 provinsi form-control" title="Pilih Provinsi" name="provinsi_id" style="width: 100%" id="provinsi_id">
+            <select class="select2 kecamatan form-control" title="Pilih Kecamatan" name="kecamatan_id" style="width: 100%" id="kecamatan_id">
               <option value="" selected="selected">- Please Select -</option>
-              @foreach ($prov as $value)
+              @foreach ($kec as $value)
                 <option value="{{$value->id}}">{{$value->nama}}</option>
               @endforeach
             </select>

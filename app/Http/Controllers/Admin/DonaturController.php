@@ -56,14 +56,12 @@ class DonaturController extends Controller
             return $index->street.', '.$kec.', '.$kab.', '.$prov;
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('donatur.destroy', $index->id), "method" => "DELETE"]);
-            $tag    .= "<div class='d-flex justify-content-end'>";
+            $tag    = "<div class='d-flex justify-content-end'>";
+            $tag    .= Form::open(["url"=>route('donatur.destroy', $index->id), "method" => "DELETE"]);
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('donatur.edit', $index->id), "method" => "GET"]);
-            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= "<a href='".route('donatur.edit', $index->id)."' class='btn btn-success btn-sm'>Edit</a>";
             $tag    .= "</div>";
-            $tag    .= Form::close();
             return $tag;
         })
         ->rawColumns([
