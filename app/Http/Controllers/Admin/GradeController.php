@@ -131,11 +131,9 @@ class GradeController extends Controller
       $data['title'] = $this->title;
       $data['back'] = route($this->uri.'.index');
       $data['kelas'] = Grade::findOrFail($id);
-      if (isset(Grade::find($id)->teacher->name)) {
-        'ada';
-      }else {
-        'gada';
-      }
+      $data['std'] = Student::where('status',1)->whereHas('studentGrades', function($q){
+            $q->where('status',0);
+        })->get();
       return view($this->folder.'.show', $data);
     }
 
