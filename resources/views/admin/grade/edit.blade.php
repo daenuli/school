@@ -28,15 +28,8 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
         $('.js-example-basic-single').select2();
-        $("#count").bind("keypress", function(e){
-            var keyCode = e.which ? e.which : e.keyCode;
-            if (!(keyCode >= 45 && keyCode <= 57)) {
-                return false;
-            }else {
-                return true;
-            }
-        });
     });
 </script>
 @endsection

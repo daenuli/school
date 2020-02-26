@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+@section('link')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
 <div class="col-md-12">
     <div class="card ">
@@ -7,8 +10,15 @@
           <i class="material-icons">contacts</i>
         </div>
         <h4 class="card-title">Informasi Kelas {{$kelas->name}}</h4>
+
       </div>
       <div class="card-body">
+        <div class="row">
+          <div class="col-12 text-right">
+            <button class="btn btn-info btn-round" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Siswa</button>
+          </div>
+        </div>
+        @include('admin.grade.modal')
         <div class="row mt-3">
           <div class="col-12">
             <table class="table">
@@ -59,13 +69,14 @@
 </div>
 @endsection
 @section('script')
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
   <script type="text/javascript">
     var table;
     $(function() {
       table = $('#datatables').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/std/dbtb',
+        ajax: '{{url('/std/dbtb/'.$kelas->id)}}',
         order: [[0, 'desc']],
         columns: [
         { data: 'id', name: 'id', searchable: true, orderable: true},
@@ -85,5 +96,6 @@
         }],
       });
     });
+    $('.js-example-basic-multiple').select2();
   </script>
 @endsection
