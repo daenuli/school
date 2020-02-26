@@ -22,7 +22,7 @@
                   <th>Nama</th>
                   <th>Tanggal Lahir</th>
                   <th>Email</th>
-                  <th>Alamat</th>
+                  {{-- <th>Alamat</th> --}}
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -52,7 +52,7 @@
               { data: 'name', searchable: true, orderable: false},
               { data: 'date_birth', searchable: false, orderable: false},
               { data: 'email', searchable: false, orderable: false},
-              { data: 'alamat', searchable: false, orderable: false},
+              // { data: 'alamat', searchable: false, orderable: false},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{

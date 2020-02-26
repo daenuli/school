@@ -49,14 +49,6 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th>Nomor</th>
-                <th>NIS</th>
-                <th>Nama</th>
-                <th>Action</th>
-              </tr>
-            </tfoot>
             <tbody>
             </tbody>
           </table>
@@ -77,9 +69,9 @@
         processing: true,
         serverSide: true,
         ajax: '{{url('/std/dbtb/'.$kelas->id)}}',
-        order: [[0, 'desc']],
+        order: [[2, 'asc']],
         columns: [
-        { data: 'id', name: 'id', searchable: true, orderable: true},
+        { data: 'id', name: 'id', searchable: false, orderable: false},
         { data: 'nis', name: 'nis', searchable: true, orderable: true},
         { data: 'name', name: 'name', searchable: true, orderable: true},
         { data: 'action', name: 'action', searchable: false, orderable: false},
