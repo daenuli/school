@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('imagine/css/style.css') }}">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  
+
 
   <div id="overlayer"></div>
   <div class="loader">
@@ -38,13 +38,13 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-   
-   
+
+
     <header class="site-navbar py-3 js-sticky-header site-navbar-target" role="banner">
 
       <div class="container">
         <div class="row align-items-center">
-          
+
           <div class="col-6 col-md-3 col-xl-4  d-block">
             <h1 class="mb-0 site-logo"><a href="index.html" class="text-black h2 mb-0">Ar Rabwah<span class="text-primary">.</span> </a></h1>
           </div>
@@ -66,13 +66,13 @@
         </div>
       </div>
     </header>
-    
+
     <div class="site-blocks-cover" style="overflow: hidden;">
       <div class="container">
         <div class="row align-items-center justify-content-center">
 
           <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-            
+
             <img src="{{ asset('imagine/images/undraw_investing_7u74.svg') }}" alt="Image" class="img-fluid img-absolute">
 
             <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
@@ -99,14 +99,14 @@
                   </ul>
                 </div>
               </div>
-              
-              
+
+
             </div>
 
           </div>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="site-section" id="features-section">
       <div class="container">
@@ -161,7 +161,7 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="footer pb-4 text-center">
       <div class="container">
@@ -199,7 +199,7 @@
   <script src="{{ asset('imagine/js/jquery.easing.1.3.js') }}"></script>
   <script src="{{ asset('imagine/js/aos.js') }}"></script>
   <script src="{{ asset('imagine/js/jquery.fancybox.min.js') }}"></script>
-  <script src="{{ asset('imagine/js/jquery.sticky.js') }}"></script>  
+  <script src="{{ asset('imagine/js/jquery.sticky.js') }}"></script>
   <script src="{{ asset('imagine/js/main.js') }}"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -212,12 +212,12 @@
             serverSide: true,
             searching: false,
             ajax: '{{$ajaxSpp}}',
-            order: [[0,'desc']],
+            order: [[3,'desc']],
             columns: [
                 { data: 'id', searchable: false, orderable: false},
                 { data: 'created_at', searchable: true, orderable: true},
-                { data: 'spp_id', searchable: true, orderable: true},                  
-                { data: 'status', searchable: true, orderable: true},                  
+                { data: 'spp_id', searchable: true, orderable: true},
+                { data: 'status', searchable: true, orderable: true},
             ],
             columnDefs: [{
               "targets": 0,
@@ -240,7 +240,7 @@
             serverSide: true,
             searching: false,
             ajax: '{{$ajaxHafalan}}',
-            order: [[0,'desc']],
+            order: [[4,'desc']],
             columns: [
                 { data: 'id', searchable: false, orderable: false},
                 { data: 'surah', searchable: true, orderable: true},

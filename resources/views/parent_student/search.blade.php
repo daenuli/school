@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('imagine/css/style.css') }}">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  
+
 
   <div id="overlayer"></div>
   <div class="loader">
@@ -37,13 +37,13 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-   
-   
+
+
     <header class="site-navbar py-3 js-sticky-header site-navbar-target" role="banner">
 
       <div class="container">
         <div class="row align-items-center">
-          
+
           <div class="col-6 col-md-3 col-xl-4  d-block">
             <h1 class="mb-0 site-logo"><a href="index.html" class="text-black h2 mb-0">Ar Rabwah<span class="text-primary">.</span> </a></h1>
           </div>
@@ -64,13 +64,13 @@
         </div>
       </div>
     </header>
-    
+
     <div class="site-blocks-cover" style="overflow: hidden;">
       <div class="container">
         <div class="row align-items-center justify-content-center">
 
           <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-            
+
             <img src="{{ asset('imagine/images/undraw_investing_7u74.svg') }}" alt="Image" class="img-fluid img-absolute">
 
             <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
@@ -78,7 +78,7 @@
                 <h1>Cari Riwayat Santri</h1>
                 <p class="mb-5">Anda bisa melihat sekaligus memantau hasil perkembangan hafalan santri dan juga mengecek SPP bulanan santri.</p>
                 <div>
-                  @if (session('notif'))                    
+                  @if (session('notif'))
                     <div class="alert alert-danger" role="alert">
                         {{session('notif')}}
                     </div>
@@ -86,20 +86,20 @@
                   <form action="{{ route('search.result') }}">
                     <div class="d-flex flex-row">
                         <input type="text" name="nis" class="form-control rounded-0" placeholder="Masukan NIS">
-                        <input type="text" name="birth_date" class="form-control rounded-0 ml-1" placeholder="Masukan Tanggal Lahir Y/M/D">
+                        <input type="text" name="birth_date" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
                         <button type="submit" class="btn rounded-0 btn-sm btn-primary px-3 py-1"><span class="icon-search"></span></button>
                     </div>
                   </form>
                 </div>
               </div>
-              
-              
+
+
             </div>
 
           </div>
         </div>
       </div>
-    </div>  
+    </div>
 
     <div class="footer pb-4 text-center">
       <div class="container">
@@ -137,9 +137,9 @@
   <script src="{{ asset('imagine/js/jquery.easing.1.3.js') }}"></script>
   <script src="{{ asset('imagine/js/aos.js') }}"></script>
   <script src="{{ asset('imagine/js/jquery.fancybox.min.js') }}"></script>
-  <script src="{{ asset('imagine/js/jquery.sticky.js') }}"></script>  
+  <script src="{{ asset('imagine/js/jquery.sticky.js') }}"></script>
   <script src="{{ asset('imagine/js/main.js') }}"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-  
+
   </body>
 </html>
