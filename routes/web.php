@@ -71,3 +71,8 @@ Route::resource('/donatur', 'Admin\DonaturController');
 
 Route::get('/donaturStudent', 'DonaturStudentController@create')->name('donaturStudent.create');
 Route::post('/donaturStudent', 'DonaturStudentController@store')->name('donaturStudent.store');
+// Parent Search
+Route::get('/parentStudent', 'ParentStudentController@search')->name('search.input');
+Route::get('/result', 'ParentStudentController@result')->name('search.result');
+Route::get('/result/{id}/spptb', 'ParentStudentController@sppTables')->name('search.spp');
+Route::get('/result/{id}/hafalantb', 'ParentStudentController@hafalanTables')->name('search.hafalan');

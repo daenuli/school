@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeSeeder::class);
         $this->call(SppSeeder::class);
         $this->call(DonaturSeeder::class);
+        $this->call(SppStudentSeeder::class);
+        $this->call(HafalanSeeder::class);
     }
 }
