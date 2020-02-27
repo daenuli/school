@@ -10,6 +10,8 @@ use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use Yajra\DataTables\DataTables;
 use Form;
+use App\Models\DonaturStudent;
+use App\Models\Student;
 
 class DonaturController extends Controller
 {
@@ -61,6 +63,7 @@ class DonaturController extends Controller
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
             $tag    .= "<a href='".route('donatur.edit', $index->id)."' class='btn btn-success btn-sm'>Edit</a>";
+            $tag    .= "<a href='".route('donatur.show', $index->id)."' class='btn btn-info btn-sm'>Show</a>";
             $tag    .= "</div>";
             return $tag;
         })
@@ -103,7 +106,19 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        //
+        // $donatur = Donatur::find($id);
+        // $donaturan = DonaturStudent::where('donatur_id', $id)->get();
+        // $santri = Student::all();
+        $id;
+        $ajax = route('donatur.donaturDetail', $id);
+        return view('admin.donaturs.show', compact('ajax','id'));
+    }
+
+    public function donaturDetail(Request $request, $id)
+    {
+        $data = DonaturStudent::where('donatur_id', $id)->get();
+        return Datatables::of($data)
+        ->make(true);
     }
 
     /**

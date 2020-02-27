@@ -76,3 +76,5 @@ Route::get('/parentStudent', 'ParentStudentController@search')->name('search.inp
 Route::get('/result', 'ParentStudentController@result')->name('search.result');
 Route::get('/result/{id}/spptb', 'ParentStudentController@sppTables')->name('search.spp');
 Route::get('/result/{id}/hafalantb', 'ParentStudentController@hafalanTables')->name('search.hafalan');
+// donatur detail DataTable
+Route::get('/donatur/{donatur}/donaturDetail', 'Admin\DonaturController@donaturDetail')->name('donatur.donaturDetail');
