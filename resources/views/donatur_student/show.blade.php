@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('imagine/fonts/icomoon/style.css') }}">
     <link rel="stylesheet" href="{{ asset('imagine/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('imagine/css/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('imagine/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('imagine/css/owl.theme.default.min.css') }}">
@@ -53,6 +54,7 @@
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
                 <li><a href="" class="nav-link">Home</a></li>
+                <li><a href="{{ route('donaturStudent.create') }}" class="nav-link">Kembali</a></li>
                 <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
               </ul>
             </nav>
@@ -75,22 +77,55 @@
 
             <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
               <div class="col-lg-6 mr-auto">
-                <h1>Cari Riwayat Santri</h1>
-                <p class="mb-5">Anda bisa melihat sekaligus memantau hasil perkembangan hafalan santri dan juga mengecek SPP bulanan santri.</p>
-                <div>
-                  @if (session('notif'))
-                    <div class="alert alert-danger" role="alert">
-                        {{session('notif')}}
-                    </div>
-                  @endif
-                  <form action="{{route('donaturStudent.show')}}">
-                    <div class="d-flex flex-row">
-                        <input type="text" name="nik" class="form-control rounded-0" placeholder="Masukan NIK">
-                        <input type="text" name="date_birth" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
-                        <button type="submit" class="btn rounded-0 btn-sm btn-primary px-3 py-1"><span class="icon-search"></span></button>
-                    </div>
-                  </form>
-                </div>
+                <table class="table table-sm" style="width: 100%">
+                  <tr>
+                    <th>Nama</th>
+                    <th>{{ $donatur->name }}</th>
+                  </tr>
+                  <tr>
+                    <td>NIK</td>
+                    <td>{{ $donatur->nik }}</td>
+                  </tr>
+                  <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>{{ $donatur->date_birth }}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{ $donatur->email }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section" id="features-section">
+      <div class="container">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="row mb-2 justify-content-center text-center">
+              <div class="col-7 text-center  mb-5">
+                <h2 class="section-title">Data Santri</h2>
+              </div>
+            </div>
+            <div class="row align-items-stretch">
+              <div class="table-responsive">
+                <table id="datatable" class="table table-hover table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIS</th>
+                      <th>Nama</th>
+                      <th>TTL</th>
+                      <th class="disabled-sorting text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -137,6 +172,35 @@
   <script src="{{ asset('imagine/js/jquery.sticky.js') }}"></script>
   <script src="{{ asset('imagine/js/main.js') }}"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript">
+    var table;
+    $(function() {
+        table = $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{$ajax}}',
+            order: [[0,'desc']],
+            columns: [
+                { data: 'id', searchable: false, orderable: false},
+                { data: 'nis', searchable: true, orderable: true},
+                { data: 'name', searchable: true, orderable: true},
+                { data: 'birth', searchable: false, orderable: false},
+                { data: 'action', searchable: false, orderable: false}
+            ],
+            columnDefs: [{
+              "targets": 0,
+              "searchable": false,
+              "orderable": false,
+              "data": null,
+              "title": 'No',
+              "render": function (data, type, full, meta) {
+                  return meta.settings._iDisplayStart + meta.row + 1;
+              }
+            }],
+        });
+    });
+  </script>
   </body>
 </html>

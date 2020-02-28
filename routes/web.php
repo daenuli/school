@@ -69,8 +69,10 @@ Route::resource('/grade', 'Admin\GradeController');
 Route::get('/donatur/dbtb', 'Admin\DonaturController@dbTables')->name('donatur.dbtb');
 Route::resource('/donatur', 'Admin\DonaturController');
 
+Route::get('/donaturStudent/{id}/dbtb', 'DonaturStudentController@dbTables')->name('donaturStudent.dbtb');
 Route::get('/donaturStudent', 'DonaturStudentController@create')->name('donaturStudent.create');
-Route::post('/donaturStudent', 'DonaturStudentController@store')->name('donaturStudent.store');
+Route::get('/showStudent', 'DonaturStudentController@show')->name('donaturStudent.show');
+
 // Parent Search
 Route::get('/parentStudent', 'ParentStudentController@search')->name('search.input');
 Route::get('/result', 'ParentStudentController@result')->name('search.result');
