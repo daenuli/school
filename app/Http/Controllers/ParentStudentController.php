@@ -38,7 +38,7 @@ class ParentStudentController extends Controller
 
     public function sppTables(Request $request, $id)
     {
-    	$data = SppStudent::where('student_id', 1)->get();
+    	$data = SppStudent::where('student_id', $id)->get();
         return Datatables::of($data)
         ->editColumn('created_at', function($index){
             return $index->created_at->format('d M Y');
@@ -61,7 +61,7 @@ class ParentStudentController extends Controller
 
     public function hafalanTables(Request $request, $id)
     {
-    	$data = Hafalan::where('student_id', 1)->get();
+    	$data = Hafalan::where('student_id', $id)->get();
         return Datatables::of($data)
         ->editColumn('created_at', function($index){
             return $index->created_at->format('d M Y');

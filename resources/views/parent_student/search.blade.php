@@ -85,8 +85,8 @@
                   @endif
                   <form action="{{ route('search.result') }}">
                     <div class="d-flex flex-row">
-                        <input type="text" name="nis" class="form-control rounded-0" placeholder="Masukan NIS">
-                        <input type="text" name="birth_date" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
+                        <input type="text" name="nis" autocomplete="off" class="form-control rounded-0" placeholder="Masukan NIS">
+                        <input type="text" name="birth_date" autocomplete="off" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
                         <button type="submit" class="btn rounded-0 btn-sm btn-primary px-3 py-1"><span class="icon-search"></span></button>
                     </div>
                   </form>
