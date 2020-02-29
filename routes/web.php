@@ -28,6 +28,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/student/dbtb', 'Admin\StudentsController@dbTables')->name('student.dbtb');
 Route::get('/hafalan/dbtb', 'Admin\HafalanController@dbTables')->name('hafalan.dbtb');
 Route::get('/std/dbtb/{id}', 'Admin\GradeController@studentDbtb')->name('s.dbtb');
+Route::delete('/std/delete/{id}', 'Admin\GradeController@stdDelete')->name('s.delete');
 
 // plugin alamat
 Route::post('kabupatenAll', 'Admin\WilayahController@getAllKabupaten')->name('wilayah.kabupaten.all');
