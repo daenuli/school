@@ -131,9 +131,10 @@ class GradeController extends Controller
       $data['title'] = $this->title;
       $data['back'] = route($this->uri.'.index');
       $data['kelas'] = Grade::findOrFail($id);
-      $data['std'] = Student::where('status',1)->whereHas('studentGrades', function($q){
-            $q->where('status',0);
-        })->get();
+      $data['std'] = Student::all();
+      // $data['std'] = Student::where('status',1)->whereHas('studentGrades', function($q){
+      //       $q->where('status',0);
+      //   })->get();
       return view($this->folder.'.show', $data);
     }
 
