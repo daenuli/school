@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{{ asset('imagine/fonts/flaticon/font/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('imagine/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('imagine/css/style.css') }}">
+    <style>
+      .site-section {
+        padding: 6rem 0 !important;
+      }
+    </style>
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -53,7 +58,6 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
-                <li><a href="" class="nav-link">Home</a></li>
                 <li><a href="{{ route('search.input') }}" class="nav-link">Kembali</a></li>
                 <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
               </ul>
@@ -67,54 +71,28 @@
       </div>
     </header>
 
-    <div class="site-blocks-cover" style="overflow: hidden;">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-
-          <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-
-            <img src="{{ asset('imagine/images/undraw_investing_7u74.svg') }}" alt="Image" class="img-fluid img-absolute">
-
-            <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
-              <div class="col-lg-6 mr-auto">
-                <h2 class="text-dark">{{ $student->name }}</h2>
-                <table class="table table-sm" style="width: 100%">
-                  <tr>
-                    <td>Kelas</td>
-                    <td>XII IPS</td>
-                  </tr>
-                  <tr>
-                    <td>NIS</td>
-                    <td>{{ $student->nis }}</td>
-                  </tr>
-                </table>
-                <div>
-                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Hafalan</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">SPP</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="site-section" id="features-section">
       <div class="container">
+        <div class="flex-column d-flex justify-content-center align-items-center">
+          <h3 class="text-dark mb-0 section-title">{{ $student->name }}</h3>
+          <lead class="text-dark">
+            <span class="badge badge-pill badge-warning">{{ $grade ? 'Kelas '.$grade->grade->name : 'Belum ada kelas' }}</span> | 
+            NIS {{ $student->nis }}
+          </lead>
+          <ul class="nav nav-pills mt-3 mb-5" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Hafalan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">SPP</a>
+            </li>
+          </ul>
+        </div>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="row mb-2 justify-content-center text-center">
-              <div class="col-7 text-center  mb-5">
-                <h2 class="section-title">Hafalan Santri</h2>
+              <div class="col-7 text-center mb-3">
+                <h2 class="text-dark font-weight-bold">Hafalan Santri</h2>
               </div>
             </div>
             <div class="row align-items-stretch">
@@ -139,7 +117,7 @@
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="row mb-2 justify-content-center text-center">
               <div class="col-7 text-center mb-5">
-                <h2 class="section-title">SPP Santri</h2>
+                <h2 class="text-dark font-weight-bold">SPP Santri</h2>
               </div>
             </div>
             <div class="row align-items-stretch">

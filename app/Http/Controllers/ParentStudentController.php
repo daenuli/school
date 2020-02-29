@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Grade;
+use App\Models\StudentGrade;
 use App\Models\SppStudent;
 use App\Models\Hafalan;
 use Yajra\Datatables\Datatables;
@@ -26,7 +28,11 @@ class ParentStudentController extends Controller
     	} else {
 	    	$ajaxSpp = route('search.spp', $student->id);
 	    	$ajaxHafalan = route('search.hafalan', $student->id);
-    		return view('parent_student.result', compact('student', 'ajaxSpp', 'ajaxHafalan'));
+	    	$grade = StudentGrade::where([
+	    		['student_id', $student->id],
+	    		['status', 1]
+	    	])->first();
+    		return view('parent_student.result', compact('student', 'grade', 'ajaxSpp', 'ajaxHafalan'));
     	}
     }
 
