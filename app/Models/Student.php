@@ -30,4 +30,8 @@ class Student extends Model
     {
       return $this->hasMany(StudentGrade::class);
     }
+    public function student()
+    {
+        return $this->hasMany(DonaturStudent::class);
+    }
 }
