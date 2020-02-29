@@ -67,8 +67,8 @@ class GradeController extends Controller
         return $index->student->name;
       })
       ->addColumn('action', function($index){
-        $tag = Form::open(["url" => route($this->uri.'.destroy', $index->id), "method" => "DELETE"]);
-        $tag .= "<button type='submit' class='btn btn-sm btn-danger btn-label' onclick='javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')'>Hapus</button>";
+        $tag = Form::open(["url" => route('s.delete', $index->id), "method" => "DELETE"]);
+        $tag .= "<button type='submit' class='btn btn-sm btn-danger btn-label' onclick='javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')'>Hapus dari Kelas</button>";
         $tag .= Form::close();
         return $tag;
       })
@@ -186,5 +186,19 @@ class GradeController extends Controller
     {
         Grade::find($id)->delete();
         return redirect(route($this->uri.'.index'))->with('Success',trans('Data anda telah berhasil di Hapus !'));
+    }
+
+    /**
+     * Nonaktifkan siswa dari Kelas.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function stdDelete($id)
+    {
+      StudentGrade::where('student_id', $id)->update([
+          'status'    => 0,
+      ]);
+        return redirect(route($this->uri.'.index'))->with('Success',trans('Data anda telah berhasil di Hapus dari kelas ini !'));
     }
 }
