@@ -10,6 +10,8 @@ use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use Yajra\DataTables\DataTables;
 use Form;
+use App\Models\DonaturStudent;
+use App\Models\Student;
 
 class DonaturController extends Controller
 {
@@ -61,6 +63,7 @@ class DonaturController extends Controller
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
             $tag    .= "<a href='".route('donatur.edit', $index->id)."' class='btn btn-success btn-sm'>Edit</a>";
+            $tag    .= "<a href='".route('donatur.show', $index->id)."' class='btn btn-info btn-sm'>Show</a>";
             $tag    .= "</div>";
             return $tag;
         })
@@ -103,7 +106,11 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        //
+        $donatur = Donatur::where('id', $id)->get();
+        $student = Student::all();
+        $id;
+        $ajax = route('donatur.donaturDetail', $id);
+        return view('admin.donaturs.show', compact('ajax','donatur','id','student'));
     }
 
     /**
@@ -144,5 +151,57 @@ class DonaturController extends Controller
     {
         Donatur::find($id)->delete();
         return redirect('/donatur');
+    }
+
+    public function donaturDetail(Request $request, $id)
+    {
+        $data = DonaturStudent::where('donatur_id', $id)->get();
+        return Datatables::of($data)
+        ->editColumn('nis',function($index){
+            $student = Student::all();
+            foreach ($student as $value) {
+              if ($index->student_id == $value->id) {
+                return $value->nis;
+              }
+            }
+        })
+        ->editColumn('student_id',function($index){
+            $student = Student::all();
+            foreach ($student as $value) {
+              if ($index->student_id == $value->id) {
+                return $value->name;
+              }
+            }
+        })
+        ->addColumn('action', function($index){
+            $tag     = Form::open(["url"=>route('donatur.destroyStudent', $index->id), "method" => "DELETE"]);
+            $tag    .= "<div class='d-flex justify-content-end'>";
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag    .= Form::close();
+            return $tag;
+        })
+        ->rawColumns([
+            'nis', 'student_id', 'action'
+        ])
+        ->make(true);
+    }
+
+    public function createStudent($id)
+    {
+        $student = Student::all();
+        $id;
+        return view('admin.donaturs.add', compact('student','id'));
+    }
+
+    public function storeStudent(Request $request, $id)
+    {
+        DonaturStudent::create($request->all());
+        return redirect()->route('donatur.show', $id);
+    }
+
+    public function destroyStudent($id)
+    {
+        DonaturStudent::find($id)->delete();
+        return redirect()->back();
     }
 }
