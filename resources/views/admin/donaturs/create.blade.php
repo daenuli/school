@@ -63,9 +63,6 @@
           <div class="col-sm-8">
             <select class="select2 kabupaten form-control" title="Pilih Kabupaten" name="kabupaten_id" style="width: 100%" id="kabupaten_id">
               <option value="" selected="selected">- Please Select -</option>
-              @foreach ($kab as $value)
-                <option value="{{$value->id}}">{{$value->nama}}</option>
-              @endforeach
             </select>
           </div>
         </div>
@@ -74,9 +71,6 @@
           <div class="col-sm-8">
             <select class="select2 kecamatan form-control" title="Pilih Kecamatan" name="kecamatan_id" style="width: 100%" id="kecamatan_id">
               <option value="" selected="selected">- Please Select -</option>
-              @foreach ($kec as $value)
-                <option value="{{$value->id}}">{{$value->nama}}</option>
-              @endforeach
             </select>
           </div>
         </div>
@@ -116,6 +110,30 @@
       $('.select2').select2({
         width: 'resolve',
       });
+  });
+</script>
+<script> //ajax for data donatur
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $(document).on('change', '.provinsi', function () {
+    $('.kecamatan').html('<option value="0">- Please Select -</option>');
+    $.post( '{{ route('wilayah.kabupaten') }}', {
+      provinsi_id: $(this).val()
+    }).done(function( data ) {
+      $('.kabupaten').html(data);
+    }).fail(function(data){
+      console.log(data);
+    });
+  });
+  $(document).on('change', '.kabupaten', function () {
+    $.post( '{{ route('wilayah.kecamatan') }}', {
+      kabupaten_id: $(this).val()
+    }).done(function( data ) {
+      $('.kecamatan').html(data);
+    });
   });
 </script>
 @endsection

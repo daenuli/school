@@ -21,71 +21,71 @@
       </h4>
     </div>
     <div class="card-body ">
-      <form method="post" action="{{route('donatur.update', $data->id)}}" class="form-horizontal">
+      <form method="post" action="{{route('donatur.update', $donatur->id)}}" class="form-horizontal">
         @csrf
         @method('PUT')
         <div class="row">
           <label class="col-sm-2 col-form-label">NIK</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="nik" value="{{$data->nik}}">
+            <input type="text" class="form-control" name="nik" value="{{$donatur->nik}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Nama Donatur</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="name" value="{{$data->name}}">
+            <input type="text" class="form-control" name="name" value="{{$donatur->name}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="email" value="{{$data->email}}">
+            <input type="text" class="form-control" name="email" value="{{$donatur->email}}">
           </div>
         </div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control datepicker" name="date_birth" value="{{$data->date_birth}}">
+            <input type="text" class="form-control datepicker" name="date_birth" value="{{$donatur->date_birth}}">
           </div>
         </div>
         <div class="row d-flex align-items-end mt-3">
-          <label class="col-sm-2 col-form-label">Kecamatan</label>
-          <div class="col-sm-8">
-            <select class="select2 kecamatan form-control" title="Pilih Kecamatan" name="kecamatan_id" style="width: 100%" id="kecamatan_id">
-              <option value="" selected="selected">- Please Select -</option>
-              @foreach ($kec as $value)
-                <option value="{{$value->id}}" {{$data->kecamatan_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-        <div class="row d-flex align-items-end mt-3">
-          <label class="col-sm-2 col-form-label">Kabupaten</label>
-          <div class="col-sm-8">
-            <select class="select2 kabupaten form-control" title="Pilih Kabupaten" name="kabupaten_id" style="width: 100%" id="kabupaten_id">
-              <option value="" selected="selected">- Please Select -</option>
-              @foreach ($kab as $value)
-                <option value="{{$value->id}}" {{$data->kabupaten_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-        <div class="row d-flex align-items-end mt-3">
-          <label class="col-sm-2 col-form-label">Provinsi</label>
-          <div class="col-sm-8">
-            <select class="select2 provinsi form-control" title="Pilih Provinsi" name="provinsi_id" style="width: 100%" id="provinsi_id">
-              <option value="" selected="selected">- Please Select -</option>
-              @foreach ($prov as $value)
-                <option value="{{$value->id}}" {{$data->provinsi_id == $value->id ? 'selected' : ''}}>{{$value->nama}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
+  			  <label class="col-sm-2 col-form-label">Provinsi</label>
+  			  <div class="col-sm-8">
+  			    <select class="select2 provinsi" title="Pilih Provinsi" style="width: 100%" id="provinsi_id" name="provinsi_id">
+  			      <option value="{{ $donatur->provinsi_id ? $donatur->provinsi_id : '' }}" selected="selected">
+  			        {{ $donatur->provinsi_id ? $donatur->provinsi->nama : '- Please Select -' }}
+  			      </option>
+  			      @foreach ($provinsi as $data)
+  			        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+  			      @endforeach
+  			    </select>
+  			  </div>
+  			</div>
+  			<div class="row d-flex align-items-end mt-3">
+  			  <label class="col-sm-2 col-form-label">Kabupaten</label>
+  			  <div class="col-sm-8">
+  			    <select class="select2 kabupaten" title="Pilih Kabupaten" style="width: 100%" id="kabupaten_id" name="kabupaten_id">
+  			      <option value="{{ $donatur->kabupaten_id ? $donatur->kabupaten_id : '' }}" selected="selected">
+  			        {{ $donatur->kabupaten_id ? $donatur->kabupaten->nama : '- Please Select -' }}
+  			      </option>
+  			    </select>
+  			  </div>
+  			</div>
+  			<div class="row d-flex align-items-end mt-3">
+  			  <label class="col-sm-2 col-form-label">Kecamatan</label>
+  			  <div class="col-sm-8">
+  			    <select class="select2 kecamatan" title="Pilih Kecamatan" style="width: 100%" id="kecamatan_id" name="kecamatan_id">
+  			      <option value="{{ $donatur->kecamatan_id ? $donatur->kecamatan_id : '' }}" selected="selected">
+  			        {{ $donatur->kecamatan_id ? $donatur->kecamatan->nama : '- Please Select -' }}
+  			      </option>
+  			    </select>
+  			  </div>
+  			</div>
         <div class="row mt-3">
           <label class="col-sm-2 col-form-label">Alamat</label>
           <div class="col-sm-8">
             <div class="form-group">
-              <input type="text" class="form-control" name="street" value="{{$data->street}}">
+              <input type="text" class="form-control" name="street" value="{{$donatur->street}}">
             </div>
           </div>
         </div>
@@ -117,6 +117,30 @@
       $('.select2').select2({
         width: 'resolve',
       });
+  });
+</script>
+<script> //ajax for data donatur
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $(document).on('change', '.provinsi', function () {
+    $('.kecamatan').html('<option value="0">- Please Select -</option>');
+    $.post( '{{ route('wilayah.kabupaten') }}', {
+      provinsi_id: $(this).val()
+    }).done(function( data ) {
+      $('.kabupaten').html(data);
+    }).fail(function(data){
+      console.log(data);
+    });
+  });
+  $(document).on('change', '.kabupaten', function () {
+    $.post( '{{ route('wilayah.kecamatan') }}', {
+      kabupaten_id: $(this).val()
+    }).done(function( data ) {
+      $('.kecamatan').html(data);
+    });
   });
 </script>
 @endsection
