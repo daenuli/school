@@ -75,15 +75,16 @@
 
             <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
               <div class="col-lg-6 mr-auto">
-                <h1>Cari Riwayat Santri</h1>
-                <p class="mb-5">Anda bisa melihat sekaligus memantau hasil perkembangan hafalan santri dan juga mengecek SPP bulanan santri.</p>
+                <h1>Cari Riwayat Santri Asuh</h1>
+                <p class="mb-5">Anda bisa melihat sekaligus memantau hasil perkembangan hafalan dan juga mengecek SPP bulanan santri Asuh Anda.</p>
                 <div>
                   @if (session('notif'))
                     <div class="alert alert-danger" role="alert">
                         {{session('notif')}}
                     </div>
                   @endif
-                  <form action="{{route('donaturStudent.show')}}">
+                  <form method="post" action="{{route('donaturStudent.show')}}">
+                    @csrf
                     <div class="d-flex flex-row">
                         <input type="text" name="nik" autocomplete="off" class="form-control rounded-0" placeholder="Masukan NIK">
                         <input type="text" name="date_birth" autocomplete="off" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
