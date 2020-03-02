@@ -155,19 +155,20 @@ class StudentsController extends Controller
 
     public function show($id)
     {
-        $student = Student::find($id);
-        $illness = IllnessHistory::where('student_id', $id)->get();
-        $parents = Parents::where('student_id', $id)->get();
-        $father = Parents::where([['student_id', $id], ['role', 1]])->first();
-        $mother = Parents::where([['student_id', $id], ['role', 2]])->first();
-        $wali = Parents::where([['student_id', $id], ['role', 3]])->first();
-        $guardian = Parents::where([['student_id', $id], ['is_guardian', 1]])->first();
-        $school = SchoolHistory::where('student_id', $id)->first();
+        $data['student'] = Student::find($id);
+        $data['illness'] = IllnessHistory::where('student_id', $id)->get();
+        $data['parents'] = Parents::where('student_id', $id)->get();
+        $data['father'] = Parents::where([['student_id', $id], ['role', 1]])->first();
+        $data['mother'] = Parents::where([['student_id', $id], ['role', 2]])->first();
+        $data['wali'] = Parents::where([['student_id', $id], ['role', 3]])->first();
+        $data['guardian'] = Parents::where([['student_id', $id], ['is_guardian', 1]])->first();
+        $data['school'] = SchoolHistory::where('student_id', $id)->first();
+        $data['hafalan'] = Hafalan::where('student_id',$id)->orderBy('created_at', 'desc')->get();
 
         // for update
         $provinsi = Provinsi::all();
 
-        return view('admin.students.show', compact('student', 'illness', 'parents', 'school', 'father', 'mother', 'wali', 'guardian', 'provinsi'));
+        return view('admin.students.show', $data);
     }
 
     public function edit($id)

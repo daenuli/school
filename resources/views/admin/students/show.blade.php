@@ -218,7 +218,7 @@
 				<div class="row mt-4">
 					<div class="col-md-12">
 							<h4>
-								Data 
+								Data
 								  	@if ($parent->role == 1)
 										Ayah
 						  			@elseif($parent->role == 2)
@@ -309,7 +309,7 @@
   	</div>
 </div>
 
-<div class="col-md-12">		
+<div class="col-md-12">
 	<div class="card">
 		<div class="card-header card-header-icon card-header-rose">
 			<div class="card-icon">
@@ -416,6 +416,60 @@
 					  					@csrf
 					  					@method('DELETE')
 						  				<a href="{{ route('illness.edit', $data->id) }}" class="btn btn-sm btn-rose">Update</a>
+					  					<button type="submit" class="btn btn-sm btn-danger px-2"><i class="material-icons">delete</i></button>
+					  				</form>
+					  			</td>
+					  		</tr>
+				  		@endforeach
+				  	</tbody>
+		  		</table>
+			</div>
+		</div>
+	   <div class="card-footer d-flex justify-content-end">
+	    	<a href="{{ route('illness.createIllness', $student->id) }}" class="btn btn-sm btn-primary">Tambah</a>
+	   </div>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header card-header-icon card-header-rose">
+			<div class="card-icon">
+				<i class="material-icons">bookmarks</i>
+			</div>
+			<h4 class="card-title">Data Perkembangan Hafalan</h4>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Tanggal setor</th>
+							<th>Musyrif/Pengampu</th>
+							<th>Nama Surah</th>
+							<th>Ayat</th>
+							<th>Keterangan</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					@php
+						$nomor = 1;
+					@endphp
+				  	<tbody>
+				  		@foreach ($hafalan as $h)
+					  		<tr>
+					  			<td>{{ $nomor++ }}</td>
+					  			<td>{{ date('d F Y', strtotime($h->created_at)) }}</td>
+					  			<td>{{ $h->user->name }}</td>
+					  			<td>{{ $h->surah->name }}</td>
+					  			<td>{{ $h->ayat_start }} - {{$h->ayat_end}}</td>
+					  			<td>{{ $h->note }}</td>
+					  			<td>
+					  				<form action="{{ route('hafalan.destroy', $h->id) }}" method="POST">
+					  					@csrf
+					  					@method('DELETE')
+						  				<a href="{{ route('hafalan.edit', $h->id) }}" class="btn btn-sm btn-rose">Update</a>
 					  					<button type="submit" class="btn btn-sm btn-danger px-2"><i class="material-icons">delete</i></button>
 					  				</form>
 					  			</td>
