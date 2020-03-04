@@ -30,33 +30,6 @@ class DonaturController extends Controller
     {
         $data = Donatur::orderBy('created_at', 'desc')->get();
         return DataTables::of($data)
-        ->editColumn('date_birth', function($index){
-          return date('d F Y', strtotime($index->date_birth));
-        })
-        ->addColumn('alamat', function($index){
-            $kecamatan = Kecamatan::all();
-            foreach ($kecamatan as $value) {
-              if ($index->kecamatan_id == $value->id) {
-                $kec = $value->nama;
-              }
-            }
-
-            $kabupaten = Kabupaten::all();
-            foreach ($kabupaten as $value) {
-              if ($index->kabupaten_id == $value->id) {
-                $kab = $value->nama;
-              }
-            }
-
-            $provinsi = Provinsi::all();
-            foreach ($provinsi as $value) {
-              if ($index->provinsi_id == $value->id) {
-                $prov = $value->nama;
-              }
-            }
-
-            return $index->street.', '.$kec.', '.$kab.', '.$prov;
-        })
         ->addColumn('action', function($index){
             $tag    = "<div class='d-flex justify-content-end'>";
             $tag    .= Form::open(["url"=>route('donatur.destroy', $index->id), "method" => "DELETE"]);
@@ -108,7 +81,7 @@ class DonaturController extends Controller
     {
         $donatur = Donatur::where('id', $id)->get();
         $student = Student::all();
-        $id;
+        $id;//untuk mengambil id pada saat create student donatur
         $ajax = route('donatur.donaturDetail', $id);
         return view('admin.donaturs.show', compact('ajax','donatur','id','student'));
     }
@@ -157,21 +130,11 @@ class DonaturController extends Controller
     {
         $data = DonaturStudent::where('donatur_id', $id)->get();
         return Datatables::of($data)
-        ->editColumn('nis',function($index){
-            $student = Student::all();
-            foreach ($student as $value) {
-              if ($index->student_id == $value->id) {
-                return $value->nis;
-              }
-            }
+        ->addColumn('nis',function($index){
+            return $index->student->nis;
         })
         ->editColumn('student_id',function($index){
-            $student = Student::all();
-            foreach ($student as $value) {
-              if ($index->student_id == $value->id) {
-                return $value->name;
-              }
-            }
+            return $index->student->name;
         })
         ->addColumn('action', function($index){
             $tag     = Form::open(["url"=>route('donatur.destroyStudent', $index->id), "method" => "DELETE"]);
@@ -188,8 +151,11 @@ class DonaturController extends Controller
 
     public function createStudent($id)
     {
-        $student = Student::all();
+        $donatur_student = DonaturStudent::get('student_id');
+        $studentEliminated = $donatur_student->toArray();
+        $student = Student::where('status', 1)->whereNotIn('id', $studentEliminated)->get();
         $id;
+        // return response()->json($d);
         return view('admin.donaturs.add', compact('student','id'));
     }
 
