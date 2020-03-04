@@ -54,7 +54,16 @@
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
                 <li><a href="" class="nav-link">Home</a></li>
-                <li><a href="{{ route('donaturStudent.create') }}" class="nav-link">Kembali</a></li>
+                <li>
+                  <form method="post" action="{{ route('donaturStudent.show') }}">
+                    @csrf
+                    @foreach ($dnt as $data)
+                    <input type="hidden" name="nik" value="{{$data->nik}}">
+                    <input type="hidden" name="date_birth" value="{{$data->date_birth}}">
+                    @endforeach
+                    <button type="submit" class="nav-link" style="border: none; background-color: white; ">Kembali</button>
+                  </form>
+                </li>
                 <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
               </ul>
             </nav>
@@ -66,49 +75,13 @@
         </div>
       </div>
     </header>
-
-    <div class="site-blocks-cover" style="overflow: hidden;">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-
-          <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-
-            <img src="{{ asset('imagine/images/undraw_investing_7u74.svg') }}" alt="Image" class="img-fluid img-absolute">
-
-            <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
-              <div class="col-lg-6 mr-auto">
-                <table class="table table-sm" style="width: 100%">
-                  <tr>
-                    <th>Nama</th>
-                    <th>{{ $donatur->name }}</th>
-                  </tr>
-                  <tr>
-                    <td>NIK</td>
-                    <td>{{ $donatur->nik }}</td>
-                  </tr>
-                  <tr>
-                    <td>Tanggal Lahir</td>
-                    <td>{{ $donatur->date_birth }}</td>
-                  </tr>
-                  <tr>
-                    <td>Email</td>
-                    <td>{{ $donatur->email }}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="site-section" id="features-section">
       <div class="container">
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="row mb-2 justify-content-center text-center">
               <div class="col-7 text-center  mb-5">
-                <h2 class="section-title">Data Santri Asuh</h2>
+                <h2 class="section-title">SPP Santri Asuh</h2>
               </div>
             </div>
             <div class="row align-items-stretch">
@@ -117,50 +90,15 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>NIS</th>
-                      <th>Nama</th>
-                      <th>TTL</th>
-                      <th class="disabled-sorting text-right">Actions</th>
+                      <th>Kategori</th>
+                      <th>Pencatat</th>
+                      <th>Tanggal Bayar</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                   </tbody>
                 </table>
-              </div>
-            </div>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Modal title</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                      <i class="material-icons">clear</i>
-                    </button>
-                  </div>
-                  <div class=" modal-body">
-                    <div class="row align-items-stretch">
-                      <div class="table-responsive">
-                        <table id="sppdatatable" class="table table-hover table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th>No</th>
-                              <th>Kategori</th>
-                              <th>Pencatat</th>
-                              <th>Tanggal Bayar</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-link">Nice Button</button>
-                    <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -216,13 +154,13 @@
             processing: true,
             serverSide: true,
             ajax: '{{$ajax}}',
-            order: [[0,'desc']],
+            order: [[1,'desc']],
             columns: [
                 { data: 'id', searchable: false, orderable: false},
-                { data: 'nis', searchable: true, orderable: true},
-                { data: 'name', searchable: true, orderable: true},
-                { data: 'birth', searchable: false, orderable: false},
-                { data: 'action', searchable: false, orderable: false}
+                { data: 'spp_id', searchable: false, orderable: false},
+                { data: 'user_id', searchable: false, orderable: false},
+                { data: 'created_at', searchable: true, orderable: true},
+                { data: 'status', searchable: false, orderable: false}
             ],
             columnDefs: [{
               "targets": 0,
