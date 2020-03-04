@@ -83,7 +83,8 @@
                         {{session('notif')}}
                     </div>
                   @endif
-                  <form action="{{ route('search.result') }}">
+                  <form action="{{ route('search.result') }}" method="POST">
+                    @csrf
                     <div class="d-flex flex-row">
                         <input type="text" name="nis" autocomplete="off" class="form-control rounded-0" placeholder="Masukan NIS">
                         <input type="text" name="birth_date" autocomplete="off" class="form-control rounded-0 ml-1" placeholder="Tanggal Lahir 2002-07-20">
