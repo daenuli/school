@@ -19,6 +19,8 @@
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
+                  <th>NIK</th>
+                  <th>Email</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>
@@ -45,6 +47,8 @@
           columns: [
               { data: 'id', searchable: false, orderable: false},
               { data: 'name', searchable: true, orderable: false},
+              { data: 'nik', searchable: true, orderable: false},
+              { data: 'email', searchable: true, orderable: false},
               { data: 'action', searchable: false, orderable: false}
           ],
           columnDefs: [{
