@@ -53,10 +53,8 @@ class DonaturController extends Controller
      */
     public function create()
     {
-        $kec = Kecamatan::all();
-        $kab = Kabupaten::all();
         $prov = Provinsi::all();
-        return view('admin.donaturs.create', compact('kec','kab','prov'));
+        return view('admin.donaturs.create', compact('prov'));
     }
 
     /**
@@ -94,11 +92,9 @@ class DonaturController extends Controller
      */
     public function edit($id)
     {
-        $data = Donatur::find($id);
-        $kec = Kecamatan::all();
-        $kab = Kabupaten::all();
-        $prov = Provinsi::all();
-        return view('admin.donaturs.edit', compact('data','kec','kab','prov'));
+        $donatur = Donatur::find($id);
+        $provinsi = Provinsi::all();
+        return view('admin.donaturs.edit', compact('donatur','provinsi'));
     }
 
     /**
