@@ -12,4 +12,8 @@ class SppStudent extends Model
     {
         return $this->belongsTo(Spp::class);
     }
+    public function students()
+    {
+        return $this->belongsTo(Student::class, "student_id");
+    }
 }

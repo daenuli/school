@@ -53,7 +53,6 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
-                <li><a href="" class="nav-link">Home</a></li>
                 <li><a href="{{ route('donaturStudent.create') }}" class="nav-link">Kembali</a></li>
                 <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
               </ul>
@@ -66,41 +65,6 @@
         </div>
       </div>
     </header>
-
-    <div class="site-blocks-cover" style="overflow: hidden;">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-
-          <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-
-            <img src="{{ asset('imagine/images/undraw_investing_7u74.svg') }}" alt="Image" class="img-fluid img-absolute">
-
-            <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
-              <div class="col-lg-6 mr-auto">
-                <table class="table table-sm" style="width: 100%">
-                  <tr>
-                    <th>Nama</th>
-                    <th>{{ $donatur->name }}</th>
-                  </tr>
-                  <tr>
-                    <td>NIK</td>
-                    <td>{{ $donatur->nik }}</td>
-                  </tr>
-                  <tr>
-                    <td>Tanggal Lahir</td>
-                    <td>{{ $donatur->date_birth }}</td>
-                  </tr>
-                  <tr>
-                    <td>Email</td>
-                    <td>{{ $donatur->email }}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="site-section" id="features-section">
       <div class="container">

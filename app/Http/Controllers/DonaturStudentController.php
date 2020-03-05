@@ -7,6 +7,7 @@ use App\Models\DonaturStudent;
 use App\Models\Donatur;
 use App\Models\SppStudent;
 use App\Models\Spp;
+use App\Models\StudentGrade;
 use App\User;
 use Yajra\Datatables\Datatables;
 use Form;
@@ -101,9 +102,8 @@ class DonaturStudentController extends Controller
         $dnt = Donatur::where('id', $std->toArray())->get();
         // return response()->json($dnt);
         $ajax = route('donaturStudent.spptb', $id);
-        $id;
 
-        return view($this->folder.'.spp', compact('ajax', 'spps','id','dnt'));
+        return view($this->folder.'.spp', compact('ajax', 'spps', 'dnt'));
     }
 
     public function sppTables(Request $request, $id)
