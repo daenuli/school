@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class SppStudent extends Model
 {
@@ -11,5 +12,9 @@ class SppStudent extends Model
     public function spp()
     {
         return $this->belongsTo(Spp::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -110,21 +110,11 @@ class DonaturStudentController extends Controller
     {
         $data = SppStudent::where('student_id', $id)->get();
         return Datatables::of($data)
-        ->editColumn('spp_id', function($index){
-            $spp = Spp::all();
-            foreach ($spp as $value) {
-              if ($index->spp_id == $value->id) {
-                return $value->name;
-              }
-            }
+        ->addColumn('spp_id', function($index){
+            return $index->spp->name;
         })
-        ->editColumn('user_id', function($index){
-            $user = User::all();
-            foreach ($user as $value) {
-              if ($index->user_id == $value->id) {
-                return $value->name;
-              }
-            }
+        ->addColumn('user_id', function($index){
+            return $index->user->name;
         })
         ->editColumn('created_at', function($index){
             return date('d F Y', strtotime($index->created_at));
