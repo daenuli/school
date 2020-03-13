@@ -34,4 +34,8 @@ class Student extends Model
     {
         return $this->hasMany(DonaturStudent::class);
     }
+    public function students()
+    {
+        return $this->hasMany(SppStudent::class, "student_id");
+    }
 }
