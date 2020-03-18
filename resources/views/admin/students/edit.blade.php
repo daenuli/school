@@ -211,6 +211,18 @@
 			    </div>
 			  </div>
 			</div>
+			<div class="row">
+			  <label class="col-sm-2 col-form-label">Status Keluarga</label>
+			  <div class="col-sm-8">
+			    <div class="form-group">
+			      <select class="selectpicker" name="spp_id" data-style="btn btn-primary" title="Pilih Status">
+			        <option value="{{ $student->spp_id }}" selected>{{ $student->spp->name }}</option>
+			        <option value="1">Mampu</option>
+			        <option value="2">Tidak Mampu</option>
+			      </select>
+			    </div>
+			  </div>
+			</div>
 		</div>
 	   	<div class="card-footer d-flex justify-content-between">
 			<a href="{{ route('student.show', $student->id) }}" class="btn btn-rose btn-sm">Kembali</a>

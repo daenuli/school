@@ -159,7 +159,7 @@
 				  			</td>
 				  		</tr>
 				  		<tr>
-				  			<td class="profile-title">HP/Telepon</td>
+				  			<td class="profile-title">Email</td>
 				  			<td>
 				  				@if ($student->email)
 					  				{{ $student->email }}
@@ -176,6 +176,20 @@
 				  						<span class='badge badge-pill badge-primary'>Perempuan</span>
 				  					@else
 				  						<span class='badge badge-pill badge-success'>Laki Laki</span>
+				  					@endif
+				  				@else
+				  					<i>Data belum ditambahkan</i>
+				  				@endif
+				  			</td>
+				  		</tr>
+				  		<tr>
+				  			<td class="profile-title">Status Keluarga</td>
+				  			<td>
+				  				@isset ($student->spp_id)
+				  					@if ($student->spp_id == 1)
+				  						<span class='badge badge-pill badge-success'>Mampu</span>
+				  					@else
+				  						<span class='badge badge-pill badge-primary'>Tidak Mampu</span>
 				  					@endif
 				  				@else
 				  					<i>Data belum ditambahkan</i>

@@ -38,4 +38,8 @@ class Student extends Model
     {
         return $this->hasMany(SppStudent::class, "student_id");
     }
+    public function spp()
+    {
+        return $this->belongsTo(Spp::class);
+    }
 }

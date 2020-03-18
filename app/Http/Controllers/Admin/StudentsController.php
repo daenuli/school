@@ -56,6 +56,7 @@ class StudentsController extends Controller
         ->addColumn('action', function($index){
             $tag     = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
             $tag    .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
+            $tag    .= "<a href='' class='btn btn-danger text-white btn-sm'>Fault</a>";
             $tag    .= Form::close();
             return $tag;
         })
@@ -68,7 +69,8 @@ class StudentsController extends Controller
     public function create()
     {
         $provinsi = Provinsi::all();
-        return view('admin.students.create', compact('provinsi'));
+        $spp = Spp::all();
+        return view('admin.students.create', compact('provinsi', 'spp'));
     }
 
     public function store(Request $request)
@@ -90,6 +92,7 @@ class StudentsController extends Controller
         $student->birth_date = $request->birth_date;
         $student->gender = $request->gender;
         $student->status = $request->status;
+        $student->spp_id = $request->spp_id;
         $student->position = $request->position;
         $student->sibling = $request->sibling;
         $student->level = $request->level;
@@ -175,7 +178,8 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
         $provinsi = Provinsi::all();
-        return view('admin.students.edit', compact('student', 'provinsi'));
+        $spp = Spp::all();
+        return view('admin.students.edit', compact('student', 'provinsi', 'spp'));
     }
 
     public function update(Request $request, $id)
@@ -196,6 +200,7 @@ class StudentsController extends Controller
             'kecamatan_id' => $request->kecamatan_id,
             'street' => $request->street,
             'status' => $request->status,
+            'spp_id' => $request->spp_id,
             'email' => $request->email
         ]);
         return redirect()->route('student.show', $id)->with('notif', 'Data berhasil diubah!');

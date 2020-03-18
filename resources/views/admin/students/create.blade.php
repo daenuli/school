@@ -208,6 +208,18 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">Status Keluarga</label>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <select class="selectpicker" name="spp_id" data-style="btn btn-primary" title="Pilih Status">
+                    @foreach ($spp as $data)
+                      <option value="{{ $data->id }}">{{ $data->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
           
           <div class="tab-pane" id="sekolah">
