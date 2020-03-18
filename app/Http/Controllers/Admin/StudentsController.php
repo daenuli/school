@@ -22,10 +22,13 @@ use Carbon\Carbon;
 
 class StudentsController extends Controller
 {
+    private $title = 'Daftar Santri';
+
     public function index()
     {
+        $title = $this->title;
         $ajax = route('student.dbtb');
-        return view('admin.students.index', compact('ajax'));
+        return view('admin.students.index', compact('ajax', 'title'));
     }
 
     public function dbTables(Request $request)
@@ -54,9 +57,10 @@ class StudentsController extends Controller
             return $index->birth_place.", ".date('d M Y', strtotime($index->birth_date));
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
-            $tag    .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
-            $tag    .= Form::close();
+            $tag = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
+            $tag .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
+            $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
+            $tag .= Form::close();
             return $tag;
         })
         ->rawColumns([
@@ -155,6 +159,7 @@ class StudentsController extends Controller
 
     public function show($id)
     {
+        $data['title'] = 'Informasi Data Santri';
         $data['student'] = Student::find($id);
         $data['illness'] = IllnessHistory::where('student_id', $id)->get();
         $data['parents'] = Parents::where('student_id', $id)->get();
@@ -241,12 +246,13 @@ class StudentsController extends Controller
 
     public function sppStudent($id)
     {
+        $title = 'Daftar SPP Santri';
         $spp = Spp::all();
         $spps = SppStudent::find($id);
         $ajax = route('sppStudent.spptb', $id);
         $id;
         // return response()->json($ajax);
-        return view('admin.sppStudents.index', compact('ajax','spp','spps','id'));
+        return view('admin.sppStudents.index', compact('ajax','spp','spps','id', 'title'));
     }
 
     public function sppTables(Request $request, $id)
