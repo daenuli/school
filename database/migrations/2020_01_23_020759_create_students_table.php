@@ -30,6 +30,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone')->nullable();
             $table->boolean('gender'); //1 = Laki Laki, 0 = Perempuan
             $table->boolean('status'); //1 = Aktif, 0 = Tidak Aktif
+            $table->integer('spp_id'); //1 = Mampu, 2 = Tidak Mampu
             $table->string('provinsi_id',2)->nullable();
             $table->string('kabupaten_id',4)->nullable();
             $table->string('kecamatan_id',7)->nullable();

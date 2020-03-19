@@ -12,4 +12,8 @@ class Spp extends Model
     {
         return $this->hasMany(SppStudent::class);
     }
+    public function student()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

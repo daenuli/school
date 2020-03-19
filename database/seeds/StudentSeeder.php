@@ -28,6 +28,7 @@ class StudentSeeder extends Seeder
                 'phone' =>  $faker->phoneNumber,
                 'gender' => $faker->randomElement([0, 1]),
                 'status' => 1,
+                'spp_id' => $faker->randomElement([1, 2]),
                 // 'registration_date' => $faker->dateTimeThisYear()->format('Y-m-d'),
                 // 'father_name' => $faker->name($gender = 'male'),
                 // 'mother_name' => $faker->name($gender = 'female'),
