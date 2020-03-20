@@ -87,3 +87,7 @@ Route::get('/donatur/{donatur}/donaturDetail', 'Admin\DonaturController@donaturD
 Route::get('/donatur/{donatur}/createStudent', 'Admin\DonaturController@createStudent')->name('donatur.createStudent');
 Route::post('/donatur/{donatur}/storeStudent', 'Admin\DonaturController@storeStudent')->name('donatur.storeStudent');
 Route::delete('/donatur/{donatur}/destroyStudent', 'Admin\DonaturController@destroyStudent')->name('donatur.destroyStudent');
+
+// SppPayment
+Route::get('/sppPayment/{sppPayment}/sppTable', 'Admin\StudentsController@sppPaymentTables')->name('sppPayment.sppTable');
+Route::get('/sppPayment/{sppPayment}/sppDetail', 'Admin\StudentsController@sppPaymentDetail')->name('sppPayment.sppDetail');
