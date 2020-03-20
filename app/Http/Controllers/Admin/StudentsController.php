@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Parents;
 use App\Models\StudentUser;
+use App\Models\StudentGrade;
 use App\Models\Provinsi;
 use App\Models\Hafalan;
 use App\Models\Kabupaten;
@@ -17,6 +18,7 @@ use Yajra\Datatables\Datatables;
 use Form;
 use App\Models\SppStudent;
 use App\Models\Spp;
+use App\Models\SppPayment;
 use App\User;
 use Carbon\Carbon;
 
@@ -331,5 +333,113 @@ class StudentsController extends Controller
     {
         SppStudent::find($id)->delete();
         return redirect()->back();
+    }
+
+    // Spp Payment
+
+    public function sppPaymentDetail($id)
+    {
+        $spp = Spp::all();
+        $spps = SppPayment::find($id);
+        $ajax = route('sppPayment.sppTable', $id);
+        $id;
+        // return response()->json($ajax);
+        return view('admin.spp_payment.index', compact('ajax','spp','spps','id'));
+    }
+
+    public function sppPaymentTables(Request $request, $id)
+    {
+        $studentGrade = StudentGrade::where('student_id', $id)->first();
+        $student = Student::find($id);
+        $payMonth = $studentGrade->school_year['id'];
+        // dd($payMonth);
+        $sppPayment = SppPayment::where('student_id', $id)->where('pay_month', )->get();
+        $spp = Spp::all();
+        $month = [
+          [
+            'id' => 1,
+            'name' => 'Januari'
+          ],
+          [
+            'id' => 2,
+            'name' => 'Februari'
+          ],
+          [
+            'id' => 3,
+            'name' => 'Maret'
+          ],
+          [
+            'id' => 4,
+            'name' => 'April'
+          ],
+          [
+            'id' => 5,
+            'name' => 'Mei'
+          ],
+          [
+            'id' => 6,
+            'name' => 'Juni'
+          ],
+          [
+            'id' => 7,
+            'name' => 'Juli'
+          ],
+          [
+            'id' => 8,
+            'name' => 'Agustus'
+          ],
+          [
+            'id' => 9,
+            'name' => 'September'
+          ],
+          [
+            'id' => 10,
+            'name' => 'Oktober'
+          ],
+          [
+            'id' => 11,
+            'name' => 'November'
+          ],
+          [
+            'id' => 12,
+            'name' => 'Desember'
+          ]
+        ];
+        return Datatables::of($month)
+        ->addColumn('category', function($index) use($student) {
+          return $student->spp_id;
+        })
+        ->addColumn('total', function($index) {
+          $total = 10000; // data dump
+          return $total;
+        })
+        ->addColumn('pay_date', function($index) {
+          return date('d M Y');
+        })
+        ->addColumn('status', function($index) {
+          $spp = 1500000;
+          $pay = 1000000;
+          if ($pay <= $spp) {
+            $status = "<span class='badge badge-pill badge-success'>Lunas</span>";
+          } else {
+            $status = "<span class='badge badge-pill badge-warning'>Belum Lunas</span>";
+          }
+          return $status;
+        })
+        ->addColumn('action', function($index){
+            $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index['id']), "method" => "DELETE"]);
+            $tag    .= "<div class='d-flex justify-content-end'>";
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+            $tag    .= Form::close();
+            $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index['id']), "method" => "GET"]);
+            $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
+            $tag    .= "</div>";
+            $tag    .= Form::close();
+            return $tag;
+        })
+        ->rawColumns([
+            'status', 'action'
+        ])
+        ->make(true);
     }
 }
