@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentFault extends Model
 {
-	protected $fillable = ['id', 'student_id', 'name', 'type', 'description'];
+	protected $fillable = ['id', 'student_id', 'name', 'type', 'point', 'description'];
     public function student()
     {
         return $this->belongsTo(Student::class);

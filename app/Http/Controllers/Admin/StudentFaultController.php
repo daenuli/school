@@ -25,17 +25,15 @@ class StudentFaultController extends Controller
         $title = $this->title;
         $ajax = route('student_fault.faulttb', $id);
         $id;
+        $student = Student::where('id', $id)->get();
         // return response()->json($ajax);
-        return view($this->folder.'.index', compact('ajax', 'id', 'title'));
+        return view($this->folder.'.index', compact('ajax', 'id', 'title', 'student'));
     }
 
     public function faultTables(Request $request, $id)
     {
         $data = StudentFault::where('student_id', $id)->get();
         return Datatables::of($data)
-        ->addColumn('student_id', function($index){
-            return $index->student->name;
-        })
         ->addColumn('type', function($index){
             if ($index->type == 1) {
                 return "<span class='badge badge-pill badge-info'>Ringan</span>";
@@ -54,7 +52,7 @@ class StudentFaultController extends Controller
             </form>
             ';
         })
-        ->rawColumns(['id', 'student_id', 'type', 'action'])
+        ->rawColumns(['id', 'type', 'action'])
         ->make(true);
     }
     /**

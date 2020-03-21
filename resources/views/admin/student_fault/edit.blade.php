@@ -65,6 +65,14 @@
             </div>
           </div>
           <div class="row">
+            <label class="col-sm-3 col-form-label">Point</label>
+            <div class="col-sm-8">
+              <div class="form-group">
+                <input type="number" class="form-control" name="point" value="{{$student->point}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <label class="col-sm-3 col-form-label">Description</label>
             <div class="col-sm-8">
               <div class="form-group">

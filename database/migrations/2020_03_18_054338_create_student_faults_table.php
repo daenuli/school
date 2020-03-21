@@ -18,6 +18,7 @@ class CreateStudentFaultsTable extends Migration
             $table->integer('student_id');
             $table->string('name');
             $table->enum('type', [1, 2, 3]); // 1. Ringan, 2. Sedang, 3. Berat
+            $table->integer('point')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });

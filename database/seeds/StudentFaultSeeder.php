@@ -18,31 +18,36 @@ class StudentFaultSeeder extends Seeder
             	'student_id' => 1,
                 'name' => 'Merokok',
                 'type' => 1,
-                'description' => '',
+                'point' => 50,
+                'description' => 'Jangan Di Ulangi !',
             ],
             [
                 'student_id' => 2,
                 'name' => 'Telat Shalat Jamaah',
                 'type' => 1,
-                'description' => '',
+                'point' => 50,
+                'description' => 'Jangan Di Ulangi !',
             ],
             [
                 'student_id' => 3,
                 'name' => 'Pacaran',
                 'type' => 3,
-                'description' => '',
+                'point' => 50,
+                'description' => 'Jangan Di Ulangi !',
             ],
             [
                 'student_id' => 1,
                 'name' => 'Telat Shalat Jamaah',
                 'type' => 2,
-                'description' => '',
+                'point' => 50,
+                'description' => 'Jangan Di Ulangi !',
             ],
             [
                 'student_id' => 1,
                 'name' => 'Pacaran',
                 'type' => 3,
-                'description' => '',
+                'point' => 50,
+                'description' => 'Jangan Di Ulangi !',
             ]
         ]);
     }
