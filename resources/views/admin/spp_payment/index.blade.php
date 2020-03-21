@@ -47,6 +47,8 @@
       table = $('#datatable').DataTable({
           processing: true,
           serverSide: true,
+          paging: false,
+          searching: false,
           ajax: '{{$ajax}}',
           order: [[1,'desc']],
           columns: [
