@@ -55,7 +55,7 @@ Route::resource('/spp', 'Admin\SppsController');
 Route::get('/teacher/dbtb', 'Admin\TeacherController@dbTables')->name('teacher.dbtb');
 Route::resource('/teacher', 'Admin\TeacherController');
 
-// spp student / spp detail
+// spp student / spp detail 
 Route::get('/sppStudent/{sppStudent}/spptb', 'Admin\StudentsController@sppTables')->name('sppStudent.spptb');
 Route::get('/sppStudent/{sppStudent}/sppdtl', 'Admin\StudentsController@sppStudent')->name('sppStudent.sppdtl');
 Route::get('/sppStudent/sppcrt', 'Admin\StudentsController@sppCreate')->name('sppStudent.sppcrt');
@@ -63,6 +63,14 @@ Route::post('/sppStudent/{sppStudent}/sppstr', 'Admin\StudentsController@sppStor
 Route::get('/sppStudent/{sppStudent}/sppedt', 'Admin\StudentsController@sppEdit')->name('sppStudent.sppedt');
 Route::delete('/sppStudent/{sppStudent}/sppdestroy', 'Admin\StudentsController@sppDestroy')->name('sppStudent.sppdestroy');
 Route::post('/sppStudent/{sppStudent}/sppupdt', 'Admin\StudentsController@sppUpdate')->name('sppStudent.sppupdt');
+
+// student_fault
+Route::get('/student_fault/{id}/faulttb', 'Admin\StudentFaultController@faultTables')->name('student_fault.faulttb');
+Route::get('/student_fault/{id}/fault', 'Admin\StudentFaultController@student_fault')->name('student_fault.fault');
+Route::post('/student_fault/{id}/store', 'Admin\StudentFaultController@store')->name('student_fault.store');
+Route::get('/student_fault/{id}/edit', 'Admin\StudentFaultController@edit')->name('student_fault.edit');
+Route::put('/student_fault/{id}/update', 'Admin\StudentFaultController@update')->name('student_fault.update');
+Route::delete('/student_fault/{id}/fault', 'Admin\StudentFaultController@destroy')->name('student_fault.destroy');
 
 Route::get('/grade/dbtb', 'Admin\GradeController@dbTables')->name('grade.dbtb');
 Route::resource('/grade', 'Admin\GradeController');
