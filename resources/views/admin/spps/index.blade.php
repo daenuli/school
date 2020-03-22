@@ -21,7 +21,7 @@
                   <th>Kategori</th>
                   <th>Total</th>
                   <th>Pembuat</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
               <tbody>

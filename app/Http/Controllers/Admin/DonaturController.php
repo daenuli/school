@@ -32,10 +32,10 @@ class DonaturController extends Controller
         return DataTables::of($data)
         ->addColumn('action', function($index){
             $tag    = "<div class='d-flex justify-content-end'>";
+            $tag    .= "<a href='".route('donatur.edit', $index->id)."' class='btn btn-success btn-sm'>Edit</a>";
             $tag    .= Form::open(["url"=>route('donatur.destroy', $index->id), "method" => "DELETE"]);
             $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= Form::close();
-            $tag    .= "<a href='".route('donatur.edit', $index->id)."' class='btn btn-success btn-sm'>Edit</a>";
             $tag    .= "<a href='".route('donatur.show', $index->id)."' class='btn btn-info btn-sm'>Show</a>";
             $tag    .= "</div>";
             return $tag;

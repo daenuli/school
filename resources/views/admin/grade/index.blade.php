@@ -9,7 +9,7 @@
           ajax: 'grade/dbtb',
           aaSorting: [[0, 'desc']],
           columns: [
-          { data: 'id', name: 'id', searchable: true, orderable: true},
+          { data: 'id', name: 'id', searchable: false, orderable: false},
           { data: 'teacher_id', name: 'teacher_id', searchable: true, orderable: true},
           { data: 'name', name: 'name', searchable: true, orderable: true},
           { data: 'action', name: 'action', searchable: true, orderable: true},
@@ -37,7 +37,7 @@
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Daftar {{$title ?? 'title'}}</h4>
-          <a href="{{$create}}" class="btn btn-sm btn-info pull-right"><i class="material-icons">add_circle</i>Create</a>
+          <a href="{{$create}}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
         </div>
         <div class="card-body">
           <div class="toolbar">
@@ -58,20 +58,12 @@
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
               <thead>
                 <tr>
-                  <th>Nomor</th>
+                  <th>No</th>
                   <th>Wali Kelas</th>
                   <th>Kelas</th>
-                  <th class="disabled-sorting text-center">Actions</th>
+                  <th class="disabled-sorting text-center"></th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nomor</th>
-                  <th>Wali Kelas</th>
-                  <th>Kelas</th>
-                  <th class="disabled-sorting text-center">Actions</th>
-                </tr>
-              </tfoot>
               <tbody>
               </tbody>
             </table>

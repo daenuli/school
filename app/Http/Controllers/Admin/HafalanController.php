@@ -49,7 +49,7 @@ class HafalanController extends Controller
             })
             ->addColumn('action', function($index){
                 $tag = Form::open(["url" => route($this->route.'destroy', $index->id), "method" => "PUT", "class" => "text-right"]);
-                $tag .= "<a href=". route($this->route.'edit', $index->id) ." class='btn btn-primary btn-sm'>Ubah</a> ";
+                $tag .= "<a href=". route($this->route.'edit', $index->id) ." class='btn btn-success btn-sm'>Edit</a> ";
                 $tag .= "<button type='submit' class='btn btn-danger btn-sm' onclick='javascript:return confirm(`Apakah anda yakin ingin menghapus data ini?`)'>Hapus</button>";
                 $tag .= Form::close();
                 return $tag;

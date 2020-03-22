@@ -39,7 +39,7 @@
                   <th>TTL</th>
                   <th>Gender</th>
                   <th>Hafalan</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
               <tbody>

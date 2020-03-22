@@ -40,12 +40,12 @@ class SppsController extends Controller
             return 'Rp '.number_format($index->total, 0, "", ".");
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE"]);
+            $tag     = Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET"]);
             $tag    .= "<div class='d-flex justify-content-end'>";
-            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
-            $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('spp.edit', $index->id), "method" => "GET"]);
             $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= Form::close();
+            $tag    .= Form::open(["url"=>route('spp.destroy', $index->id), "method" => "DELETE"]);
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= "</div>";
             $tag    .= Form::close();
             return $tag;
