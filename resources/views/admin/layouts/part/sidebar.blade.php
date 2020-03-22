@@ -55,127 +55,138 @@ Tip 2: you can also add an image using data-image tag
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('hafalan') || Request::is('hafalan/*')? 'active' : '' }}">
-              <a class="nav-link" data-toggle="collapse" href="#collapseHafalan">
-                <i class="material-icons">assessment</i>
-                <p> Hafalan Tahfizh
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse {{ Request::is('hafalan') || Request::is('hafalan/*')? 'show' : '' }}" id="collapseHafalan">
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('hafalan/create') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('hafalan.create') }}">
-                      <span class="sidebar-mini"> TH </span>
-                      <span class="sidebar-normal"> Tambah Hafalan </span>
-                    </a>
-                  </li>
-                  <li class="nav-item {{ Request::is('hafalan') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('hafalan.index') }}">
-                      <span class="sidebar-mini"> DH </span>
-                      <span class="sidebar-normal"> Data Hafalan </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'active' : '' }}">
-            {{-- <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}"> --}}
-              <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
-                <i class="material-icons">emoji_people</i>
-                <p> Santri
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'show' : '' }}" id="mapsExamples">
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('student.create') }}">
-                      <span class="sidebar-mini"> TS </span>
-                      <span class="sidebar-normal"> Tambah Santri </span>
-                    </a>
-                  </li>
-                  <li class="nav-item {{ Request::is('student') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('student.index') }}">
-                      <span class="sidebar-mini"> DS </span>
-                      <span class="sidebar-normal"> Daftar Santri </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item {{ Request::is('spp') || Request::is('spp/*')? 'active' : '' }}">
-              <a class="nav-link" data-toggle="collapse" href="#spp">
-                <i class="material-icons">credit_card</i>
-                <p> Kategori SPP
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse {{ Request::is('spp') || Request::is('spp/*')? 'show' : '' }}" id="spp">
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('spp/create') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('spp.create') }}">
-                      <span class="sidebar-mini"> TS </span>
-                      <span class="sidebar-normal"> Tambah SPP </span>
-                    </a>
-                  </li>
-                  <li class="nav-item {{ Request::is('spp') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('spp.index') }}">
-                      <span class="sidebar-mini"> DS </span>
-                      <span class="sidebar-normal"> Daftar SPP </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item {{ Request::is('grade') || Request::is('grade/*')? 'active' : '' }}">
-              <a class="nav-link" data-toggle="collapse" href="#class">
-                <i class="material-icons">account_balance</i>
-                <p> Kelas
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse {{ Request::is('grade') || Request::is('grade/*')? 'show' : '' }}" id="class">
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('grade/create') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('grade.create') }}">
-                      <span class="sidebar-mini"> TK </span>
-                      <span class="sidebar-normal"> Tambah Kelas </span>
-                    </a>
-                  </li>
-                  <li class="nav-item {{ Request::is('grade') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('grade.index') }}">
-                      <span class="sidebar-mini"> DK </span>
-                      <span class="sidebar-normal"> Daftar Kelas </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item {{ Request::is('teacher') || Request::is('teacher/*')? 'active' : '' }}">
-              <a class="nav-link" data-toggle="collapse" href="#teacher">
-                <i class="material-icons">person</i>
-                <p> Guru
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse {{ Request::is('teacher') || Request::is('teacher/*')? 'show' : '' }}" id="teacher">
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('teacher/create') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('teacher.create') }}">
-                      <span class="sidebar-mini"> TG </span>
-                      <span class="sidebar-normal"> Tambah Guru </span>
-                    </a>
-                  </li>
-                  <li class="nav-item {{ Request::is('teacher') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('teacher.index') }}">
-                      <span class="sidebar-mini"> DG </span>
-                      <span class="sidebar-normal"> Daftar Guru </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            @can ('manage-hafalans')
+                <li class="nav-item {{ Request::is('hafalan') || Request::is('hafalan/*')? 'active' : '' }}">
+                  <a class="nav-link" data-toggle="collapse" href="#collapseHafalan">
+                    <i class="material-icons">assessment</i>
+                    <p> Hafalan Tahfizh
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <div class="collapse {{ Request::is('hafalan') || Request::is('hafalan/*')? 'show' : '' }}" id="collapseHafalan">
+                    <ul class="nav">
+                      <li class="nav-item {{ Request::is('hafalan/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('hafalan.create') }}">
+                          <span class="sidebar-mini"> TH </span>
+                          <span class="sidebar-normal"> Tambah Hafalan </span>
+                        </a>
+                      </li>
+                      <li class="nav-item {{ Request::is('hafalan') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('hafalan.index') }}">
+                          <span class="sidebar-mini"> DH </span>
+                          <span class="sidebar-normal"> Data Hafalan </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+            @endcan
+            @can ('manage-santris')
+                <li class="nav-item {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ Request::is('student') || Request::is('student/*')? 'active' : '' }}"> --}}
+                  <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
+                    <i class="material-icons">emoji_people</i>
+                    <p> Santri
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <div class="collapse {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'show' : '' }}" id="mapsExamples">
+                    <ul class="nav">
+                      <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('student.create') }}">
+                          <span class="sidebar-mini"> TS </span>
+                          <span class="sidebar-normal"> Tambah Santri </span>
+                        </a>
+                      </li>
+                      <li class="nav-item {{ Request::is('student') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('student.index') }}">
+                          <span class="sidebar-mini"> DS </span>
+                          <span class="sidebar-normal"> Daftar Santri </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+            @endcan
+            @can ('manage-spps')
+                <li class="nav-item {{ Request::is('spp') || Request::is('spp/*')? 'active' : '' }}">
+                  <a class="nav-link" data-toggle="collapse" href="#spp">
+                    <i class="material-icons">credit_card</i>
+                    <p> Kategori SPP
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <div class="collapse {{ Request::is('spp') || Request::is('spp/*')? 'show' : '' }}" id="spp">
+                    <ul class="nav">
+                      <li class="nav-item {{ Request::is('spp/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('spp.create') }}">
+                          <span class="sidebar-mini"> TS </span>
+                          <span class="sidebar-normal"> Tambah SPP </span>
+                        </a>
+                      </li>
+                      <li class="nav-item {{ Request::is('spp') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('spp.index') }}">
+                          <span class="sidebar-mini"> DS </span>
+                          <span class="sidebar-normal"> Daftar SPP </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+            @endcan
+            @can ('manage-kelas')
+                <li class="nav-item {{ Request::is('grade') || Request::is('grade/*')? 'active' : '' }}">
+                  <a class="nav-link" data-toggle="collapse" href="#class">
+                    <i class="material-icons">account_balance</i>
+                    <p> Kelas
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <div class="collapse {{ Request::is('grade') || Request::is('grade/*')? 'show' : '' }}" id="class">
+                    <ul class="nav">
+                      <li class="nav-item {{ Request::is('grade/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('grade.create') }}">
+                          <span class="sidebar-mini"> TK </span>
+                          <span class="sidebar-normal"> Tambah Kelas </span>
+                        </a>
+                      </li>
+                      <li class="nav-item {{ Request::is('grade') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('grade.index') }}">
+                          <span class="sidebar-mini"> DK </span>
+                          <span class="sidebar-normal"> Daftar Kelas </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+            @endcan
+            @can ('manage-gurus')
+                <li class="nav-item {{ Request::is('teacher') || Request::is('teacher/*')? 'active' : '' }}">
+                  <a class="nav-link" data-toggle="collapse" href="#teacher">
+                    <i class="material-icons">person</i>
+                    <p> Guru
+                      <b class="caret"></b>
+                    </p>
+                  </a>
+                  <div class="collapse {{ Request::is('teacher') || Request::is('teacher/*')? 'show' : '' }}" id="teacher">
+                    <ul class="nav">
+                      <li class="nav-item {{ Request::is('teacher/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('teacher.create') }}">
+                          <span class="sidebar-mini"> TG </span>
+                          <span class="sidebar-normal"> Tambah Guru </span>
+                        </a>
+                      </li>
+                      <li class="nav-item {{ Request::is('teacher') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('teacher.index') }}">
+                          <span class="sidebar-mini"> DG </span>
+                          <span class="sidebar-normal"> Daftar Guru </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+            @endcan
+            @can ('manage-donaturs')
             <li class="nav-item {{ Request::is('donatur') || Request::is('donatur/*')? 'active' : '' }}">
               <a class="nav-link" data-toggle="collapse" href="#donatur">
                 <i class="material-icons">how_to_vote</i>
@@ -200,6 +211,8 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            @endcan
+            @can ('manage-users')
             <li class="nav-item {{ Request::is('users') || Request::is('users/*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="material-icons">people</i>
@@ -222,6 +235,7 @@ Tip 2: you can also add an image using data-image tag
                 </ul>
               </div>
             </li>
+            @endcan
         </ul>
     </div>
 </div>

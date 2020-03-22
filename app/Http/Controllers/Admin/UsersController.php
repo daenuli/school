@@ -9,6 +9,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use DataTables;
 use Form;
 use App\Forms\UserForm;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
@@ -18,7 +19,10 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-users')) return $next($request);
+            abort(403);
+        });
     }
     /**
      * Display a listing of the resource.
@@ -40,9 +44,12 @@ class UsersController extends Controller
             if($index->role == 1) {
                 return '<span class="btn btn-sm btn-success">Admin</span>';
             } elseif ($index->role == 2){
-                return '<span class="btn btn-sm btn-primary">Donatur</span>';
-            } else {
-                return '<span class="btn btn-sm btn-warning">Parent</span>';
+                return '<span class="btn btn-sm btn-primary">Musyrif Tahfizh</span>';
+            } elseif ($index->role == 3){
+                return '<span class="btn btn-sm btn-info">Asatidz/ah</span>';
+            }
+             else {
+                return '<span class="btn btn-sm btn-warning">Staff Keuangan</span>';
             }
         })
         ->addColumn('action', function ($index) {

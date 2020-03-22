@@ -21,10 +21,30 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected $manage = 'manage-';
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        Gate::define($this->manage.'users', function($user){
+            return $user->role == 1;
+        });
+        Gate::define($this->manage.'donaturs', function($user){
+            return $user->role == 1;
+        });
+        Gate::define($this->manage.'hafalans', function($user){
+            return $user->role == 1 || $user->role == 2;
+        });
+        Gate::define($this->manage.'santris', function($user){
+            return $user->role == 1 || $user->role == 3;
+        });
+        Gate::define($this->manage.'gurus', function($user){
+            return $user->role == 1 || $user->role == 3;
+        });
+        Gate::define($this->manage.'kelas', function($user){
+            return $user->role == 1 || $user->role == 3;
+        });
+        Gate::define($this->manage.'spps', function($user){
+            return $user->role == 1 || $user->role == 4;
+        });
     }
 }

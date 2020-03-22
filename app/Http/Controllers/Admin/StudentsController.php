@@ -21,9 +21,17 @@ use App\Models\Spp;
 use App\Models\SppPayment;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class StudentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-santris')) return $next($request);
+            abort(403);
+        });
+    }
     public function index()
     {
         $ajax = route('student.dbtb');

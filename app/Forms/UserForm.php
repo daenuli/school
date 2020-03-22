@@ -21,9 +21,9 @@ class UserForm extends Form
                 'attr' => ['data-validation' => 'required']
             ])
             ->add('role', 'choice', [
-                'choices' => [1 => 'ADMIN', 2 => 'DONATUR', 3 => 'PARENT'],
+                'choices' => [1 => 'ADMIN', 2 => 'MUSYRIF', 3 => 'ASATIDZ/AH', 4 => 'STAFF KEUANGAN'],
                 'choice_options' => [
-                    'wrapper' => ['class' => 'radio role'],
+                    'wrapper' => ['class' => 'radio'],
                     'label_attr' => ['class' => ''],
                 ],
                 'attr' => ['data-validation' => 'required'],

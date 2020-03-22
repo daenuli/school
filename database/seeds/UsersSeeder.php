@@ -22,15 +22,21 @@ class UsersSeeder extends Seeder
             ],
             [
                 'name' => 'Abu Fulan',
-                'email' => 'fulan@ortu.com',
+                'email' => 'abu@musyrif.com',
                 'password' => bcrypt(111111),
                 'role' => 2
             ],
             [
-                'name' => 'PT Donatur',
-                'email' => 'donatur@donasi.com',
+                'name' => 'Ibnu Fulan',
+                'email' => 'ibnu@asatidz.com',
                 'password' => bcrypt(111111),
                 'role' => 3
+            ],
+            [
+                'name' => 'Fulus',
+                'email' => 'fulus@keuangan.com',
+                'password' => bcrypt(111111),
+                'role' => 4
             ],
         ]);
     }
