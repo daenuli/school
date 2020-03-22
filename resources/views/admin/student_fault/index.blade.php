@@ -17,16 +17,25 @@
           @foreach($student as $row)
           <h4>Nama Santri : <b>{{$row->name}}</b></h4>
           @endforeach
+          @php
+            $sum_tot_Point = 0;
+          @endphp
+          @foreach($point as $po)
+            @php
+              $sum_tot_Point += $po->point;
+            @endphp
+          @endforeach
+          <h4>Jumlah Poin : <b>{{$sum_tot_Point}}</b></h4>
           <div class="material-datatables">
             <table id="datatable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
               <thead>
                 <tr>
                   <th>No</th>
                   <th>Nama Pelanggaran</th>
-                  <th>Type</th>
-                  <th>Point</th>
-                  <th>Description</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th>Tipe</th>
+                  <th>Poin</th>
+                  <th>Keterangan</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
               <tbody>
@@ -61,7 +70,7 @@
           columnDefs: [{
             "targets": 0,
             "searchable": false,
-            "orderable": true,
+            "orderable": false,
             "data": null,
             "title": 'No',
             "render": function (data, type, full, meta) {

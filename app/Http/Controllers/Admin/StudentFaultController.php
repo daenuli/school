@@ -26,8 +26,9 @@ class StudentFaultController extends Controller
         $ajax = route('student_fault.faulttb', $id);
         $id;
         $student = Student::where('id', $id)->get();
+        $point = StudentFault::where('student_id', $id)->get();
         // return response()->json($ajax);
-        return view($this->folder.'.index', compact('ajax', 'id', 'title', 'student'));
+        return view($this->folder.'.index', compact('ajax', 'id', 'title', 'student', 'point'));
     }
 
     public function faultTables(Request $request, $id)
