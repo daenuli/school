@@ -13,6 +13,7 @@ use App\Models\Hafalan;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\SchoolHistory;
+use App\Models\SchoolYear;
 use App\Models\IllnessHistory;
 use Yajra\Datatables\Datatables;
 use Form;
@@ -349,11 +350,11 @@ class StudentsController extends Controller
 
     public function sppPaymentTables(Request $request, $id)
     {
-        $studentGrade = StudentGrade::where('student_id', $id)->first();
         $student = Student::find($id);
-        $payMonth = $studentGrade->school_year['id'];
-        // dd($payMonth);
-        $sppPayment = SppPayment::where('student_id', $id)->where('pay_month', )->get();
+        $studentGrade = StudentGrade::where('student_id', $id)->first();
+        $schoolYear = SchoolYear::where('id', $studentGrade->school_year_id)->first();
+        $sppPayment = SppPayment::where([['student_id', $id], ['pay_month', 'like', $schoolYear->start_year."%"]])->get();
+        // dd($sppPayment);
         $spp = Spp::all();
         $month = [
           [
@@ -407,11 +408,15 @@ class StudentsController extends Controller
         ];
         return Datatables::of($month)
         ->addColumn('category', function($index) use($student) {
-          return $student->spp_id;
+          if ($student->spp_id == 1) {
+            $sppCategory = "<span class='badge badge-pill badge-success'>Mampu</span>";
+          } else {
+            $sppCategory = "<span class='badge badge-pill badge-primary'>Tidak Mampu</span>";
+          }
+          return $sppCategory;
         })
-        ->addColumn('total', function($index) {
-          $total = 10000; // data dump
-          return $total;
+        ->addColumn('total', function($index) use($student) {
+          return 'Rp '.number_format($student->spp->total, 0, "", ".");
         })
         ->addColumn('pay_date', function($index) {
           return date('d M Y');
@@ -438,7 +443,7 @@ class StudentsController extends Controller
             return $tag;
         })
         ->rawColumns([
-            'status', 'action'
+            'category', 'status', 'action'
         ])
         ->make(true);
     }
