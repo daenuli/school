@@ -28,9 +28,9 @@ class TeacherController extends Controller
         return Datatables::of($data)
         ->editColumn('gender',function($index){
             if ($index->gender == 1) {
-              return "<span class='badge badge-pill badge-primary'>Laki-laki</span>";
+                return "<span class='badge badge-pill badge-primary'>Laki-Laki</span>";
             } else {
-              return "<span class='badge badge-pill badge-primary'>Perempuan</span>";
+                return "<span class='badge badge-pill badge-info'>Perempuan</span>";
             }
         })
         ->editColumn('department_id',function($index){
@@ -42,12 +42,12 @@ class TeacherController extends Controller
             }
         })
         ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('teacher.destroy', $index->id), "method" => "DELETE"]);
+            $tag     = Form::open(["url"=>route('teacher.edit', $index->id), "method" => "GET"]);
             $tag    .= "<div class='d-flex justify-content-end'>";
-            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
-            $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('teacher.edit', $index->id), "method" => "GET"]);
             $tag    .= "<button type='submit' class='btn btn-success btn-sm' >Edit</button>";
+            $tag    .= Form::close();
+            $tag    .= Form::open(["url"=>route('teacher.destroy', $index->id), "method" => "DELETE"]);
+            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
             $tag    .= "</div>";
             $tag    .= Form::close();
             return $tag;

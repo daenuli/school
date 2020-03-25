@@ -45,11 +45,11 @@ class GradeController extends Controller
           return '<a href="'.route($this->uri.'.show', $index->id).'" class="btn btn-sm btn-info">'.$index->name.'</a>';
         })
         ->addColumn('action', function ($index) {
-            return '<form action="'. route($this->uri.'.destroy', $index->id) .'" method="POST" class="text-center">
-            <a href="' . route($this->uri.'.edit', $index->id) . '" class="btn btn-sm btn-success"><i class="material-icons">create</i> Edit </a>
+            return '<form action="'. route($this->uri.'.destroy', $index->id) .'" method="POST" class="text-right">
+            <a href="' . route($this->uri.'.edit', $index->id) . '" class="btn btn-sm btn-success">Edit</a>
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="'. csrf_token() .'">
-            <button type="submit" class="btn btn-sm btn-danger btn-label" onclick="javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')"><i class="material-icons">delete</i> Hapus </button>
+            <button type="submit" class="btn btn-sm btn-danger btn-label" onclick="javascript:return confirm(\'Apakah anda yakin ingin menghapus data ini?\')">Hapus</button>
             </form>
             ';
         })

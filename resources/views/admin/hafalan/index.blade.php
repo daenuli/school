@@ -43,7 +43,7 @@
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Daftar {{$title}} Santri</h4>
-          <a href="{{$create}}" class="btn btn-sm btn-info pull-right"><i class="material-icons">add_circle</i>Create</a>
+          <a href="{{$create}}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
         </div>
         <div class="card-body">
           <div class="toolbar">
@@ -72,22 +72,9 @@
                   <th>Mulai Ayat</th>
                   <th>Akhir Ayat</th>
                   <th>Catatan</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nomor</th>
-                  <th>Musyrif</th>
-                  <th>Santri</th>
-                  <th>Juz</th>
-                  <th>Surah</th>
-                  <th>Mulai Ayat</th>
-                  <th>Akhir Ayat</th>
-                  <th>Catatan</th>
-                  <th class="disabled-sorting text-right">Actions</th>
-                </tr>
-              </tfoot>
               <tbody>
               </tbody>
             </table>

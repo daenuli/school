@@ -22,8 +22,8 @@
                   <th>Nama</th>
                   <th>Jenis Kelamin</th>
                   <th>Jabatan</th>
-                  <th>Phone</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th>Telepon</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
               <tbody>

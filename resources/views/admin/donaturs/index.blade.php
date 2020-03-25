@@ -21,7 +21,7 @@
                   <th>Nama</th>
                   <th>NIK</th>
                   <th>Email</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
               <tbody>

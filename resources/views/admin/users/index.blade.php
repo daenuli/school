@@ -38,8 +38,8 @@
           <div class="card-icon">
             <i class="material-icons">assignment</i>
           </div>
-          <h4 class="card-title">DataTables.net</h4>
-          <a href="{{$create}}" class="btn btn-sm btn-info pull-right"><i class="material-icons">add_circle</i>Create</a>
+          <h4 class="card-title">Daftar User</h4>
+          <a href="{{$create}}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
         </div>
         <div class="card-body">
           <div class="toolbar">
@@ -60,22 +60,13 @@
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
               <thead>
                 <tr>
-                  <th>Nomor</th>
-                  <th>Name</th>
+                  <th>No</th>
+                  <th>Nama</th>
                   <th>Email</th>
-                  <th>Role</th>
-                  <th class="disabled-sorting text-right">Actions</th>
+                  <th>Bagian</th>
+                  <th class="disabled-sorting text-right"></th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nomor</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th class="disabled-sorting text-right">Actions</th>
-                </tr>
-              </tfoot>
               <tbody>
               </tbody>
             </table>
