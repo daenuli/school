@@ -12,6 +12,7 @@ use App\Models\Student;
 use Kris\LaravelFormBuilder\FormBuilder;
 use DataTables;
 use Form;
+use Illuminate\Support\Facades\Gate;
 
 class GradeController extends Controller
 {
@@ -21,7 +22,10 @@ class GradeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-kelas'))return $next($request);
+            abort(403);
+        });
     }
     /**
      * Display a listing of the resource.
@@ -34,6 +38,7 @@ class GradeController extends Controller
         $data['create'] = route($this->uri.'.create');
         return view($this->folder.'.index',$data);
     }
+
     public function dbTables()
     {
         $users = Grade::all();

@@ -8,9 +8,17 @@ use App\Models\Teacher;
 use Yajra\Datatables\Datatables;
 use Form;
 use App\Models\Departement;
+use Illuminate\Support\Facades\Gate;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-gurus'))return $next($request);
+            abort(403);
+        });
+    }
     /**
      * Display a listing of the resource.
      *

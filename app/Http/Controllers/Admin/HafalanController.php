@@ -13,6 +13,7 @@ use DataTables;
 use Form;
 use App\Forms\HafalanForm;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HafalanController extends Controller
 {
@@ -24,7 +25,10 @@ class HafalanController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function($request, $next){
+            if (Gate::allows('manage-hafalans')) return $next($request);
+            abort(403);
+        });
     }
 
     public function index()

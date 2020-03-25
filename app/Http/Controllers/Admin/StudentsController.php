@@ -23,11 +23,20 @@ use App\Models\SppPayment;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StudentsController extends Controller
 {
     private $title = 'Daftar Santri';
 
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-santris')) return $next($request);
+            abort(403);
+        });
+    }
+    
     public function index()
     {
         $title = $this->title;
@@ -342,118 +351,6 @@ class StudentsController extends Controller
         SppStudent::find($id)->delete();
         return redirect()->back();
     }
-
-    // Spp Payment
-    //
-    // public function sppPaymentDetail($id)
-    // {
-    //     $spp = Spp::all();
-    //     $spps = SppPayment::find($id);
-    //     $ajax = route('sppPayment.sppTable', $id);
-    //     $id;
-    //     // return response()->json($ajax);
-    //     return view('admin.spp_payment.index', compact('ajax','spp','spps','id'));
-    // }
-
-    // public function sppPaymentTables(Request $request, $id)
-    // {
-    //     $student = Student::find($id);
-    //     $studentGrade = StudentGrade::where('student_id', $id)->first();
-    //     $schoolYear = SchoolYear::where('id', $studentGrade->school_year_id)->first();
-    //     $sppPayment = SppPayment::where([['student_id', $id], ['pay_month', 'like', $schoolYear->start_year."%"]])->get();
-    //     // dd($sppPayment);
-    //     $spp = Spp::all();
-    //     $month = [
-    //       [
-    //         'id' => 1,
-    //         'name' => 'Januari'
-    //       ],
-    //       [
-    //         'id' => 2,
-    //         'name' => 'Februari'
-    //       ],
-    //       [
-    //         'id' => 3,
-    //         'name' => 'Maret'
-    //       ],
-    //       [
-    //         'id' => 4,
-    //         'name' => 'April'
-    //       ],
-    //       [
-    //         'id' => 5,
-    //         'name' => 'Mei'
-    //       ],
-    //       [
-    //         'id' => 6,
-    //         'name' => 'Juni'
-    //       ],
-    //       [
-    //         'id' => 7,
-    //         'name' => 'Juli'
-    //       ],
-    //       [
-    //         'id' => 8,
-    //         'name' => 'Agustus'
-    //       ],
-    //       [
-    //         'id' => 9,
-    //         'name' => 'September'
-    //       ],
-    //       [
-    //         'id' => 10,
-    //         'name' => 'Oktober'
-    //       ],
-    //       [
-    //         'id' => 11,
-    //         'name' => 'November'
-    //       ],
-    //       [
-    //         'id' => 12,
-    //         'name' => 'Desember'
-    //       ]
-    //     ];
-    //     return Datatables::of($month)
-    //     ->addColumn('category', function($index) use($student) {
-    //       if ($student->spp_id == 1) {
-    //         $sppCategory = "<span class='badge badge-pill badge-success'>Mampu</span>";
-    //       } else {
-    //         $sppCategory = "<span class='badge badge-pill badge-primary'>Tidak Mampu</span>";
-    //       }
-    //       return $sppCategory;
-    //     })
-    //     ->addColumn('total', function($index) use($student) {
-    //       return 'Rp '.number_format($student->spp->total, 0, "", ".");
-    //     })
-    //     ->addColumn('pay_date', function($index) {
-    //       return date('d M Y');
-    //     })
-    //     ->addColumn('status', function($index) {
-    //       $spp = 1500000;
-    //       $pay = 1000000;
-    //       if ($pay <= $spp) {
-    //         $status = "<span class='badge badge-pill badge-success'>Lunas</span>";
-    //       } else {
-    //         $status = "<span class='badge badge-pill badge-warning'>Belum Lunas</span>";
-    //       }
-    //       return $status;
-    //     })
-    //     ->addColumn('action', function($index){
-    //         $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index['id']), "method" => "DELETE"]);
-    //         $tag    .= "<div class='d-flex justify-content-end'>";
-    //         $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
-    //         $tag    .= Form::close();
-    //         $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index['id']), "method" => "GET"]);
-    //         $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
-    //         $tag    .= "</div>";
-    //         $tag    .= Form::close();
-    //         return $tag;
-    //     })
-    //     ->rawColumns([
-    //         'category', 'status', 'action'
-    //     ])
-    //     ->make(true);
-    // }
 
     public function sppPayemntStudents(Request $request, $id)
     {

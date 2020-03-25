@@ -12,14 +12,18 @@ use Yajra\DataTables\DataTables;
 use Form;
 use App\Models\DonaturStudent;
 use App\Models\Student;
+use Illuminate\Support\Facades\Gate;
 
 class DonaturController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-donaturs')) return $next($request);
+            abort(403);
+        });
+    }
+
     public function index()
     {
         $ajax = route('donatur.dbtb');

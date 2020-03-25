@@ -10,9 +10,17 @@ use Yajra\Datatables\Datatables;
 use Form;
 use App\Http\Controllers\Admin\Auth;
 use App\User;
+use Illuminate\Support\Facades\Gate;
 
 class SppsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            if(Gate::allows('manage-spps'))return $next($request);
+            abort(403);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
