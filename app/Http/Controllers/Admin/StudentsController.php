@@ -40,7 +40,7 @@ class StudentsController extends Controller
         $data = Student::where('status', 1)->get();
         return Datatables::of($data)
         ->editColumn('name', function($index){
-            return "<a href=".route('student.show', $index->id)." class='text-dark underline'>".$index->name."</a>";
+            return $index->name;
         })
         ->editColumn('gender',function($index){
             if ($index->gender == 1) {
@@ -64,6 +64,7 @@ class StudentsController extends Controller
 
             $tag = "<a href=" . route('student.spp.payment', $index->id) . " class='btn btn-success btn-sm'>SPP</a>";
             $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
+            $tag .= "<a href=". route('student.show', $index->id)." class='btn btn-info btn-sm'>Detail</a>";
 
             return $tag;
         })

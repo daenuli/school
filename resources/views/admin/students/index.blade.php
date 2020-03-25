@@ -61,10 +61,10 @@
           processing: true,
           serverSide: true,
           ajax: '{{$ajax}}',
-          order: [[0,'desc']],
+          order: [[2,'asc']],
           columns: [
               { data: 'id', searchable: false, orderable: false},
-              { data: 'nis', searchable: true, orderable: true},
+              { data: 'nis', searchable: true, orderable: false},
               { data: 'name', searchable: true, orderable: true},
               { data: 'birth', searchable: false, orderable: false},
               { data: 'gender', searchable: false, orderable: false},

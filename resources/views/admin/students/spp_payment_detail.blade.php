@@ -32,7 +32,7 @@
                       <tr>
                           <td>{{$no++}}</td>
                           <td>{{'Rp '.number_format($value->total, 0, '', '.')}}</td>
-                          <td>{{$value->created_at->format('d F Y H:i:s')}}</td>
+                          <td>{{$value->created_at->format('d F Y')}}</td>
                           <td>
                               <a href="{{route('student.spp.payment.edit',[
                                   'student' => $value->student_id,

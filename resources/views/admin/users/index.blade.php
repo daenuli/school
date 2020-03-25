@@ -8,10 +8,10 @@
           processing: true,
           serverSide: true,
           ajax: 'users/data',
-          aaSorting: [[0, 'desc']],
+          aaSorting: [[1, 'asc']],
           columns: [
           { data: 'id', name: 'id', searchable: false, orderable: false},
-          { data: 'name', name: 'name', searchable: true, orderable: false},
+          { data: 'name', name: 'name', searchable: true, orderable: true},
           { data: 'email', name: 'email', searchable: false, orderable: false},
           { data: 'role', name: 'role', searchable: false, orderable: false},
           { data: 'action', name: 'action', searchable: false, orderable: false,}
