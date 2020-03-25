@@ -13,8 +13,8 @@ class SchoolYearSeeder extends Seeder
     public function run()
     {
       $data     = [
-          'start_year'       => '2021',
-          'end_year'          => '2022',
+          'start_year'       => '2020',
+          'end_year'          => '2021',
           'status'            => 1
       ];
       DB::table('school_years')->truncate();
