@@ -36,7 +36,7 @@ class StudentsController extends Controller
             abort(403);
         });
     }
-    
+
     public function index()
     {
         $title = $this->title;
@@ -444,6 +444,19 @@ class StudentsController extends Controller
     public function sppPaymentDelete($id)
     {
         SppPayment::find($id)->delete();
+        return redirect()->back();
+    }
+
+
+
+    public function sppPaymentUpdate(Request $request, $student, $month, $year)
+    {
+        // SppPayment::create([
+        //     'student_id' => $student,
+        //     'total' => $request->payment,
+        //     'pay_month' => $year.'-'.$month.'-'.date('d'),
+        //     'user_id' => Auth::id()
+        // ]);
         return redirect()->back();
     }
 
