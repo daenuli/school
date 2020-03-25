@@ -107,7 +107,7 @@ Route::get('/sppPayment/{sppPayment}/sppDetail', 'Admin\StudentsController@sppPa
 Route::get('/student/{student?}/sppPayment', 'Admin\StudentsController@sppPayemntStudents')->name('student.spp.payment');
 Route::get('/student/{student?}/sppPaymentDetail/{month?}/{year?}', 'Admin\StudentsController@sppPaymentDetail')->name('student.spp.payment.detail');
 Route::get('/student/{student?}/sppPaymentEdit/{id?}/{month?}/{year?}', 'Admin\StudentsController@sppPaymentEdit')->name('student.spp.payment.edit');
-Route::get('/student/{student?}/sppPaymentUpdate/{id?}/{month?}/{year?}', 'Admin\StudentsController@sppPaymentUpdate')->name('student.spp.payment.update');
+Route::get('/student/{id?}/sppPaymentUpdate', 'Admin\StudentsController@sppPaymentUpdate')->name('student.spp.payment.update');
 Route::get('/student/{id?}/sppPaymentDelete', 'Admin\StudentsController@sppPaymentDelete')->name('student.spp.payment.delete');
 Route::post('/student/{student?}/sppPaymentStore/{month?}/{year?}', 'Admin\StudentsController@sppPaymentStore')->name('student.spp.payment.store');
 Route::post('/student/{student?}/sppPaymentStoreAll', 'Admin\StudentsController@sppPaymentStoreAll')->name('student.spp.payment.store_all');

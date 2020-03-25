@@ -449,8 +449,9 @@ class StudentsController extends Controller
 
 
 
-    public function sppPaymentUpdate(Request $request, $student, $month, $year)
+    public function sppPaymentUpdate(Request $request, $id)
     {
+        // SppPayment::find($)
         // SppPayment::create([
         //     'student_id' => $student,
         //     'total' => $request->payment,

@@ -35,10 +35,7 @@
                           <td>{{$value->created_at->format('d F Y')}}</td>
                           <td>
                               <a href="{{route('student.spp.payment.edit',[
-                                  'student' => $value->student_id,
-                                  'id' => $value->id,
-                                  'month' => $month,
-                                  'year' => $year
+                                  'id' => $value->id
                                   ])}}" class="btn btn-sm btn-info">Edit</a>
                               <a href="{{route('student.spp.payment.delete',[
                                   'id' => $value->id,
