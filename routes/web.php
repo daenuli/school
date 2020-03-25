@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// use Carbon\Carbon;
 
 Route::get('/', function () {
     // return view('admin.layouts.app');
@@ -17,7 +18,10 @@ Route::get('/', function () {
     return view('admin.auth.login');
     // return redirect('/login');
 });
-
+// Route::get('/test', function () {
+//     return Carbon::now()->subWeeks(8)->format('Y-m-d').' : '.Carbon::now()->subWeeks(4)->format('Y-m-d');
+//     return ;
+// });
 Route::get('/login', function () {
     return view('admin.auth.login');
 });
@@ -55,7 +59,7 @@ Route::resource('/spp', 'Admin\SppsController');
 Route::get('/teacher/dbtb', 'Admin\TeacherController@dbTables')->name('teacher.dbtb');
 Route::resource('/teacher', 'Admin\TeacherController');
 
-// spp student / spp detail 
+// spp student / spp detail
 Route::get('/sppStudent/{sppStudent}/spptb', 'Admin\StudentsController@sppTables')->name('sppStudent.spptb');
 Route::get('/sppStudent/{sppStudent}/sppdtl', 'Admin\StudentsController@sppStudent')->name('sppStudent.sppdtl');
 Route::get('/sppStudent/sppcrt', 'Admin\StudentsController@sppCreate')->name('sppStudent.sppcrt');
@@ -99,3 +103,11 @@ Route::delete('/donatur/{donatur}/destroyStudent', 'Admin\DonaturController@dest
 // SppPayment
 Route::get('/sppPayment/{sppPayment}/sppTable', 'Admin\StudentsController@sppPaymentTables')->name('sppPayment.sppTable');
 Route::get('/sppPayment/{sppPayment}/sppDetail', 'Admin\StudentsController@sppPaymentDetail')->name('sppPayment.sppDetail');
+
+Route::get('/student/{student?}/sppPayment', 'Admin\StudentsController@sppPayemntStudents')->name('student.spp.payment');
+Route::get('/student/{student?}/sppPaymentDetail/{month?}/{year?}', 'Admin\StudentsController@sppPaymentDetail')->name('student.spp.payment.detail');
+Route::get('/student/{student?}/sppPaymentEdit/{id?}/{month?}/{year?}', 'Admin\StudentsController@sppPaymentEdit')->name('student.spp.payment.edit');
+Route::get('/student/{student?}/sppPaymentUpdate/{id?}/{month?}/{year?}', 'Admin\StudentsController@sppPaymentUpdate')->name('student.spp.payment.update');
+Route::get('/student/{id?}/sppPaymentDelete', 'Admin\StudentsController@sppPaymentDelete')->name('student.spp.payment.delete');
+Route::post('/student/{student?}/sppPaymentStore/{month?}/{year?}', 'Admin\StudentsController@sppPaymentStore')->name('student.spp.payment.store');
+Route::post('/student/{student?}/sppPaymentStoreAll', 'Admin\StudentsController@sppPaymentStoreAll')->name('student.spp.payment.store_all');

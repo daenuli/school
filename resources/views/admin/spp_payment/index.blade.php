@@ -28,6 +28,11 @@
                 </tr>
               </thead>
               <tbody>
+                  {{-- @for ($i=1; $i < 13; $i++)
+                      <tr>
+                          <td>{{$i++}}</td>
+                      </tr>
+                  @endfor --}}
               </tbody>
             </table>
           </div>

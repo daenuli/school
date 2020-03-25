@@ -22,6 +22,7 @@ use App\Models\Spp;
 use App\Models\SppPayment;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StudentsController extends Controller
 {
@@ -61,10 +62,8 @@ class StudentsController extends Controller
         })
         ->addColumn('action', function($index){
 
-            $tag = Form::open(["url"=>route('sppStudent.sppdtl', $index->id), "method" => "GET", "class" => "text-right"]);
-            $tag .= "<button type='submit' class='btn btn-success btn-sm' >SPP</button>";
+            $tag = "<a href=" . route('student.spp.payment', $index->id) . " class='btn btn-success btn-sm'>SPP</a>";
             $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
-            $tag .= Form::close();
 
             return $tag;
         })
@@ -344,114 +343,210 @@ class StudentsController extends Controller
     }
 
     // Spp Payment
+    //
+    // public function sppPaymentDetail($id)
+    // {
+    //     $spp = Spp::all();
+    //     $spps = SppPayment::find($id);
+    //     $ajax = route('sppPayment.sppTable', $id);
+    //     $id;
+    //     // return response()->json($ajax);
+    //     return view('admin.spp_payment.index', compact('ajax','spp','spps','id'));
+    // }
 
-    public function sppPaymentDetail($id)
-    {
-        $spp = Spp::all();
-        $spps = SppPayment::find($id);
-        $ajax = route('sppPayment.sppTable', $id);
-        $id;
-        // return response()->json($ajax);
-        return view('admin.spp_payment.index', compact('ajax','spp','spps','id'));
-    }
+    // public function sppPaymentTables(Request $request, $id)
+    // {
+    //     $student = Student::find($id);
+    //     $studentGrade = StudentGrade::where('student_id', $id)->first();
+    //     $schoolYear = SchoolYear::where('id', $studentGrade->school_year_id)->first();
+    //     $sppPayment = SppPayment::where([['student_id', $id], ['pay_month', 'like', $schoolYear->start_year."%"]])->get();
+    //     // dd($sppPayment);
+    //     $spp = Spp::all();
+    //     $month = [
+    //       [
+    //         'id' => 1,
+    //         'name' => 'Januari'
+    //       ],
+    //       [
+    //         'id' => 2,
+    //         'name' => 'Februari'
+    //       ],
+    //       [
+    //         'id' => 3,
+    //         'name' => 'Maret'
+    //       ],
+    //       [
+    //         'id' => 4,
+    //         'name' => 'April'
+    //       ],
+    //       [
+    //         'id' => 5,
+    //         'name' => 'Mei'
+    //       ],
+    //       [
+    //         'id' => 6,
+    //         'name' => 'Juni'
+    //       ],
+    //       [
+    //         'id' => 7,
+    //         'name' => 'Juli'
+    //       ],
+    //       [
+    //         'id' => 8,
+    //         'name' => 'Agustus'
+    //       ],
+    //       [
+    //         'id' => 9,
+    //         'name' => 'September'
+    //       ],
+    //       [
+    //         'id' => 10,
+    //         'name' => 'Oktober'
+    //       ],
+    //       [
+    //         'id' => 11,
+    //         'name' => 'November'
+    //       ],
+    //       [
+    //         'id' => 12,
+    //         'name' => 'Desember'
+    //       ]
+    //     ];
+    //     return Datatables::of($month)
+    //     ->addColumn('category', function($index) use($student) {
+    //       if ($student->spp_id == 1) {
+    //         $sppCategory = "<span class='badge badge-pill badge-success'>Mampu</span>";
+    //       } else {
+    //         $sppCategory = "<span class='badge badge-pill badge-primary'>Tidak Mampu</span>";
+    //       }
+    //       return $sppCategory;
+    //     })
+    //     ->addColumn('total', function($index) use($student) {
+    //       return 'Rp '.number_format($student->spp->total, 0, "", ".");
+    //     })
+    //     ->addColumn('pay_date', function($index) {
+    //       return date('d M Y');
+    //     })
+    //     ->addColumn('status', function($index) {
+    //       $spp = 1500000;
+    //       $pay = 1000000;
+    //       if ($pay <= $spp) {
+    //         $status = "<span class='badge badge-pill badge-success'>Lunas</span>";
+    //       } else {
+    //         $status = "<span class='badge badge-pill badge-warning'>Belum Lunas</span>";
+    //       }
+    //       return $status;
+    //     })
+    //     ->addColumn('action', function($index){
+    //         $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index['id']), "method" => "DELETE"]);
+    //         $tag    .= "<div class='d-flex justify-content-end'>";
+    //         $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
+    //         $tag    .= Form::close();
+    //         $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index['id']), "method" => "GET"]);
+    //         $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
+    //         $tag    .= "</div>";
+    //         $tag    .= Form::close();
+    //         return $tag;
+    //     })
+    //     ->rawColumns([
+    //         'category', 'status', 'action'
+    //     ])
+    //     ->make(true);
+    // }
 
-    public function sppPaymentTables(Request $request, $id)
+    public function sppPayemntStudents(Request $request, $id)
     {
+        $year = isset($request->year)?$request->year:date('Y');
+        $sppPayment = SppPayment::where('student_id', $id)
+                ->whereYear('pay_month', $year)
+                ->orderByRaw("pay_month ASC, created_at DESC")
+                ->get();
         $student = Student::find($id);
-        $studentGrade = StudentGrade::where('student_id', $id)->first();
-        $schoolYear = SchoolYear::where('id', $studentGrade->school_year_id)->first();
-        $sppPayment = SppPayment::where([['student_id', $id], ['pay_month', 'like', $schoolYear->start_year."%"]])->get();
-        // dd($sppPayment);
-        $spp = Spp::all();
-        $month = [
-          [
-            'id' => 1,
-            'name' => 'Januari'
-          ],
-          [
-            'id' => 2,
-            'name' => 'Februari'
-          ],
-          [
-            'id' => 3,
-            'name' => 'Maret'
-          ],
-          [
-            'id' => 4,
-            'name' => 'April'
-          ],
-          [
-            'id' => 5,
-            'name' => 'Mei'
-          ],
-          [
-            'id' => 6,
-            'name' => 'Juni'
-          ],
-          [
-            'id' => 7,
-            'name' => 'Juli'
-          ],
-          [
-            'id' => 8,
-            'name' => 'Agustus'
-          ],
-          [
-            'id' => 9,
-            'name' => 'September'
-          ],
-          [
-            'id' => 10,
-            'name' => 'Oktober'
-          ],
-          [
-            'id' => 11,
-            'name' => 'November'
-          ],
-          [
-            'id' => 12,
-            'name' => 'Desember'
-          ]
-        ];
-        return Datatables::of($month)
-        ->addColumn('category', function($index) use($student) {
-          if ($student->spp_id == 1) {
-            $sppCategory = "<span class='badge badge-pill badge-success'>Mampu</span>";
-          } else {
-            $sppCategory = "<span class='badge badge-pill badge-primary'>Tidak Mampu</span>";
-          }
-          return $sppCategory;
-        })
-        ->addColumn('total', function($index) use($student) {
-          return 'Rp '.number_format($student->spp->total, 0, "", ".");
-        })
-        ->addColumn('pay_date', function($index) {
-          return date('d M Y');
-        })
-        ->addColumn('status', function($index) {
-          $spp = 1500000;
-          $pay = 1000000;
-          if ($pay <= $spp) {
-            $status = "<span class='badge badge-pill badge-success'>Lunas</span>";
-          } else {
-            $status = "<span class='badge badge-pill badge-warning'>Belum Lunas</span>";
-          }
-          return $status;
-        })
-        ->addColumn('action', function($index){
-            $tag     = Form::open(["url"=>route('sppStudent.sppdestroy', $index['id']), "method" => "DELETE"]);
-            $tag    .= "<div class='d-flex justify-content-end'>";
-            $tag    .= "<button type='submit' class='btn btn-danger btn-sm' >Hapus</button>";
-            $tag    .= Form::close();
-            $tag    .= Form::open(["url"=>route('sppStudent.sppedt', $index['id']), "method" => "GET"]);
-            $tag    .= "<button type='submit' class='btn btn-sm btn-success pull-right'>Edit</button>";
-            $tag    .= "</div>";
-            $tag    .= Form::close();
-            return $tag;
-        })
-        ->rawColumns([
-            'category', 'status', 'action'
-        ])
-        ->make(true);
+        $start_year = SppPayment::orderBy('pay_month', 'asc')->take(1)->pluck('pay_month')
+        ->map(function ($item, $key) {
+            return explode('-', $item)[0];
+        });
+        $store_all = route('student.spp.payment.store_all', $id);
+
+        for ($i=1; $i <= 12 ; $i++) {
+            $month = (strlen($i)==1)?'0'.$i:$i;
+            $total = 0;
+            $payment_date = 0;
+            $spp = 0;
+            foreach ($sppPayment as $key => $value) {
+                $spp = $value->student->spp->total;
+                if (explode('-',$value->pay_month)[1] == $month) {
+                    $total += $value->total;
+                    $payment_date = $value->created_at;
+                }
+            }
+            $minus = ($spp - $total);
+            $data[$i] = [
+                'total' => !empty($total)? 'Rp'.number_format($total, 0, '', '.'):'-',
+                'month' => month($month),
+                'payment_date' => ($payment_date)?date('d F Y H:i:s', strtotime($payment_date)):'-',
+                'status' => ($total >= $spp && !empty($spp)) ? 'Lunas' : 'Belum Lunas',
+                'minus' => ($minus) ? 'Rp '.number_format($minus, 0, '', '.'):'-',
+                'url' => route('student.spp.payment.detail', ['student' => $id, 'month' => $month, 'year' => $year])
+            ];
+        }
+        return view('admin.students.spp_payment', compact('data', 'student', 'start_year', 'year', 'store_all'));
     }
+
+    public function sppPaymentDetail(Request $request, $student, $month, $year)
+    {
+        $spp = SppPayment::where('student_id', $student)
+                    ->whereMonth('pay_month', $month)
+                    ->whereYear('pay_month', $year)
+                    ->orderBy('created_at')
+                    ->get();
+        $store = route('student.spp.payment.store', [
+            'student' => $student,
+            'month' => $month,
+            'year' => $year
+        ]);
+        return view('admin.students.spp_payment_detail', compact('student','spp', 'month', 'year', 'store'));
+    }
+
+    public function sppPaymentEdit(Request $request, $student, $id, $month, $year)
+    {
+        $spp = SppPayment::find($id);
+        $back = route('student.spp.payment.detail',[
+            'student' => $student,
+            'month' => $month,
+            'year' => $year
+        ]);
+        $update = route('student.spp.payment.update',$id);
+        return view('admin.students.spp_payment_edit', compact('spp','back', 'update'));
+    }
+
+    public function sppPaymentStore(Request $request, $student, $month, $year)
+    {
+        SppPayment::create([
+            'student_id' => $student,
+            'total' => $request->payment,
+            'pay_month' => $year.'-'.$month.'-'.date('d'),
+            'user_id' => Auth::id()
+        ]);
+        return redirect()->back();
+    }
+
+    public function sppPaymentStoreAll(Request $request, $student)
+    {
+        SppPayment::create([
+            'student_id' => $student,
+            'total' => $request->payment,
+            // 'pay_month' => '2020-01-30',
+            'pay_month' => $request->pay_month,
+            'user_id' => Auth::id()
+        ]);
+        return redirect()->back();
+    }
+
+    public function sppPaymentDelete($id)
+    {
+        SppPayment::find($id)->delete();
+        return redirect()->back();
+    }
+
 }
