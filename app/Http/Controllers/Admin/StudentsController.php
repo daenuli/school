@@ -354,6 +354,7 @@ class StudentsController extends Controller
 
     public function sppPayemntStudents(Request $request, $id)
     {
+        $title = 'SPP Santri';
         $year = isset($request->year)?$request->year:date('Y');
         $sppPayment = SppPayment::where('student_id', $id)
                 ->whereYear('pay_month', $year)
@@ -388,11 +389,12 @@ class StudentsController extends Controller
                 'url' => route('student.spp.payment.detail', ['student' => $id, 'month' => $month, 'year' => $year])
             ];
         }
-        return view('admin.students.spp_payment', compact('data', 'student', 'start_year', 'year', 'store_all'));
+        return view('admin.students.spp_payment', compact('data', 'student', 'start_year', 'year', 'store_all', 'title'));
     }
 
     public function sppPaymentDetail(Request $request, $student, $month, $year)
     {
+        $title = 'Detail SPP Santri';
         $spp = SppPayment::where('student_id', $student)
                     ->whereMonth('pay_month', $month)
                     ->whereYear('pay_month', $year)
@@ -403,19 +405,7 @@ class StudentsController extends Controller
             'month' => $month,
             'year' => $year
         ]);
-        return view('admin.students.spp_payment_detail', compact('student','spp', 'month', 'year', 'store'));
-    }
-
-    public function sppPaymentEdit(Request $request, $student, $id, $month, $year)
-    {
-        $spp = SppPayment::find($id);
-        $back = route('student.spp.payment.detail',[
-            'student' => $student,
-            'month' => $month,
-            'year' => $year
-        ]);
-        $update = route('student.spp.payment.update',$id);
-        return view('admin.students.spp_payment_edit', compact('spp','back', 'update'));
+        return view('admin.students.spp_payment_detail', compact('student','spp', 'month', 'year', 'store', 'title'));
     }
 
     public function sppPaymentStore(Request $request, $student, $month, $year)
@@ -447,18 +437,32 @@ class StudentsController extends Controller
         return redirect()->back();
     }
 
-
+    public function sppPaymentEdit(Request $request, $student, $id, $month, $year)
+    {
+        $title = 'Detail SPP Santri';
+        $spp = SppPayment::find($id);
+        $students = $student;
+        $months = $month;
+        $years = $year;
+        $back = route('student.spp.payment.detail',[
+            'student' => $student,
+            'month' => $month,
+            'year' => $year
+        ]);
+        $update = route('student.spp.payment.update', $id);
+        return view('admin.students.spp_payment_edit', compact('spp','back', 'update', 'title', 'students', 'months', 'years'));
+    }
 
     public function sppPaymentUpdate(Request $request, $id)
     {
-        // SppPayment::find($)
-        // SppPayment::create([
-        //     'student_id' => $student,
-        //     'total' => $request->payment,
-        //     'pay_month' => $year.'-'.$month.'-'.date('d'),
-        //     'user_id' => Auth::id()
-        // ]);
-        return redirect()->back();
+        SppPayment::find($id)->update([
+            'total' => $request->payment,
+        ]);
+        return redirect()->route('student.spp.payment.detail',[
+            'student' => $request->student,
+            'month' => $request->month,
+            'year' => $request->year
+        ]);
     }
 
 }
