@@ -92,12 +92,14 @@ Tip 2: you can also add an image using data-image tag
                   </a>
                   <div class="collapse {{ Request::is('student') || Request::is('student/*') || Request::is('parent/*') || Request::is('illness/*') || Request::is('school/*') ? 'show' : '' }}" id="mapsExamples">
                     <ul class="nav">
-                      <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('student.create') }}">
-                          <span class="sidebar-mini"> TS </span>
-                          <span class="sidebar-normal"> Tambah Santri </span>
-                        </a>
-                      </li>
+                      @can ('button-santris')
+                          <li class="nav-item {{ Request::is('student/create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('student.create') }}">
+                              <span class="sidebar-mini"> TS </span>
+                              <span class="sidebar-normal"> Tambah Santri </span>
+                            </a>
+                          </li>
+                      @endcan
                       <li class="nav-item {{ Request::is('student') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('student.index') }}">
                           <span class="sidebar-mini"> DS </span>
