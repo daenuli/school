@@ -12,13 +12,17 @@
             </h4>
 		</div>
         <form action="{{ $update }}" method="POST">
-            @csrf
+          @csrf
+          @method('PUT')
             <div class="card-body">
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Jumlah Pembayaran</label>
                     <div class="col-sm-8">
                         <div class="form-group">
                             <input type="text" class="form-control" name="payment" value="{{ $spp->total }}">
+                            <input type="hidden" class="form-control" name="student" value="{{ $students }}">
+                            <input type="hidden" class="form-control" name="month" value="{{ $months }}">
+                            <input type="hidden" class="form-control" name="year" value="{{ $years }}">
                         </div>
                     </div>
                 </div>
