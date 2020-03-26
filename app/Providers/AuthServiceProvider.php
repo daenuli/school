@@ -35,6 +35,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role == 1 || $user->role == 2;
         });
         Gate::define($this->manage.'santris', function($user){
+            return $user->role == 1 || $user->role == 3 || $user->role == 4;
+        });
+        Gate::define('button-santris', function($user){
             return $user->role == 1 || $user->role == 3;
         });
         Gate::define($this->manage.'gurus', function($user){

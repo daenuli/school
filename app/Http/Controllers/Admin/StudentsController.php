@@ -72,8 +72,10 @@ class StudentsController extends Controller
         ->addColumn('action', function($index){
 
             $tag = "<a href=" . route('student.spp.payment', $index->id) . " class='btn btn-success btn-sm'>SPP</a>";
-            $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
-            $tag .= "<a href=". route('student.show', $index->id)." class='btn btn-info btn-sm'>Detail</a>";
+            if (Gate::allows('button-santris')) {
+                $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
+                $tag .= "<a href=". route('student.show', $index->id)." class='btn btn-info btn-sm'>Detail</a>";
+            }
 
             return $tag;
         })
@@ -85,9 +87,13 @@ class StudentsController extends Controller
 
     public function create()
     {
-        $provinsi = Provinsi::all();
-        $spp = Spp::all();
-        return view('admin.students.create', compact('provinsi', 'spp'));
+        if (Gate::allows('button-santris')) {
+            $provinsi = Provinsi::all();
+            $spp = Spp::all();
+            return view('admin.students.create', compact('provinsi', 'spp'));
+        }else {
+            abort(403);
+        }
     }
 
     public function store(Request $request)
