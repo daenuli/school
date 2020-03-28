@@ -25,8 +25,8 @@ class StudentFaultController extends Controller
         $title = $this->title;
         $ajax = route('student_fault.faulttb', $id);
         $id;
-        $student = Student::where('id', $id)->get();
-        $point = StudentFault::where('student_id', $id)->get();
+        $student = Student::find($id);
+        $point = StudentFault::where('student_id', $id)->sum('point');
         // return response()->json($ajax);
         return view($this->folder.'.index', compact('ajax', 'id', 'title', 'student', 'point'));
     }
@@ -109,7 +109,7 @@ class StudentFaultController extends Controller
     {
         $title = $this->title;
         $student = StudentFault::find($id);
-        $id; 
+        $id;
         return view($this->folder.'.edit', compact('student', 'id', 'title'));
     }
 

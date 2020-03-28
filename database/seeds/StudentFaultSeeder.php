@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\StudentFault;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class StudentFaultSeeder extends Seeder
 {
@@ -13,42 +15,21 @@ class StudentFaultSeeder extends Seeder
     public function run()
     {
         StudentFault::truncate();
-        StudentFault::insert([
-            [
-            	'student_id' => 1,
-                'name' => 'Merokok',
-                'type' => 1,
-                'point' => 50,
-                'description' => 'Jangan Di Ulangi !',
-            ],
-            [
-                'student_id' => 2,
-                'name' => 'Telat Shalat Jamaah',
-                'type' => 1,
-                'point' => 50,
-                'description' => 'Jangan Di Ulangi !',
-            ],
-            [
-                'student_id' => 3,
-                'name' => 'Pacaran',
-                'type' => 3,
-                'point' => 50,
-                'description' => 'Jangan Di Ulangi !',
-            ],
-            [
-                'student_id' => 1,
-                'name' => 'Telat Shalat Jamaah',
-                'type' => 2,
-                'point' => 50,
-                'description' => 'Jangan Di Ulangi !',
-            ],
-            [
-                'student_id' => 1,
-                'name' => 'Pacaran',
-                'type' => 3,
-                'point' => 50,
-                'description' => 'Jangan Di Ulangi !',
-            ]
-        ]);
+        $faker = Faker::create('id_ID');
+
+        $student = Student::orderBy('id')->get();
+        $pelanggaran = ['Merokok', 'Telat Shalat Jamaah', 'Pacaran', 'Telat Shalat Jamaah', 'Pacaran'];
+        foreach ($student as $key => $value) {
+            for ($i=1; $i <= rand(0, 3) ; $i++) {
+                $data[] = [
+                    'student_id' => $value->id,
+                    'name' => $faker->randomElement($pelanggaran),
+                    'type' => rand(1, 3),
+                    'point' => rand(30, 50),
+                    'description' => 'Jangan Di Ulangi !'
+                ];
+            }
+        }
+        StudentFault::insert($data);
     }
 }

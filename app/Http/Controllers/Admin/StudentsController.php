@@ -73,7 +73,7 @@ class StudentsController extends Controller
 
             $tag = "<a href=" . route('student.spp.payment', $index->id) . " class='btn btn-success btn-sm'>SPP</a>";
             if (Gate::allows('button-santris')) {
-                $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Fault</a>";
+                $tag .= "<a href=" . route('student_fault.fault', $index->id) . " class='btn btn-primary btn-sm'>Poin</a>";
                 $tag .= "<a href=". route('student.show', $index->id)." class='btn btn-info btn-sm'>Detail</a>";
             }
 
@@ -390,7 +390,7 @@ class StudentsController extends Controller
                 'total' => !empty($total)? 'Rp'.number_format($total, 0, '', '.'):'-',
                 'month' => month($month),
                 'payment_date' => ($payment_date)?date('d F Y H:i:s', strtotime($payment_date)):'-',
-                'status' => ($total >= $spp && !empty($spp)) ? 'Lunas' : 'Belum Lunas',
+                'status' => ($total >= $spp && !empty($spp)) ? '<span class="badge badge-pill badge-success">Lunas</span>' : '<span class="badge badge-pill badge-danger">Belum Lunas</span>',
                 'minus' => ($minus) ? 'Rp '.number_format($minus, 0, '', '.'):'-',
                 'url' => route('student.spp.payment.detail', ['student' => $id, 'month' => $month, 'year' => $year])
             ];
@@ -432,7 +432,8 @@ class StudentsController extends Controller
             'student_id' => $student,
             'total' => $request->payment,
             // 'pay_month' => '2020-01-30',
-            'pay_month' => $request->pay_month,
+            'pay_month' => $request->pay_month_year.'-'.$request->pay_month_month.'-01',
+            // 'pay_month' => $request->pay_month,
             'user_id' => Auth::id()
         ]);
         return redirect()->back();

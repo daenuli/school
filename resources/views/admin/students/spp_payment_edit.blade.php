@@ -19,7 +19,7 @@
                     <label class="col-sm-2 col-form-label">Jumlah Pembayaran</label>
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="payment" value="{{ $spp->total }}">
+                            <input type="text" class="form-control payment" name="payment" value="{{ $spp->total }}">
                             <input type="hidden" class="form-control" name="student" value="{{ $students }}">
                             <input type="hidden" class="form-control" name="month" value="{{ $months }}">
                             <input type="hidden" class="form-control" name="year" value="{{ $years }}">
@@ -38,4 +38,16 @@
         </form>
       </div>
 </div>
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+    $('.payment').priceFormat({
+        prefix: '',
+        thousandsSeparator: '.',
+        clearPrefix:true,
+        centsLimit: 0,
+    });
+    </script>
 @endsection

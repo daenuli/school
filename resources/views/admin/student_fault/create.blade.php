@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-3 col-form-label">Description</label>
+                <label class="col-sm-3 col-form-label">Keterangan</label>
                 <div class="col-sm-8">
                   <div class="form-group">
                     <input type="text" class="form-control" name="description">

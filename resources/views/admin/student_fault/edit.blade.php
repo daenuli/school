@@ -2,10 +2,37 @@
 
 @section('content')
   <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">emoji_people</i>
+          </div>
+          <h4 class="card-title">Data Santri</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="profile-title" width="15%">Nama</td>
+                      <td>
+                        @if ($student->student->name)
+                          {{ $student->student->name }}
+                        @else
+                          <i>Data belum ditambahkan</i>
+                        @endif
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end content-->
+      </div>
     <div class="card ">
-      <div class="card-header card-header-rose card-header-icon">
+      <div class="card-header card-header-primary card-header-icon">
         <div class="card-icon">
-          <i class="material-icons">contacts</i>
+          <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title">Edit Pelanggara Santri
         </h4>
@@ -28,9 +55,9 @@
             <div class="col-sm-8 checkbox-radios">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="type" value="1" 
+                  <input class="form-check-input" type="radio" name="type" value="1"
                     @if ($student->type == 1)
-                    checked 
+                    checked
                     @endif
                   > Ringan
                   <span class="circle">
@@ -42,7 +69,7 @@
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" name="type" value="2"
                   @if ($student->type == 2)
-                    checked 
+                    checked
                     @endif
                   > Sedang
                   <span class="circle">
@@ -52,9 +79,9 @@
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="type" value="3" 
+                  <input class="form-check-input" type="radio" name="type" value="3"
                     @if ($student->type == 3)
-                    checked 
+                    checked
                     @endif
                   > Berat
                   <span class="circle">
@@ -73,7 +100,7 @@
             </div>
           </div>
           <div class="row">
-            <label class="col-sm-3 col-form-label">Description</label>
+            <label class="col-sm-3 col-form-label">Keterangan</label>
             <div class="col-sm-8">
               <div class="form-group">
                 <input type="text" class="form-control" name="description" value="{{$student->description}}">

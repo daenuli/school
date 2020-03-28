@@ -17,4 +17,9 @@ class SppPayment extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function setTotalAttribute($val)
+    {
+        $this->attributes['total'] = str_replace('.','',$val);
+    }
 }

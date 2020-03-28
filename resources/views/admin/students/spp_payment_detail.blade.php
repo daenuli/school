@@ -63,7 +63,7 @@
           <div class="card-icon">
             <i class="material-icons">assignment</i>
           </div>
-          <h4 class="card-title">Pembayaran SPP -  
+          <h4 class="card-title">Pembayaran SPP -
               <b>{{month($month).' '.$year}}</b>
             <a href="" class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
           </h4>
@@ -112,7 +112,7 @@
 @endsection
 
 @section('script')
-    <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -125,10 +125,10 @@
               <form id="myForm" action="{{$store}}" method="post">
                   @csrf
                   <div class="row">
-                      <label class="col-sm-2 col-form-label">Jumlah</label>
-                      <div class="col-sm-8">
+                      <label class="col-sm-3 col-form-label">Jumlah</label>
+                      <div class="col-sm-7">
                           <div class="form-group">
-                              <input type="text" class="form-control" name="payment" autocomplete="off">
+                              <input type="text" class="form-control payment" name="payment" autocomplete="off">
                           </div>
                       </div>
                   </div>
@@ -141,5 +141,12 @@
         </div>
       </div>
     </div>
-
+    <script type="text/javascript">
+    $('.payment').priceFormat({
+        prefix: '',
+        thousandsSeparator: '.',
+        clearPrefix:true,
+        centsLimit: 0,
+    });
+    </script>
 @endsection
