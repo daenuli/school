@@ -18,7 +18,6 @@
           </div>
           <h4 class="card-title">Detail Donatur
             <a href="{{route('donatur.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
-            <a href="" class="btn btn-sm btn-info pull-right">Print</a>
             <a href="{{ route('donatur.createStudent', $id) }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
           </h4>
         </div>

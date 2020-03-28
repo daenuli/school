@@ -16,7 +16,6 @@
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Daftar Santri
-            <a href="" class="btn btn-sm btn-info pull-right">Print</a>
             @can ('button-santris')
                 <a href="{{ route('student.create') }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
             @endcan
