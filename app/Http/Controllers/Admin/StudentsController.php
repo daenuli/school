@@ -411,7 +411,8 @@ class StudentsController extends Controller
             'month' => $month,
             'year' => $year
         ]);
-        return view('admin.students.spp_payment_detail', compact('student','spp', 'month', 'year', 'store', 'title'));
+        $studentData = Student::find($student);
+        return view('admin.students.spp_payment_detail', compact('student','spp', 'month', 'year', 'store', 'title', 'studentData'));
     }
 
     public function sppPaymentStore(Request $request, $student, $month, $year)

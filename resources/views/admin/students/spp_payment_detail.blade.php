@@ -2,14 +2,69 @@
 
 @section('content')
     <div class="col-md-12">
+
+      <div class="card">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">emoji_people</i>
+          </div>
+          <h4 class="card-title">Data Santri
+            <a href="{{route('student.spp.payment', $student)}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
+          </h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="profile-title" width="15%">Nama</td>
+                      <td>
+                        @if ($studentData->name)
+                          {{ $studentData->name }}
+                        @else
+                          <i>Data belum ditambahkan</i>
+                        @endif
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="profile-title">Status Keluarga</td>
+                      <td>
+                        @isset ($studentData->spp_id)
+                          @if ($studentData->spp_id == 1)
+                            <span class='badge badge-pill badge-success'>Mampu</span>
+                          @else
+                            <span class='badge badge-pill badge-primary'>Tidak Mampu</span>
+                          @endif
+                        @else
+                          <i>Data belum ditambahkan</i>
+                        @endif
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="profile-title">Biaya</td>
+                      <td>
+                        @if ($studentData->spp_id)
+                          Rp {{ number_format($studentData->spp->total,0,"",".") }}
+                        @else
+                          <i>Data belum ditambahkan</i>
+                        @endif
+                      </td>
+                    </tr>
+                    <tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end content-->
+      </div>
+
       <div class="card">
         <div class="card-header card-header-primary card-header-icon">
           <div class="card-icon">
             <i class="material-icons">assignment</i>
           </div>
-          <h4 class="card-title">Spp Santri -
-              {{month($month).'-'.$year}}
-            <a href="{{route('student.spp.payment', $student)}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
+          <h4 class="card-title">Pembayaran SPP -  
+              <b>{{month($month).' '.$year}}</b>
             <a href="" class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Tambah Data</a>
           </h4>
         </div>
