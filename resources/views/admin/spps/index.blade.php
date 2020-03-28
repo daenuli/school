@@ -8,7 +8,6 @@
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Daftar Spp
-            <a href="" class="btn btn-sm btn-info pull-right">Print</a>
             <a href="{{ route('spp.create') }}" class="btn btn-sm btn-primary pull-right">Tambah Data</a>
           </h4>
         </div>

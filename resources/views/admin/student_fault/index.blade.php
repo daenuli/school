@@ -7,9 +7,8 @@
           <div class="card-icon">
             <i class="material-icons">assignment</i>
           </div>
-          <h4 class="card-title">Catatan Pelanggaran Santri 
+          <h4 class="card-title">Catatan Pelanggaran Santri
             <a href="{{route('student.index')}}" class="btn btn-sm btn-danger pull-right">Kembali</a>
-            <a href="" class="btn btn-sm btn-info pull-right">Print</a>
             <button type="button" class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target=".bd-example-modal-lg">Tambah Data</button>
           </h4>
         </div>
